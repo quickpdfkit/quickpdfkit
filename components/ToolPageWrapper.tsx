@@ -19,7 +19,7 @@ export default function ToolPageWrapper({
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pb-16 px-4 overflow-hidden">
+      <section className="relative  px-4 overflow-hidden">
         <div className="relative z-10 max-w-4xl mx-auto text-center pt-20">
           {/* Icon */}
           {icon && (
@@ -39,7 +39,7 @@ export default function ToolPageWrapper({
         <div className="max-w-5xl mx-auto">
           <div className="relative">
             {/* Card */}
-            <div className="relative bg-white border border-gray-200 rounded-3xl p-8 sm:p-12 shadow-xl">
+            <div className="relative bg-white border border-gray-200 rounded-3xl overflow-hidden sm:p-12 rounded-2xl shadow-xl">
               {/* Content */}
               <div className="relative z-10">{children}</div>
             </div>
