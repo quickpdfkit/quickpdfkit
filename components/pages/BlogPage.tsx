@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 
 export default function BlogPage() {
   const blogs = [
@@ -56,7 +55,7 @@ export default function BlogPage() {
               className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden flex flex-col"
             >
               {/* Image */}
-              <div className="relative w-full h-48">
+              <div className="relative w-full  ">
                 {/* <Image
                   src={blog.image}
                   alt={blog.title}
