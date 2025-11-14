@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Menu,
   X,
@@ -16,13 +17,17 @@ import {
   Minimize2,
   FileEdit,
   Star,
+  ArrowRight,
 } from "lucide-react";
+import { allTools } from "@/config/toolsData";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,19 +37,43 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Filter tools based on search query
+  const filteredTools = searchQuery
+    ? allTools.filter(
+        (tool) =>
+          tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          tool.category.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
+  // Show max 6 results in search modal
+  const searchResults = filteredTools.slice(0, 6);
+
+  const handleToolClick = (href: string) => {
+    setIsSearchOpen(false);
+    setSearchQuery("");
+    router.push(href);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && searchResults.length > 0) {
+      handleToolClick(searchResults[0].href);
+    }
+  };
+
   const convertToPdfTools = [
-    { name: "Image to PDF", href: "/tools/image-to-pdf", icon: ImageIcon },
+    { name: "Image to PDF", href: "/tools/image-to-pdf-converter", icon: ImageIcon },
     { name: "JPG to PDF", href: "/tools/jpg-to-pdf", icon: ImageIcon },
-    { name: "PNG to PDF", href: "/tools/png-to-pdf", icon: ImageIcon },
-    { name: "WEBP to PDF", href: "/tools/webp-to-pdf", icon: ImageIcon },
+    { name: "PNG to PDF", href: "/tools/png-to-pdf-converter", icon: ImageIcon },
+    { name: "WEBP to PDF", href: "/tools/webp-to-pdf-converter", icon: ImageIcon },
   ];
 
   const editTools = [
     { name: "Merge PDF", href: "/tools/merge-pdf", icon: FileText },
-    { name: "Split PDF", href: "/tools/split-pdf", icon: Scissors },
+    { name: "Split PDF", href: "/tools/split-pdf-online", icon: Scissors },
     { name: "Compress PDF", href: "/tools/compress-pdf", icon: Minimize2 },
     { name: "Protect PDF", href: "/tools/protect-pdf", icon: Lock },
-    { name: "Unlock PDF", href: "/tools/unlock-pdf", icon: Unlock },
     { name: "Edit PDF", href: "/tools/edit-pdf", icon: FileEdit },
   ];
 
@@ -53,8 +82,8 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-sm"
-            : "bg-white/80 backdrop-blur-md"
+            ? "bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-sm sm:m-3 sm:rounded-xl "
+            : "bg-white/80 backdrop-blur-md "
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -217,13 +246,15 @@ export default function Header() {
 
               {/* Login Button - Desktop */}
               <Link
-                href="/login"
+                href="/tools"
                 className="hidden sm:flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-all shadow-sm hover:shadow-md"
               >
-                Login
+                Tools
               </Link>
 
               {/* Mobile Menu Button */}
+            
+            </div>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="lg:hidden p-2 text-gray-600 hover:text-orange-500 transition-colors hover:scale-105 active:scale-95"
@@ -235,7 +266,6 @@ export default function Header() {
                   <Menu className="w-6 h-6" />
                 )}
               </button>
-            </div>
           </div>
         </div>
 
@@ -271,13 +301,6 @@ export default function Header() {
               >
                 Contact
               </Link>
-              <Link
-                href="/login"
-                className="block px-4 py-2 text-center bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-all mt-4"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Login
-              </Link>
             </div>
           </div>
         )}
@@ -287,30 +310,141 @@ export default function Header() {
       {isSearchOpen && (
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-20 px-4 animate-fadeIn"
-          onClick={() => setIsSearchOpen(false)}
+          onClick={() => {
+            setIsSearchOpen(false);
+            setSearchQuery("");
+          }}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-2xl bg-white border border-gray-200 rounded-2xl p-6 shadow-2xl animate-scaleIn"
+            className="w-full max-w-2xl bg-white border border-gray-200 rounded-2xl shadow-2xl animate-scaleIn overflow-hidden"
           >
-            <div className="flex items-center gap-4 mb-6">
+            {/* Search Input */}
+            <div className="flex items-center gap-4 p-6 border-b border-gray-100">
               <Search className="w-6 h-6 text-orange-500" />
               <input
                 type="text"
                 placeholder="Search for tools..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
                 className="flex-1 bg-transparent text-gray-900 placeholder-gray-400 outline-none text-lg"
                 autoFocus
               />
               <button
-                onClick={() => setIsSearchOpen(false)}
+                onClick={() => {
+                  setIsSearchOpen(false);
+                  setSearchQuery("");
+                }}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <X className="w-5 h-5 text-gray-400" />
               </button>
             </div>
-            <div className="text-sm text-gray-500">
-              Try searching for "merge", "compress", or "convert"
+
+            {/* Search Results */}
+            <div className="max-h-96 overflow-y-auto">
+              {searchQuery === "" ? (
+                // Default suggestions
+                <div className="p-6">
+                  <p className="text-sm text-gray-500 mb-4">
+                    Popular searches:
+                  </p>
+                  <div className="space-y-2">
+                    {["Merge PDF", "Compress PDF", "Convert to PDF", "Protect PDF", "Edit PDF"].map(
+                      (suggestion) => (
+                        <button
+                          key={suggestion}
+                          onClick={() => setSearchQuery(suggestion)}
+                          className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 rounded-lg transition-all group"
+                        >
+                          <div className="flex items-center gap-3">
+                            <Search className="w-4 h-4 text-gray-400 group-hover:text-orange-500" />
+                            <span className="group-hover:text-orange-600">
+                              {suggestion}
+                            </span>
+                          </div>
+                        </button>
+                      )
+                    )}
+                  </div>
+                </div>
+              ) : searchResults.length > 0 ? (
+                // Search results
+                <div className="p-2">
+                  {searchResults.map((tool) => {
+                    const IconComponent = tool.icon;
+                    return (
+                      <button
+                        key={tool.href}
+                        onClick={() => handleToolClick(tool.href)}
+                        className="w-full text-left px-4 py-4 hover:bg-orange-50 rounded-lg transition-all group"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className={`p-3 rounded-xl bg-gradient-to-br ${tool.gradient}`}>
+                            <IconComponent className="w-5 h-5 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">
+                              {tool.title}
+                            </h4>
+                            <p className="text-sm text-gray-500 line-clamp-1">
+                              {tool.description}
+                            </p>
+                          </div>
+                          <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-orange-500 opacity-0 group-hover:opacity-100 transition-all" />
+                        </div>
+                      </button>
+                    );
+                  })}
+                  {filteredTools.length > 6 && (
+                    <div className="px-4 py-3 text-center border-t border-gray-100 mt-2">
+                      <button
+                        onClick={() => {
+                          router.push("/tools");
+                          setIsSearchOpen(false);
+                          setSearchQuery("");
+                        }}
+                        className="text-sm text-orange-600 hover:text-orange-700 font-medium"
+                      >
+                        View all {filteredTools.length} results →
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                // No results
+                <div className="p-12 text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
+                    <Search className="w-8 h-8 text-orange-500" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    No tools found
+                  </h3>
+                  <p className="text-sm text-gray-500 mb-4">
+                    Try searching for "merge", "compress", or "convert"
+                  </p>
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="text-sm text-orange-600 hover:text-orange-700 font-medium"
+                  >
+                    Clear search
+                  </button>
+                </div>
+              )}
             </div>
+
+            {/* Footer */}
+            {searchQuery && searchResults.length > 0 && (
+              <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                <p className="text-xs text-gray-500 flex items-center justify-between">
+                  <span>Press Enter to select first result</span>
+                  <span className="font-medium">
+                    {searchResults.length} of {filteredTools.length} results
+                  </span>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}

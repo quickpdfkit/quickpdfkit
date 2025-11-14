@@ -1,7 +1,7 @@
 import { toolsMap } from "@/config/tools";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import ToolPageWrapper from "@/components/ToolPageWrapper";
+import ToolPageWrapper from "@/components/layout/ToolPageWrapper";
 
 interface ToolPageProps {
   params: Promise<{ id: string }>;
