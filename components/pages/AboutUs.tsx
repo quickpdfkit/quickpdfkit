@@ -14,7 +14,7 @@ export default function AboutUs() {
             About <span className="text-orange-500">Us</span>
           </h1>
           <p className="text-gray-700 text-lg sm:text-xl max-w-3xl mx-auto">
-            PDFTools is committed to revolutionizing the way people manage
+            CouldFixPdf is committed to revolutionizing the way people manage
             documents. From powerful batch processing to advanced team
             features, we aim to save time, boost productivity, and simplify
             workflows for millions of users worldwide.
