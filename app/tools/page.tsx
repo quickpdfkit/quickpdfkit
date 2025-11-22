@@ -53,10 +53,10 @@ export default function ToolsPage() {
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-white">
-              All <span className="text-orange-500">PDF Tools</span>
+              All <span className="text-orange-500">Fix PDF Tools</span>
             </h1>
             <p className="text-gray-300 text-lg sm:text-xl max-w-3xl mx-auto mb-8">
-              Discover  powerful PDF tools. Everything you need
+              Discover  powerful Fix PDF Tools. Everything you need
               to work with PDFs - all in one place, completely free.
             </p>
 

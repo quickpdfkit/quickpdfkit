@@ -18,6 +18,7 @@ import {
   FileEdit,
   Star,
   ArrowRight,
+  Repeat,
 } from "lucide-react";
 import { allTools } from "@/config/toolsData";
 
@@ -91,10 +92,10 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
               <div className="relative">
-                <Heart className="w-7 h-7 sm:w-8 sm:h-8 fill-orange-500 text-orange-500 transition-transform group-hover:scale-110" />
+                <Repeat className="w-7 h-7 sm:w-8 sm:h-8 fill-orange-500 text-orange-500 transition-transform group-hover:scale-110" />
               </div>
               <span className="text-lg sm:text-xl font-bold text-gray-900">
-                PDF <span className="text-orange-500">Tools</span>
+                Could <span className="text-orange-500">Fix PDF</span>
               </span>
             </Link>
 

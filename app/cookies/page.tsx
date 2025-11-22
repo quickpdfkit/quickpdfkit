@@ -5,19 +5,19 @@ import React from 'react'
 
 export const metadata = {
   title: {
-    default: "Cookie Policy - PDF Tools",
-    template: "%s | PDF Tools"
+    default: "Cookie Policy - Fix PDF Tools",
+    template: "%s | Fix PDF Tools"
   },
-  description: "Read PDF Tools' Cookie Policy to understand how we use cookies on our website to enhance your experience, improve functionality, and analyze usage.",
+  description: "Read Fix PDF Tools' Cookie Policy to understand how we use cookies on our website to enhance your experience, improve functionality, and analyze usage.",
   keywords: [
-    "PDF Tools cookie policy",
+    "Fix PDF Tools cookie policy",
     "cookies usage",
-    "online PDF tools privacy",
+    "online Fix PDF Tools privacy",
     "website cookies",
-    "PDF Tools data policy",
+    "Fix PDF Tools data policy",
     "cookie management",
     "user tracking",
-    "PDF tools website",
+    "Fix PDF Tools website",
     "privacy and cookies",
     "online PDF services"
   ]

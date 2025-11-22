@@ -5,17 +5,17 @@ import React from 'react'
 
 export const metadata = {
   title: {
-    default: "Privacy Policy - PDF Tools",
-    template: "%s | PDF Tools"
+    default: "Privacy Policy - Fix PDF Tools",
+    template: "%s | Fix PDF Tools"
   },
-  description: "Read PDF Tools' Privacy Policy to understand how we collect, use, and protect your information while providing 48+ free online PDF tools. Your privacy and data security are our priority.",
+  description: "Read Fix PDF Tools' Privacy Policy to understand how we collect, use, and protect your information while providing 48+ free online Fix PDF Tools. Your privacy and data security are our priority.",
   keywords: [
-    "PDF Tools privacy policy",
+    "Fix PDF Tools privacy policy",
     "data protection",
     "user privacy",
-    "online PDF tools privacy",
+    "online Fix PDF Tools privacy",
     "personal data",
-    "PDF tools security",
+    "Fix PDF Tools security",
     "privacy information",
     "website privacy",
     "PDF services privacy",

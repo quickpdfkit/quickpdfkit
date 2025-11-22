@@ -575,7 +575,7 @@ export default function PdfToExcel() {
                         <li>• Check the preview to verify data structure</li>
                         <li>• Each page will become a separate sheet in Excel</li>
                         <li>• You may need to clean up the data after conversion</li>
-                        <li>• For complex tables, consider using professional PDF tools</li>
+                        <li>• For complex tables, consider using professional Fix PDF Tools</li>
                       </ul>
                     </div>
                   </div>

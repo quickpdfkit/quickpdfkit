@@ -5,21 +5,21 @@ import React from 'react'
 
 export const metadata = {
   title: {
-    default: "FAQ - PDF Tools",
-    template: "%s | PDF Tools"
+    default: "FAQ - Fix PDF Tools",
+    template: "%s | Fix PDF Tools"
   },
-  description: "Find answers to frequently asked questions about PDF Tools. Learn how to convert, edit, merge, split, compress, and protect PDFs using our 48+ free online tools.",
+  description: "Find answers to frequently asked questions about Fix PDF Tools. Learn how to convert, edit, merge, split, compress, and protect PDFs using our 48+ free online tools.",
   keywords: [
-    "PDF tools FAQ",
+    "Fix PDF Tools FAQ",
     "frequently asked questions",
-    "PDF tools help",
+    "Fix PDF Tools help",
     "PDF editor guide",
     "online PDF converter FAQ",
     "merge PDF questions",
     "split PDF questions",
     "compress PDF guide",
-    "PDF tools support",
-    "free PDF tools help"
+    "Fix PDF Tools support",
+    "free Fix PDF Tools help"
   ]
 }
 

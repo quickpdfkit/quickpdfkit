@@ -4,22 +4,22 @@ import BlogPage from '@/components/pages/BlogPage'
 
 export const metadata = {
   title: {
-    default: "Blog - PDF Tools",
-    template: "%s | PDF Tools"
+    default: "Blog - Fix PDF Tools",
+    template: "%s | Fix PDF Tools"
   },
-  description: "Read the latest updates, tips, and guides about PDF tools. Learn how to convert, edit, merge, split, compress, and manage PDFs efficiently with 48+ free online tools.",
+  description: "Read the latest updates, tips, and guides about Fix PDF Tools. Learn how to convert, edit, merge, split, compress, and manage PDFs efficiently with 48+ free online tools.",
   keywords: [
-    "PDF tools blog",
+    "Fix PDF Tools blog",
     "PDF tips",
     "PDF guides",
-    "online PDF tools",
+    "online Fix PDF Tools",
     "PDF editor",
     "PDF converter",
     "merge PDF",
     "split PDF",
     "compress PDF",
     "PDF updates",
-    "free PDF tools",
+    "free Fix PDF Tools",
     "PDF tutorials",
     "PDF management"
   ]

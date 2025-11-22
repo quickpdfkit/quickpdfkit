@@ -5,20 +5,20 @@ import React from 'react'
 
 export const metadata = {
   title: {
-    default: "Terms and Conditions - PDF Tools",
-    template: "%s | PDF Tools"
+    default: "Terms and Conditions - Fix PDF Tools",
+    template: "%s | Fix PDF Tools"
   },
-  description: "Read the Terms and Conditions of PDF Tools to understand the rules, responsibilities, and guidelines for using our 48+ free online PDF tools safely and responsibly.",
+  description: "Read the Terms and Conditions of Fix PDF Tools to understand the rules, responsibilities, and guidelines for using our 48+ free online Fix PDF Tools safely and responsibly.",
   keywords: [
-    "PDF Tools terms and conditions",
-    "PDF tools usage rules",
-    "online PDF tools policy",
-    "PDF tools guidelines",
+    "Fix PDF Tools terms and conditions",
+    "Fix PDF Tools usage rules",
+    "online Fix PDF Tools policy",
+    "Fix PDF Tools guidelines",
     "PDF editor terms",
     "PDF converter terms",
     "website terms",
     "PDF services rules",
-    "PDF tools legal",
+    "Fix PDF Tools legal",
     "user agreement"
   ]
 }

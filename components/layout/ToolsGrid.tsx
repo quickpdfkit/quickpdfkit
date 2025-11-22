@@ -20,7 +20,7 @@ export default function ToolsGrid() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
-            Powerful <span className="text-orange-500">PDF Tools</span>
+            Powerful <span className="text-orange-500">Fix PDF Tools</span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Everything you need to work with PDFs -  tools, all

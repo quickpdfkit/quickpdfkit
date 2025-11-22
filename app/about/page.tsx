@@ -4,21 +4,21 @@ import AboutUs from '@/components/pages/AboutUs'
 
 export const metadata = {
   title: {
-    default: "About Us - PDF Tools",
-    template: "%s | PDF Tools"
+    default: "About Us - Fix PDF Tools",
+    template: "%s | Fix PDF Tools"
   },
-  description: "Learn more about PDF Tools, our mission, and how we provide 48+ free online PDF tools to help you convert, edit, merge, split, compress, and protect PDFs with ease.",
+  description: "Learn more about Fix PDF Tools, our mission, and how we provide 48+ free online Fix PDF Tools to help you convert, edit, merge, split, compress, and protect PDFs with ease.",
   keywords: [
-    "About PDF Tools",
-    "PDF tools team",
-    "PDF tools mission",
-    "free PDF tools",
+    "About Fix PDF Tools",
+    "Fix PDF Tools team",
+    "Fix PDF Tools mission",
+    "free Fix PDF Tools",
     "online PDF converter",
     "PDF editor",
     "PDF management",
     "PDF services",
     "company information",
-    "PDF tools about"
+    "Fix PDF Tools about"
   ]
 }
 

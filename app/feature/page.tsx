@@ -5,21 +5,21 @@ import React from 'react'
 
 export const metadata = {
   title: {
-    default: "Our Features - PDF Tools",
-    template: "%s | PDF Tools"
+    default: "Our Features - Fix PDF Tools",
+    template: "%s | Fix PDF Tools"
   },
-  description: "Explore the powerful features of PDF Tools. Learn how our 48+ free online PDF tools can help you convert, merge, split, compress, edit, and protect your PDFs efficiently.",
+  description: "Explore the powerful features of Fix PDF Tools. Learn how our 48+ free online Fix PDF Tools can help you convert, merge, split, compress, edit, and protect your PDFs efficiently.",
   keywords: [
-    "PDF tools features",
+    "Fix PDF Tools features",
     "PDF editor features",
-    "online PDF tools",
+    "online Fix PDF Tools",
     "PDF converter",
     "merge PDF",
     "split PDF",
     "compress PDF",
     "PDF management tools",
-    "PDF tools capabilities",
-    "free PDF tools"
+    "Fix PDF Tools capabilities",
+    "free Fix PDF Tools"
   ]
 }
 

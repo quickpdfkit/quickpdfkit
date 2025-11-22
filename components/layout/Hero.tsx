@@ -22,15 +22,15 @@ export default function Hero() {
         <div className="inline-flex mt-10 items-center gap-2 px-4 py-2 bg-white border border-orange-200 rounded-full mb-8 shadow-sm">
           <Sparkles className="w-4 h-4 text-orange-500" />
           <span className="text-sm text-orange-600 font-medium">
-            Free Online PDF Tools
+            Free Online Fix PDF Tools
           </span>
         </div>
 
         {/* Main Heading */}
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-gray-900">
-          Transform Your PDFs
+          Transform and Fix Your 
           <br />
-          <span className="text-orange-500">In Seconds</span>
+          <span className="text-orange-500">PDFs In Seconds</span>
         </h1>
 
         {/* Subheading */}
