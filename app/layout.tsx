@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://couldfixit.com'),
   title: {
-    default: "Fix Fix PDF Tools - Free Online PDF Converter & Editor | 48+ Tools",
+    default: "Fix PDF Tools - Free Online PDF Converter & Editor | 48+ Tools",
     template: "%s | Fix PDF Tools"
   },
   description: "Free online Could Fix Fix PDF Tools for all your needs. Convert, merge, split, compress, edit, and protect PDFs. 48+ powerful tools including PDF to Word, Image to PDF, and more. No registration required.",
