@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     title: "Fix PDF Tools - Free Online Could Fix PDF Converter & Editor",
     description: "Free online Fix PDF Tools for all your needs. Convert, merge, split, compress, edit, and protect PDFs.",
     images: ["/twitter-image.png"],
-    creator: "@pdftools"
+    creator: "@CouldFixPdf"
   },
   robots: {
     index: true,

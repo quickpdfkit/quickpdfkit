@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
           </h1>
           <p className="text-black text-base sm:text-lg">
             Your privacy is important to us. This Privacy Policy explains how
-            PDFTools collects, uses, and protects your personal information
+            CouldFixPdf collects, uses, and protects your personal information
             when you use our services.
           </p>
         </div>
@@ -30,7 +30,7 @@ export default function PrivacyPolicy() {
             Introduction
           </h2>
           <p className="text-gray-700 text-sm sm:text-base">
-            PDFTools is committed to protecting your privacy. By using our
+            CouldFixPdf is committed to protecting your privacy. By using our
             services, you agree to the collection and use of information in
             accordance with this policy. We aim to be transparent and provide
             you with control over your data.
@@ -149,10 +149,10 @@ export default function PrivacyPolicy() {
             If you have questions about this Privacy Policy or our practices,
             please contact us at{" "}
             <a
-              href="mailto:support@pdftools.com"
+              href="mailto:support@CouldFixPdf.com"
               className="text-orange-500 underline"
             >
-              support@pdftools.com
+              support@CouldFixPdf.com
             </a>
             .
           </p>

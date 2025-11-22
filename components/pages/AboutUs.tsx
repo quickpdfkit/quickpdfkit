@@ -26,7 +26,7 @@ export default function AboutUs() {
           <div className="md:w-1/2 space-y-4">
             <h2 className="text-3xl font-semibold text-gray-900">Our Story</h2>
             <p className="text-gray-700 text-base sm:text-lg">
-              PDFTools began as a small startup with a big idea: make PDF and
+              CouldFixPdf began as a small startup with a big idea: make PDF and
               document management effortless for everyone. What started in a
               small office with a passionate team of developers has grown into
               a comprehensive suite of document tools trusted worldwide.
@@ -57,7 +57,7 @@ export default function AboutUs() {
             <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-2">2015</h3>
               <p className="text-gray-700 text-sm sm:text-base">
-                PDFTools was founded with the goal to streamline document
+                CouldFixPdf was founded with the goal to streamline document
                 workflows for individuals and small businesses. Our first
                 PDF merge tool went live and received immediate positive feedback.
               </p>

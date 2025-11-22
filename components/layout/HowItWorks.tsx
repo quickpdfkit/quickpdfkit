@@ -49,7 +49,7 @@ export default function HowItWorksBlock() {
         Trusted by professionals worldwide
       </h3>
       <p className="text-gray-700 text-sm  sm:text-lg md:w-4xl">
-        PDFTools is your reliable web app for editing PDFs efficiently. Enjoy all the tools you need while keeping your data secure.
+        CouldFixPdf is your reliable web app for editing PDFs efficiently. Enjoy all the tools you need while keeping your data secure.
       </p>
       <div className="flex justify-between md:w-lg gap-6 mt-10">
         <Image
