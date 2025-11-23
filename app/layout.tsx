@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,8 +36,8 @@ export const metadata: Metadata = {
     "PDF splitter",
     "edit PDF online",
     "convert PDF",
-    "PDF watermark"  ,
-      "Could Fix It"
+    "PDF watermark",
+    "Could Fix It"
 
   ],
   authors: [{ name: "Fix PDF Tools Team" }],
@@ -104,10 +105,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+
     <html lang="en">
       <body
+
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-FBM4Q0Q5XM"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FBM4Q0Q5XM');
+  `}
+        </Script>
+
         {children}
       </body>
     </html>

@@ -127,7 +127,7 @@ export default function Header() {
 
                 {/* Dropdown Menu - Added pt-2 to bridge the gap */}
                 {isToolsOpen && (
-                  <div className="absolute top-full left-0 pt-2">
+                  <div className="absolute top-full left-[-160px] pt-2">
                     <div className="w-[800px] bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
                       <div className="grid grid-cols-3 gap-6 p-6">
                         {/* Convert to PDF */}

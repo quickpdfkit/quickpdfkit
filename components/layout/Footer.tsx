@@ -97,7 +97,7 @@ export default function Footer() {
       </div>
 
       <p className="text-center text-gray-500 text-sm mt-6">
-        &copy; {new Date().getFullYear()} CouldFix. All rights reserved.
+        &copy; {new Date().getFullYear()} <Link href="/">CouldFixIt.com</Link> . All rights reserved.
       </p>
     </footer>
   );
