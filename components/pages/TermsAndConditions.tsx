@@ -12,7 +12,7 @@ export default function TermsAndConditions() {
             Terms & <span className="text-orange-500">Conditions</span>
           </h1>
           <p className="text-black text-base sm:text-lg">
-            Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using CouldFixPdf. By accessing or using our services, you agree to be bound by these Terms.
+            Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using QuickFixPdf. By accessing or using our services, you agree to be bound by these Terms.
           </p>
         </div>
 
@@ -28,7 +28,7 @@ export default function TermsAndConditions() {
             Acceptance of Terms
           </h2>
           <p className="text-gray-700 text-sm sm:text-base">
-            By using CouldFixPdf, you agree to comply with and be bound by these Terms and all applicable laws and regulations. If you do not agree with any part of the Terms, you must not use our services.
+            By using QuickFixPdf, you agree to comply with and be bound by these Terms and all applicable laws and regulations. If you do not agree with any part of the Terms, you must not use our services.
           </p>
         </motion.div>
 
@@ -45,7 +45,7 @@ export default function TermsAndConditions() {
           </h2>
           <ul className="list-disc list-inside text-gray-700 space-y-2">
             <li>Users must provide accurate information when using the service.</li>
-            <li>CouldFixPdf should not be used for illegal, harmful, or fraudulent purposes.</li>
+            <li>QuickFixPdf should not be used for illegal, harmful, or fraudulent purposes.</li>
             <li>Users are responsible for maintaining the confidentiality of their account information, if any.</li>
             <li>Excessive use or abuse of the service may result in temporary or permanent suspension.</li>
           </ul>
@@ -63,7 +63,7 @@ export default function TermsAndConditions() {
             Intellectual Property
           </h2>
           <p className="text-gray-700 text-sm sm:text-base">
-            All content, features, and functionality of CouldFixPdf, including but not limited to text, graphics, logos, images, and software, are the property of CouldFixPdf or its licensors and are protected by copyright, trademark, and other intellectual property laws.
+            All content, features, and functionality of QuickFixPdf, including but not limited to text, graphics, logos, images, and software, are the property of QuickFixPdf or its licensors and are protected by copyright, trademark, and other intellectual property laws.
           </p>
         </motion.div>
 
@@ -79,7 +79,7 @@ export default function TermsAndConditions() {
             Limitation of Liability
           </h2>
           <p className="text-gray-700 text-sm sm:text-base">
-            CouldFixPdf is provided "as is" without warranties of any kind. To the fullest extent permitted by law, CouldFixPdf shall not be liable for any damages arising from the use or inability to use the service, including data loss, interrupted service, or errors in processing.
+            QuickFixPdf is provided "as is" without warranties of any kind. To the fullest extent permitted by law, QuickFixPdf shall not be liable for any damages arising from the use or inability to use the service, including data loss, interrupted service, or errors in processing.
           </p>
         </motion.div>
 
@@ -113,7 +113,7 @@ export default function TermsAndConditions() {
             Termination
           </h2>
           <p className="text-gray-700 text-sm sm:text-base">
-            CouldFixPdf may suspend or terminate access to the service at any time, without prior notice, for any reason including violation of these Terms.
+            QuickFixPdf may suspend or terminate access to the service at any time, without prior notice, for any reason including violation of these Terms.
           </p>
         </motion.div>
 
@@ -129,7 +129,7 @@ export default function TermsAndConditions() {
             Changes to Terms
           </h2>
           <p className="text-gray-700 text-sm sm:text-base">
-            We may update these Terms periodically. Users will be notified of any significant changes, and continued use of CouldFixPdf after changes indicates acceptance of the new Terms.
+            We may update these Terms periodically. Users will be notified of any significant changes, and continued use of QuickFixPdf after changes indicates acceptance of the new Terms.
           </p>
         </motion.div>
       </div>

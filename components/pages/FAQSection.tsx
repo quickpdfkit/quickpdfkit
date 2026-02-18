@@ -22,14 +22,14 @@ export default function FAQSection() {
         "Yes! You can merge, split, compress, and convert PDFs easily. Simply select the files you want to combine or split, choose your options, and download the final document. The interface is simple and optimized for quick workflows.",
     },
     {
-      question: "Do I need an account to use CouldFixPdf?",
+      question: "Do I need an account to use QuickFixPdf?",
       answer:
         "Most of our features are free and do not require creating an account. However, signing up allows you to access advanced features, save your documents to the cloud, and enjoy faster processing speeds.",
     },
     {
       question: "Which platforms are supported?",
       answer:
-        "CouldFixPdf works on all modern browsers and devices. You can use it on Windows, Mac, Linux, iOS, and Android without installing any software. We also offer dedicated apps for iLovePDF Desktop and iLovePDF Mobile for even more convenience.",
+        "QuickFixPdf works on all modern browsers and devices. You can use it on Windows, Mac, Linux, iOS, and Android without installing any software. We also offer dedicated apps for iLovePDF Desktop and iLovePDF Mobile for even more convenience.",
     },
   ];
 
@@ -49,7 +49,7 @@ export default function FAQSection() {
           <p className="text-black text-center ">
             {" "}
             We know you might have questions before getting started, so we've
-            compiled a list of the most common inquiries about using CouldFixPdf.
+            compiled a list of the most common inquiries about using QuickFixPdf.
             From uploading and processing files to security and platform
             compatibility, our FAQs provide clear answers to help you use our
             services efficiently and safely.

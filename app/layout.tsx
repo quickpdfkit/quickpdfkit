@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://couldfixit.com'),
+  metadataBase: new URL('https://quickpdfkit.com'),
   title: {
     default: "Fix PDF Tools - Free Online PDF Converter & Editor | 48+ Tools",
     template: "%s | Fix PDF Tools"
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://couldfixit.com",
+    url: "https://quickpdfkit.com",
     siteName: "Fix PDF Tools",
     title: "Fix PDF Tools - Free Online Could Fix PDF Converter & Editor",
     description: "Free online Fix PDF Tools for all your needs. Convert, merge, split, compress, edit, and protect PDFs. 48+ powerful tools available.",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     title: "Fix PDF Tools - Free Online Could Fix PDF Converter & Editor",
     description: "Free online Fix PDF Tools for all your needs. Convert, merge, split, compress, edit, and protect PDFs.",
     images: ["/twitter-image.png"],
-    creator: "@CouldFixPdf"
+    creator: "@QuickFixPdf"
   },
   robots: {
     index: true,
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   alternates: {
-    canonical: "https://couldfixit.com",
+    canonical: "https://quickpdfkit.com",
   },
   category: "Technology",
 };

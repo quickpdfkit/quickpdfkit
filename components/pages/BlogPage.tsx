@@ -6,13 +6,13 @@ export default function BlogPage() {
     {
       title: "Boost Your PDF Productivity",
       description:
-        "Discover how CouldFixPdf can save you time and streamline your workflow. Learn about batch processing, document editing, and advanced features that enhance productivity across teams.",
+        "Discover how QuickFixPdf can save you time and streamline your workflow. Learn about batch processing, document editing, and advanced features that enhance productivity across teams.",
       image: "/img/blog1.png",
     },
     {
       title: "Secure Document Management",
       description:
-        "Security is our top priority. Understand how CouldFixPdf ensures your documents remain private with advanced encryption and secure cloud processing.",
+        "Security is our top priority. Understand how QuickFixPdf ensures your documents remain private with advanced encryption and secure cloud processing.",
       image: "/img/blog2.png",
     },
     {
@@ -24,7 +24,7 @@ export default function BlogPage() {
     {
       title: "Collaborate Seamlessly with Teams",
       description:
-        "CouldFixPdf makes teamwork effortless. Learn how to share templates, watermarks, and actions with your team to boost productivity and consistency.",
+        "QuickFixPdf makes teamwork effortless. Learn how to share templates, watermarks, and actions with your team to boost productivity and consistency.",
       image: "/img/blog4.png",
     },
     {

@@ -12,7 +12,7 @@ export default function CookiePolicy() {
             Cookie <span className="text-orange-500">Policy</span>
           </h1>
           <p className="text-black text-base sm:text-lg">
-            This Cookie Policy explains how CouldFixPdf uses cookies and similar
+            This Cookie Policy explains how QuickFixPdf uses cookies and similar
             technologies to enhance your experience while using our services.
           </p>
         </div>
@@ -29,7 +29,7 @@ export default function CookiePolicy() {
             Introduction
           </h2>
           <p className="text-gray-700 text-sm sm:text-base">
-            CouldFixPdf uses cookies to personalize your experience, improve site functionality, and analyze performance. By continuing to use our services, you consent to the use of cookies in accordance with this policy.
+            QuickFixPdf uses cookies to personalize your experience, improve site functionality, and analyze performance. By continuing to use our services, you consent to the use of cookies in accordance with this policy.
           </p>
         </motion.div>
 
@@ -107,7 +107,7 @@ export default function CookiePolicy() {
             Your Consent
           </h2>
           <p className="text-gray-700 text-sm sm:text-base">
-            By using CouldFixPdf, you consent to our use of cookies as described in this Cookie Policy. You may withdraw your consent at any time by adjusting your browser settings.
+            By using QuickFixPdf, you consent to our use of cookies as described in this Cookie Policy. You may withdraw your consent at any time by adjusting your browser settings.
           </p>
         </motion.div>
       </div>

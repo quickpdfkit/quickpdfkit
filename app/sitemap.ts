@@ -2,7 +2,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://couldfixit.com";
+  const baseUrl = "https://quickpdfkit.com";
 
   const productLinks = [
     "/",              // Home

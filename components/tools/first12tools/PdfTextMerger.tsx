@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { saveAs } from "file-saver";
-    import { FileText, X, GripVertical, Upload, Download, Eye, EyeOff } from "lucide-react";
+import { FileText, X, GripVertical, Upload, Download, Eye, EyeOff } from "lucide-react";
 
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 
@@ -99,7 +99,7 @@ export default function PdfTextMerger() {
               : f
           )
         );
-      } catch  {
+      } catch {
         setPdfFiles((prev) =>
           prev.map((f) =>
             f.id === fileData.id ? { ...f, status: "error" as const } : f
@@ -150,6 +150,12 @@ export default function PdfTextMerger() {
     saveAs(blob, `${outputFilename}.txt`);
     showToast("Text file downloaded successfully!");
   };
+  const sanitizeText = (text: string) => {
+    return text
+      .replace(/\uF0B7/g, "•")   // Fix MS Word bullet
+      .replace(/\u2022/g, "•")   // Normalize bullet
+      .replace(/[^\x00-\xFF]/g, ""); // Remove unsupported WinAnsi chars
+  };
 
   const mergeAsPdf = async () => {
     const completedFiles = pdfFiles.filter((f) => f.status === "completed");
@@ -185,8 +191,9 @@ export default function PdfTextMerger() {
         yPosition -= lineHeight * 2;
 
         // Split text into lines that fit the page width
-        const lines = file.extractedText.split("\n");
-        
+        const cleanText = sanitizeText(file.extractedText);
+        const lines = cleanText.split("\n");
+
         for (const line of lines) {
           const words = line.split(" ");
           let currentLine = "";
@@ -349,9 +356,8 @@ export default function PdfTextMerger() {
                   onDragStart={() => handleDragStart(index)}
                   onDragOver={(e) => handleDragOver(e, index)}
                   onDragEnd={handleDragEnd}
-                  className={`group p-3 sm:p-4 rounded-xl bg-white border border-gray-200 hover:border-orange-300 hover:shadow-md transition-all duration-200 ${
-                    draggedIndex === index ? "opacity-50" : ""
-                  }`}
+                  className={`group p-3 sm:p-4 rounded-xl bg-white border border-gray-200 hover:border-orange-300 hover:shadow-md transition-all duration-200 ${draggedIndex === index ? "opacity-50" : ""
+                    }`}
                 >
                   <div className="flex items-start gap-3">
                     {/* Drag Handle */}
@@ -446,21 +452,19 @@ export default function PdfTextMerger() {
                 <div className="flex gap-3">
                   <button
                     onClick={() => setOutputFormat("txt")}
-                    className={`flex-1 px-4 py-3 rounded-xl border-2 font-medium transition-all ${
-                      outputFormat === "txt"
+                    className={`flex-1 px-4 py-3 rounded-xl border-2 font-medium transition-all ${outputFormat === "txt"
                         ? "border-orange-500 bg-orange-50 text-orange-700"
                         : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
-                    }`}
+                      }`}
                   >
                     Text File (.txt)
                   </button>
                   <button
                     onClick={() => setOutputFormat("pdf")}
-                    className={`flex-1 px-4 py-3 rounded-xl border-2 font-medium transition-all ${
-                      outputFormat === "pdf"
+                    className={`flex-1 px-4 py-3 rounded-xl border-2 font-medium transition-all ${outputFormat === "pdf"
                         ? "border-orange-500 bg-orange-50 text-orange-700"
                         : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
-                    }`}
+                      }`}
                   >
                     PDF File (.pdf)
                   </button>

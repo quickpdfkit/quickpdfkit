@@ -95,7 +95,7 @@ export default function Header() {
                 <Repeat className="w-7 h-7 sm:w-8 sm:h-8 fill-orange-500 text-orange-500 transition-transform group-hover:scale-110" />
               </div>
               <span className="text-lg sm:text-xl font-bold text-gray-900">
-                Could <span className="text-orange-500">Fix PDF</span>
+                Quick <span className="text-orange-500">Pdf Kit</span>
               </span>
             </Link>
 
