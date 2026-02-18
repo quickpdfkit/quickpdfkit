@@ -38,6 +38,22 @@ export interface Tool {
 
 export const allTools: Tool[] = [
   {
+    title: "Word to PDF",
+    description: "Convert Word documents to PDF",
+    href: "/tools/word-to-pdf",
+    icon: FileType,
+    gradient: "from-blue-500 to-sky-600",
+    category: "Convert",
+  },
+  {
+    title: "PDF to Word",
+    description: "Convert PDF to Word documents",
+    href: "/tools/convert-pdf-to-word",
+    icon: FileType,
+    gradient: "from-cyan-500 to-blue-600",
+    category: "Convert",
+  },
+  {
     title: "Merge PDF",
     description: "Combine multiple PDF files into one document",
     href: "/tools/merge-pdf",
@@ -45,6 +61,44 @@ export const allTools: Tool[] = [
     gradient: "from-pink-500 to-rose-600",
     category: "Organize",
   },
+  {
+    title: "Split PDF",
+    description: "Split PDF into multiple separate files",
+    href: "/tools/split-pdf-online",
+    icon: Scissors,
+    gradient: "from-green-500 to-emerald-600",
+    category: "Organize",
+  },
+  {
+    title: "Compress PDF",
+    description: "Reduce PDF file size while maintaining quality",
+    href: "/tools/compress-pdf",
+    icon: Minimize2,
+    gradient: "from-purple-500 to-violet-600",
+    category: "Optimize",
+  },
+  {
+    title: "JPG to PDF",
+    description: "Convert JPG images to PDF",
+    href: "/tools/jpg-to-pdf",
+    icon: FileImage,
+    gradient: "from-rose-500 to-pink-600",
+    category: "Convert",
+  },
+
+  {
+    title: "PDF to JPG",
+    description: "Convert PDF pages to JPG images",
+    href: "/tools/pdf-to-jpg",
+    icon: FileImage,
+    gradient: "from-cyan-500 to-blue-600",
+    category: "Convert",
+  },
+
+
+
+
+
   {
     title: "Merge PDF and Images",
     description: "Combine PDF files and images into one document",
@@ -61,14 +115,7 @@ export const allTools: Tool[] = [
     gradient: "from-indigo-500 to-blue-600",
     category: "Organize",
   },
-  {
-    title: "Split PDF",
-    description: "Split PDF into multiple separate files",
-    href: "/tools/split-pdf-online",
-    icon: Scissors,
-    gradient: "from-green-500 to-emerald-600",
-    category: "Organize",
-  },
+
   {
     title: "Split PDF Into Parts",
     description: "Divide PDF into specific number of parts",
@@ -85,14 +132,7 @@ export const allTools: Tool[] = [
     gradient: "from-cyan-500 to-teal-600",
     category: "Organize",
   },
-  {
-    title: "Compress PDF",
-    description: "Reduce PDF file size while maintaining quality",
-    href: "/tools/compress-pdf",
-    icon: Minimize2,
-    gradient: "from-purple-500 to-violet-600",
-    category: "Optimize",
-  },
+
   {
     title: "Edit PDF",
     description: "Add annotations, text, and drawings to your PDF",
@@ -237,14 +277,7 @@ export const allTools: Tool[] = [
     gradient: "from-fuchsia-500 to-pink-600",
     category: "Convert",
   },
-  {
-    title: "JPG to PDF",
-    description: "Convert JPG images to PDF",
-    href: "/tools/jpg-to-pdf",
-    icon: FileImage,
-    gradient: "from-rose-500 to-pink-600",
-    category: "Convert",
-  },
+
   {
     title: "PNG to PDF",
     description: "Convert PNG images to PDF",
@@ -293,14 +326,7 @@ export const allTools: Tool[] = [
     gradient: "from-pink-500 to-rose-600",
     category: "Convert",
   },
-  {
-    title: "PDF to JPG",
-    description: "Convert PDF pages to JPG images",
-    href: "/tools/pdf-to-jpg",
-    icon: FileImage,
-    gradient: "from-cyan-500 to-blue-600",
-    category: "Convert",
-  },
+
   {
     title: "PDF to PNG",
     description: "Convert PDF pages to PNG images",
@@ -317,14 +343,7 @@ export const allTools: Tool[] = [
     gradient: "from-emerald-500 to-green-600",
     category: "Convert",
   },
-  {
-    title: "Word to PDF",
-    description: "Convert Word documents to PDF",
-    href: "/tools/word-to-pdf",
-    icon: FileType,
-    gradient: "from-blue-500 to-sky-600",
-    category: "Convert",
-  },
+
   {
     title: "Word to PDF Simple",
     description: "Simple Word to PDF converter",
@@ -333,14 +352,7 @@ export const allTools: Tool[] = [
     gradient: "from-sky-500 to-blue-600",
     category: "Convert",
   },
-  {
-    title: "PDF to Word",
-    description: "Convert PDF to Word documents",
-    href: "/tools/convert-pdf-to-word",
-    icon: FileType,
-    gradient: "from-cyan-500 to-blue-600",
-    category: "Convert",
-  },
+
   {
     title: "PDF to Word Simple",
     description: "Simple PDF to Word converter",
