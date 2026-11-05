@@ -1,12 +1,5 @@
 "use client";
 
-import {
-  Twitter,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Music, // Using for TikTok
-} from "lucide-react";
 import Link from "next/link";
 import { useI18n, useLocalizedHref } from "@/components/i18n/I18nProvider";
 
@@ -38,14 +31,6 @@ export default function Footer() {
     { name: copy.about, href: "/about" },
     { name: copy.contact, href: "/contact" },
     { name: copy.blog, href: "/blog" },
-  ];
-
-  const socialIcons = [
-    { icon: Twitter, link: "https://twitter.com" },
-    { icon: Facebook, link: "https://facebook.com" },
-    { icon: Instagram, link: "https://instagram.com" },
-    { icon: Linkedin, link: "https://linkedin.com" },
-    { icon: Music, link: "https://tiktok.com" }, // TikTok placeholder
   ];
 
   const renderLinks = (links: { name: string; href: string }[]) =>
@@ -85,20 +70,6 @@ export default function Footer() {
       </div>
 
       <hr className="border-gray-300 my-8" />
-
-      <div className="flex justify-center gap-6">
-        {socialIcons.map((social, index) => (
-          <Link
-            key={index}
-            href={social.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-700 hover:text-orange-500 transition-colors"
-          >
-            <social.icon className="w-5 h-5" />
-          </Link>
-        ))}
-      </div>
 
       <p className="text-center text-gray-500 text-sm mt-6">
         &copy; {new Date().getFullYear()} <Link href={href("/")}>quickpdfkit.com</Link> . {copy.rights}
