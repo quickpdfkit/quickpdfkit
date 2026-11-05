@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import * as XLSX from "xlsx";
@@ -31,6 +33,7 @@ type Orientation = "portrait" | "landscape";
 type FitMode = "auto" | "fit-page";
 
 export default function ExcelToPdf() {
+  const t = useT();
   const [excelFile, setExcelFile] = useState<File | null>(null);
   const [sheets, setSheets] = useState<SheetData[]>([]);
   const [loading, setLoading] = useState(false);
@@ -133,7 +136,7 @@ export default function ExcelToPdf() {
     setConverting(true);
 
     try {
-      showToast("Creating PDF...");
+      showToast(t("Creating PDF..."));
 
       // Create PDF
       const pdf = new jsPDF({
@@ -217,11 +220,11 @@ export default function ExcelToPdf() {
       const fileName = excelFile?.name.replace(/\.(xlsx|xls)$/i, "") || "spreadsheet";
       pdf.save(`${fileName}.pdf`);
 
-      showToast("PDF created successfully!");
+      showToast(t("PDF created successfully!"));
 
     } catch (error) {
       console.error("Error converting to PDF:", error);
-      showToast("Error converting to PDF. Please try again.");
+      showToast(t("Error converting to PDF. Please try again."));
     } finally {
       setConverting(false);
     }
@@ -259,12 +262,7 @@ export default function ExcelToPdf() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <TableIcon className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Excel to <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Convert Excel spreadsheets to PDF documents
-          </p>
+          <ToolHeading toolId="excel-to-pdf" />
         </div>
 
         {/* Upload Area */}
@@ -285,9 +283,7 @@ export default function ExcelToPdf() {
                   <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
                 </div>
                 <div className="text-center">
-                  <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                    Click to upload or drag & drop
-                  </span>
+                  <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
                   <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
                     .xlsx or .xls files
                   </span>
@@ -340,9 +336,7 @@ export default function ExcelToPdf() {
               <button
                 onClick={resetAll}
                 className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-              >
-                Change File
-              </button>
+              >{t("Change File")}</button>
             </div>
 
             {loading && (
@@ -358,38 +352,34 @@ export default function ExcelToPdf() {
                 <div className="bg-white rounded-xl p-6 border border-gray-200">
                   <div className="flex items-center gap-2 mb-4">
                     <Settings className="w-5 h-5 text-gray-700" />
-                    <h3 className="text-lg font-semibold text-gray-900">PDF Settings</h3>
+                    <h3 className="text-lg font-semibold text-gray-900">{t("PDF Settings")}</h3>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* Page Size */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Page Size
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Page Size")}</label>
                       <select
                         value={pageSize}
                         onChange={(e) => setPageSize(e.target.value as PageSize)}
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                       >
                         <option value="A4">A4 (210 × 297 mm)</option>
-                        <option value="Letter">Letter (8.5 × 11 in)</option>
-                        <option value="Legal">Legal (8.5 × 14 in)</option>
+                        <option value="Letter">{t("Letter (8.5 × 11 in)")}</option>
+                        <option value="Legal">{t("Legal (8.5 × 14 in)")}</option>
                         <option value="A3">A3 (297 × 420 mm)</option>
                       </select>
                     </div>
 
                     {/* Orientation */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Orientation
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Orientation")}</label>
                       <select
                         value={orientation}
                         onChange={(e) => setOrientation(e.target.value as Orientation)}
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                       >
-                        <option value="portrait">Portrait</option>
+                        <option value="portrait">{t("Portrait")}</option>
                         <option value="landscape">Landscape (Recommended)</option>
                       </select>
                     </div>
@@ -499,18 +489,18 @@ export default function ExcelToPdf() {
                       <p className="text-2xl font-bold text-orange-500">{getSelectedCount()}</p>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-1">Total Rows</p>
+                      <p className="text-sm text-gray-600 mb-1">{t("Total Rows")}</p>
                       <p className="text-2xl font-bold text-orange-500">{getTotalRows()}</p>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-1">Page Size</p>
+                      <p className="text-sm text-gray-600 mb-1">{t("Page Size")}</p>
                       <p className="text-lg font-bold text-orange-500">{pageSize}</p>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-1">Status</p>
+                      <p className="text-sm text-gray-600 mb-1">{t("Status")}</p>
                       <div className="flex items-center gap-2">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <p className="text-sm font-medium text-green-700">Ready</p>
+                        <p className="text-sm font-medium text-green-700">{t("Ready")}</p>
                       </div>
                     </div>
                   </div>
@@ -521,9 +511,7 @@ export default function ExcelToPdf() {
                   <div className="flex gap-3">
                     <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <p className="text-sm text-yellow-900 font-medium mb-1">
-                        Conversion Notes
-                      </p>
+                      <p className="text-sm text-yellow-900 font-medium mb-1">{t("Conversion Notes")}</p>
                       <ul className="text-sm text-yellow-700 space-y-1">
                         <li>• Each sheet will be converted to separate pages in the PDF</li>
                         <li>• Complex formatting, formulas, and charts are not preserved</li>
@@ -539,9 +527,7 @@ export default function ExcelToPdf() {
                   <button
                     onClick={resetAll}
                     className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-                  >
-                    Cancel
-                  </button>
+                  >{t("Cancel")}</button>
                   <button
                     onClick={convertToPdf}
                     disabled={converting || getSelectedCount() === 0}
@@ -549,9 +535,7 @@ export default function ExcelToPdf() {
                   >
                     {converting ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Converting...
-                      </>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Converting...")}</>
                     ) : (
                       <>
                         <Download className="w-5 h-5" />

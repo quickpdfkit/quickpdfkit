@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { saveAs } from "file-saver";
@@ -29,6 +31,7 @@ type ConversionMode = "auto" | "table" | "text" | "keyvalue";
 type OutputFormat = "pretty" | "compact";
 
 export default function PdfToJson() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -197,7 +200,7 @@ export default function PdfToJson() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -211,7 +214,7 @@ export default function PdfToJson() {
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
       
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
 
       // Extract data from all pages
       const pagesData: PageData[] = [];
@@ -223,11 +226,11 @@ export default function PdfToJson() {
       }
 
       setPages(pagesData);
-      showToast("Data extraction complete");
+      showToast(t("Data extraction complete"));
 
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
     } finally {
       setLoading(false);
       setProgress(0);
@@ -300,7 +303,7 @@ export default function PdfToJson() {
       showToast("JSON copied to clipboard!");
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
-      showToast("Failed to copy to clipboard");
+      showToast(t("Failed to copy to clipboard"));
     }
   };
 
@@ -354,12 +357,7 @@ export default function PdfToJson() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <Code className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            PDF to <span className="text-orange-500">JSON</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Extract data from PDF and convert to JSON format
-          </p>
+          <ToolHeading toolId="pdf-to-json" />
         </div>
 
         {/* Upload Area */}
@@ -380,12 +378,8 @@ export default function PdfToJson() {
                   <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
                 </div>
                 <div className="text-center">
-                  <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                    Click to upload or drag & drop
-                  </span>
-                  <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                    PDF files only
-                  </span>
+                  <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                  <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
                 </div>
                 <input
                   id="pdf-upload"
@@ -453,9 +447,7 @@ export default function PdfToJson() {
               <button
                 onClick={resetAll}
                 className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-              >
-                Change File
-              </button>
+              >{t("Change File")}</button>
             </div>
 
             {/* Loading Progress */}
@@ -518,14 +510,10 @@ export default function PdfToJson() {
                             >
                               {copied ? (
                                 <>
-                                  <CheckCircle className="w-4 h-4 text-green-600" />
-                                  Copied!
-                                </>
+                                  <CheckCircle className="w-4 h-4 text-green-600" />{t("Copied!")}</>
                               ) : (
                                 <>
-                                  <Copy className="w-4 h-4" />
-                                  Copy
-                                </>
+                                  <Copy className="w-4 h-4" />{t("Copy")}</>
                               )}
                             </button>
                           </div>
@@ -540,7 +528,7 @@ export default function PdfToJson() {
                     <div className="bg-white rounded-xl p-6 border border-gray-200">
                       <div className="flex items-center gap-2 mb-4">
                         <Settings className="w-5 h-5 text-gray-700" />
-                        <h3 className="text-lg font-semibold text-gray-900">Settings</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">{t("Settings")}</h3>
                       </div>
 
                       <div className="space-y-4">
@@ -559,15 +547,11 @@ export default function PdfToJson() {
                             <option value="keyvalue">Key-Value Pairs</option>
                             <option value="text">Plain Text</option>
                           </select>
-                          <p className="text-xs text-gray-500 mt-1">
-                            Requires re-upload to change
-                          </p>
+                          <p className="text-xs text-gray-500 mt-1">{t("Requires re-upload to change")}</p>
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Output Format
-                          </label>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">{t("Output Format")}</label>
                           <select
                             value={outputFormat}
                             onChange={(e) => setOutputFormat(e.target.value as OutputFormat)}
@@ -597,16 +581,14 @@ export default function PdfToJson() {
 
                     {/* Statistics */}
                     <div className="bg-white rounded-xl p-6 border border-gray-200">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                        Statistics
-                      </h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("Statistics")}</h3>
                       <div className="space-y-3">
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Total Pages</span>
+                          <span className="text-sm text-gray-600">{t("Total Pages")}</span>
                           <span className="text-sm font-semibold text-gray-900">{totalPages}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Selected</span>
+                          <span className="text-sm text-gray-600">{t("Selected")}</span>
                           <span className="text-sm font-semibold text-orange-500">{getSelectedCount()}</span>
                         </div>
                         <div className="flex justify-between items-center">
@@ -614,7 +596,7 @@ export default function PdfToJson() {
                           <span className="text-sm font-semibold text-gray-900">{getJsonSize()}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Characters</span>
+                          <span className="text-sm text-gray-600">{t("Characters")}</span>
                           <span className="text-sm font-semibold text-gray-900">{getFormattedJson().length.toLocaleString()}</span>
                         </div>
                       </div>
@@ -658,9 +640,7 @@ export default function PdfToJson() {
                   <div className="flex gap-3">
                     <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <p className="text-sm text-blue-900 font-medium mb-1">
-                        Conversion Notes
-                      </p>
+                      <p className="text-sm text-blue-900 font-medium mb-1">{t("Conversion Notes")}</p>
                       <ul className="text-sm text-blue-700 space-y-1">
                         <li>• Auto-detect tries JSON parsing first, then table detection, then key-value pairs</li>
                         <li>• Table mode works best with tabular data (rows and columns)</li>
@@ -676,9 +656,7 @@ export default function PdfToJson() {
                   <button
                     onClick={resetAll}
                     className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-                  >
-                    Cancel
-                  </button>
+                  >{t("Cancel")}</button>
                   <button
                     onClick={copyToClipboard}
                     disabled={getSelectedCount() === 0}

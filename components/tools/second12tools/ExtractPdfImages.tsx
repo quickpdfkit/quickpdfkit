@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef, useEffect } from "react";
 import { saveAs } from "file-saver";
@@ -28,6 +30,7 @@ interface ExtractedImage {
 }
 
 export default function ExtractImages() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -55,7 +58,7 @@ export default function ExtractImages() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -70,10 +73,10 @@ export default function ExtractImages() {
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
       
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
       setPdfFile(null);
     } finally {
       setLoading(false);
@@ -187,7 +190,7 @@ export default function ExtractImages() {
       showToast(`Downloaded ${imagesToDownload.length} images as ZIP`);
     } catch (error) {
       console.error("Error creating ZIP:", error);
-      showToast("Error downloading images");
+      showToast(t("Error downloading images"));
     } finally {
       setDownloading(false);
     }
@@ -219,7 +222,7 @@ export default function ExtractImages() {
       showToast(`Downloaded all ${extractedImages.length} images as ZIP`);
     } catch (error) {
       console.error("Error creating ZIP:", error);
-      showToast("Error downloading images");
+      showToast(t("Error downloading images"));
     } finally {
       setDownloading(false);
     }
@@ -247,12 +250,7 @@ export default function ExtractImages() {
       <div className="w-full max-w-6xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Extract <span className="text-orange-500">Images</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Extract all images from your PDF file
-          </p>
+          <ToolHeading toolId="extract-images-from-pdf" />
         </div>
 
         {/* Upload Area */}
@@ -272,12 +270,8 @@ export default function ExtractImages() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -308,15 +302,13 @@ export default function ExtractImages() {
               <button
                 onClick={resetAll}
                 className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-              >
-                Change File
-              </button>
+              >{t("Change File")}</button>
             </div>
 
             {loading && (
               <div className="text-center py-12">
                 <div className="inline-block w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-4" />
-                <p className="text-gray-600">Loading PDF...</p>
+                <p className="text-gray-600">{t("Loading PDF...")}</p>
               </div>
             )}
 
@@ -499,9 +491,7 @@ export default function ExtractImages() {
                   <button
                     onClick={resetAll}
                     className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-                  >
-                    Upload New PDF
-                  </button>
+                  >{t("Upload New PDF")}</button>
                   {selectedImages.size > 0 && (
                     <button
                       onClick={downloadSelectedImages}

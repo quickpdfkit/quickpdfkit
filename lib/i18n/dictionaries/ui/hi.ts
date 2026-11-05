@@ -1,0 +1,240 @@
+import type { UiCopy } from "../../types";
+
+export const hiUi: UiCopy = {
+  meta: {
+    homeTitle: "QuickPDFKit — मुफ़्त, निजी PDF टूल, सीधे ब्राउज़र में",
+    homeDescription:
+      "QuickPDFKit एक मुफ़्त PDF टूलकिट है जो आपके ब्राउज़र में चलता है। PDF को निजी ढंग से मर्ज, स्प्लिट, कंप्रेस, कनवर्ट, एडिट और सुरक्षित करें — खाता बनाने की ज़रूरत नहीं।",
+    homeKeywords: [
+      "QuickPDFKit",
+      "मुफ़्त PDF टूल",
+      "निजी PDF एडिटर",
+      "ब्राउज़र में PDF टूल",
+      "PDF मर्ज करें",
+      "PDF स्प्लिट करें",
+      "PDF कंप्रेस करें",
+      "PDF कनवर्टर",
+      "PDF से Word",
+      "इमेज से PDF",
+      "ऑनलाइन PDF एडिट करें",
+    ],
+    toolsIndexTitle: "सभी मुफ़्त PDF टूल",
+    toolsIndexDescription:
+      "QuickPDFKit का हर मुफ़्त टूल देखें। PDF को ब्राउज़र में निजी ढंग से मर्ज, स्प्लिट, कंप्रेस, कनवर्ट, एडिट, साइन और सुरक्षित करें।",
+    toolsIndexKeywords: [
+      "QuickPDFKit टूल",
+      "मुफ़्त PDF टूल",
+      "PDF कनवर्टर",
+      "PDF मर्ज करें",
+      "PDF कंप्रेस करें",
+      "ऑनलाइन PDF एडिट",
+    ],
+    ogImageAlt: "QuickPDFKit — मुफ़्त, निजी PDF टूल, सीधे ब्राउज़र में",
+    howToName: "QuickPDFKit का इस्तेमाल कैसे करें",
+    howToDescription:
+      "एक आसान क्रम से अपने PDF संभालें। जो कुछ चाहिए, वह एक ही जगह है।",
+  },
+  language: { label: "भाषा" },
+  nav: {
+    home: "होम",
+    tools: "टूल",
+    about: "हमारे बारे में",
+    contact: "संपर्क",
+    allTools: "सभी टूल",
+    search: "खोजें",
+    convertToPdf: "PDF में बदलें",
+    editOrganize: "एडिट और व्यवस्थित करें",
+    featured: "चुनिंदा",
+    protectPdf: "PDF सुरक्षित करें",
+    secureYourFiles: "अपनी फ़ाइलें सुरक्षित रखें",
+    mostPopular: "सबसे लोकप्रिय",
+    viewAllTools: "सभी टूल देखें →",
+    searchPlaceholder: "टूल खोजें...",
+    popularSearches: "अक्सर की जाने वाली खोजें:",
+    suggestions: [
+      "PDF मर्ज करें",
+      "PDF कंप्रेस करें",
+      "PDF में बदलें",
+      "PDF सुरक्षित करें",
+      "PDF एडिट करें",
+    ],
+    noToolsFound: "कोई टूल नहीं मिला",
+    trySearching: "«मर्ज», «कंप्रेस» या «कनवर्ट» खोजकर देखें",
+    clearSearch: "खोज साफ़ करें",
+    viewAllResults: "सभी {count} परिणाम देखें →",
+    pressEnter: "पहला परिणाम चुनने के लिए Enter दबाएँ",
+    resultsCount: "{total} में से {shown} परिणाम",
+    toggleMenu: "मेनू खोलें या बंद करें",
+    imageToPdf: "इमेज से PDF",
+    jpgToPdf: "JPG से PDF",
+    pngToPdf: "PNG से PDF",
+    webpToPdf: "WEBP से PDF",
+    mergePdf: "PDF मर्ज करें",
+    splitPdf: "PDF स्प्लिट करें",
+    compressPdf: "PDF कंप्रेस करें",
+    editPdf: "PDF एडिट करें",
+  },
+  hero: {
+    badge: "मुफ़्त, निजी PDF टूल, सीधे ब्राउज़र में",
+    titleLead: "अपनी PDF को सेकंडों में",
+    titleAccent: "बदलें और सुधारें",
+    subtitle:
+      "हमारे टूल से PDF फ़ाइलें मर्ज, स्प्लिट, कंप्रेस और कनवर्ट करें। रजिस्ट्रेशन की ज़रूरत नहीं, पूरी तरह मुफ़्त।",
+    fast: "बहुत तेज़",
+    secure: "100% सुरक्षित",
+    freeForever: "हमेशा मुफ़्त",
+    exploreTools: "टूल देखें",
+    learnMore: "और जानें",
+    stats: [
+      { value: "48", label: "मुफ़्त टूल" },
+      { value: "100%", label: "ब्राउज़र में" },
+      { value: "नहीं", label: "साइनअप ज़रूरी" },
+    ],
+  },
+  features: {
+    cards: [
+      {
+        title: "डेस्कटॉप पर ऑफ़लाइन काम करें",
+        description:
+          "बिना इंटरनेट और बिना सीमा के दस्तावेज़ों को लोकल बैच में एडिट और प्रबंधित करें।",
+      },
+      {
+        title: "मोबाइल पर साथ लेकर चलें",
+        description:
+          "आपके पसंदीदा टूल, जेब में। कभी भी, कहीं भी काम जारी रखें।",
+      },
+      {
+        title: "बिज़नेस के लिए बना",
+        description:
+          "वर्कफ़्लो ऑटोमेट करें, टीमों को आसानी से जोड़ें, और लचीले प्लान के साथ आगे बढ़ें।",
+      },
+    ],
+  },
+  howItWorks: {
+    titleLead: "यह कैसे",
+    titleAccent: "काम करता है",
+    subtitle:
+      "एक आसान क्रम से अपने PDF संभालें। जो कुछ चाहिए, वह एक ही जगह है।",
+    steps: [
+      {
+        positionLabel: "01",
+        name: "फ़ाइल अपलोड करें",
+        text: "PDF को खींचकर छोड़ें या ब्राउज़ करने के लिए क्लिक करें। कई फ़ाइलें जोड़ी जा सकती हैं।",
+      },
+      {
+        positionLabel: "02",
+        name: "विकल्प चुनें",
+        text: "काम चुनें और सेटिंग अपनी ज़रूरत के अनुसार बदलें।",
+      },
+      {
+        positionLabel: "03",
+        name: "नतीजा डाउनलोड करें",
+        text: "फ़ाइल तुरंत प्रोसेस हो जाती है। एक क्लिक में डाउनलोड करें।",
+      },
+    ],
+    trustedTitle: "दुनिया भर के प्रोफ़ेशनल का भरोसा",
+    trustedText:
+      "QuickPDFKit PDF को कुशलता से एडिट करने वाला भरोसेमंद वेब ऐप है। ज़रूरी टूल इस्तेमाल करें और अपना डेटा सुरक्षित रखें।",
+  },
+  toolsGrid: {
+    titleLead: "ताकतवर",
+    titleAccent: "PDF टूल",
+    subtitle: "PDF के साथ काम करने के लिए जो चाहिए, वह सब एक ही जगह",
+    getStarted: "शुरू करें",
+  },
+  toolsIndex: {
+    titleLead: "सभी",
+    titleAccent: "PDF टूल",
+    subtitle:
+      "QuickPDFKit का हर मुफ़्त टूल देखें। ब्राउज़र में PDF मर्ज, स्प्लिट, कंप्रेस, कनवर्ट और एडिट करें — निजी और पूरी तरह मुफ़्त।",
+    searchPlaceholder: "टूल खोजें... (जैसे मर्ज, कंप्रेस, कनवर्ट)",
+    filterByCategory: "श्रेणी के अनुसार छानें",
+    showing: "दिखा रहे हैं",
+    toolSingular: "टूल",
+    toolPlural: "टूल",
+    clearSearch: "खोज साफ़ करें",
+    noToolsFound: "कोई टूल नहीं मिला",
+    noToolsHint: "जो आप ढूँढ रहे हैं, उसके लिए खोज या फ़िल्टर बदलकर देखें।",
+    resetFilters: "फ़िल्टर रीसेट करें",
+    ctaTitle: "जो चाहिए वह नहीं मिला?",
+    ctaText:
+      "हम लगातार नए टूल और सुविधाएँ जोड़ रहे हैं। लिखें और बताएँ कि आगे आप क्या देखना चाहते हैं।",
+    contactUs: "संपर्क करें",
+  },
+  footer: {
+    product: "उत्पाद",
+    solutions: "समाधान",
+    policies: "नीतियाँ",
+    company: "कंपनी",
+    home: "होम",
+    features: "विशेषताएँ",
+    tools: "टूल",
+    faq: "सवाल-जवाब",
+    editPdf: "PDF एडिट करें",
+    mergePdf: "PDF मर्ज करें",
+    splitPdf: "PDF स्प्लिट करें",
+    imageToPdf: "इमेज से PDF",
+    privacy: "गोपनीयता नीति",
+    terms: "नियम और शर्तें",
+    cookies: "कुकीज़",
+    about: "हमारे बारे में",
+    contact: "संपर्क करें",
+    blog: "ब्लॉग",
+    email: "ईमेल",
+    rights: "सर्वाधिकार सुरक्षित।",
+  },
+  contactPage: {
+    metaTitle: "संपर्क करें",
+    metaDescription:
+      "मुफ़्त ब्राउज़र PDF टूल के बारे में सहायता, प्रतिक्रिया या साझेदारी के लिए QuickPDFKit टीम से संपर्क करें।",
+    metaKeywords: [
+      "QuickPDFKit संपर्क",
+      "QuickPDFKit सहायता",
+      "PDF टूल मदद",
+      "QuickPDFKit प्रतिक्रिया",
+    ],
+    titleLead: "संपर्क",
+    titleAccent: "करें",
+    intro: "सवाल, सुझाव या प्रतिक्रिया है? नीचे फ़ॉर्म भरें, हम जल्द जवाब देंगे।",
+    emailLead: "या सीधे ईमेल करें",
+    namePlaceholder: "आपका नाम",
+    emailPlaceholder: "आपका ईमेल",
+    messagePlaceholder: "आपका संदेश",
+    send: "संदेश भेजें",
+    mailtoNote: "भेजने पर आपका ईमेल ऐप खुलेगा और यह संदेश तैयार होगा।",
+    subject: "{name} की ओर से QuickPDFKit संदेश",
+    bodyName: "नाम",
+    bodyEmail: "ईमेल",
+  },
+  categories: {
+    All: "सभी",
+    Convert: "कनवर्ट",
+    Edit: "एडिट",
+    Organize: "व्यवस्थित करें",
+    Security: "सुरक्षा",
+    Optimize: "ऑप्टिमाइज़",
+    View: "देखें",
+  },
+  notFound: {
+    title: "टूल नहीं मिला",
+    description: "माँगा गया PDF टूल QuickPDFKit पर नहीं मिला।",
+  },
+  toolGuides: {
+    "add-blank-pages-to-pdf": {
+      name: "PDF में खाली पेज जोड़ें",
+      description:
+        "जगह और पेज नंबर बताकर PDF में खाली पेज जोड़ें। नए पेज मूल पेजों के आकार के होंगे और पहचान के लिए एक हल्के वॉटरमार्क के साथ जुड़ेंगे।",
+      stepName: "यह कैसे काम करता है",
+      stepText:
+        "जगह और पेज नंबर बताकर PDF में खाली पेज जोड़ें। नए पेज मूल पेजों के आकार के होंगे और पहचान के लिए एक हल्के वॉटरमार्क के साथ जुड़ेंगे।",
+    },
+    "hyper-compress-pdf": {
+      name: "PDF को और अधिक कंप्रेस करें",
+      description:
+        "यह टूल मेटाडेटा और फ़ालतू डेटा हटाकर तथा कंप्रेशन लगाकर PDF की संरचना हल्का करता है। नतीजा मूल फ़ाइल की ऑप्टिमाइज़ेशन पर निर्भर करता है। कुछ PDF पहले से इतने अच्छे हैं कि और छोटे नहीं होते।",
+      stepName: "यह कैसे काम करता है",
+      stepText:
+        "यह टूल मेटाडेटा और फ़ालतू डेटा हटाकर तथा कंप्रेशन लगाकर PDF की संरचना हल्का करता है। नतीजा मूल फ़ाइल की ऑप्टिमाइज़ेशन पर निर्भर करता है। कुछ PDF पहले से इतने अच्छे हैं कि और छोटे नहीं होते।",
+    },
+  },
+};

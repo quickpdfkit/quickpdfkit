@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_LOCALE, type AppLocale } from "@/lib/i18n/locales";
 
 export const SITE_NAME = "QuickPDFKit";
 export const SITE_URL = "https://quickpdfkit.com";
@@ -33,11 +34,17 @@ export function pageMetadata({
   description,
   path,
   keywords,
+  locale = "en",
+  languages,
+  noIndex = false,
 }: {
   title: string;
   description: string;
   path: string;
   keywords?: string[];
+  locale?: AppLocale;
+  languages?: Record<string, string>;
+  noIndex?: boolean;
 }): Metadata {
   const fullTitle = title.includes(SITE_NAME)
     ? title
@@ -49,10 +56,18 @@ export function pageMetadata({
     keywords,
     alternates: {
       canonical: path,
+      ...(languages ? { languages } : {}),
     },
     openGraph: {
       type: "website",
-      locale: "en_US",
+      locale: OG_LOCALE[locale],
+      ...(languages
+        ? {
+            alternateLocale: (Object.keys(OG_LOCALE) as AppLocale[])
+              .filter((code) => code !== locale)
+              .map((code) => OG_LOCALE[code]),
+          }
+        : {}),
       url: path,
       siteName: SITE_NAME,
       title: fullTitle,
@@ -63,6 +78,7 @@ export function pageMetadata({
       title: fullTitle,
       description,
     },
+    ...(noIndex ? { robots: { index: false, follow: false } } : {}),
   };
 }
 
@@ -71,12 +87,13 @@ type HowToStep = { name: string; text: string };
 export function softwareApplicationJsonLd(
   description: string,
   featureList: string[],
+  path = "/",
 ) {
   return {
     "@context": "https://schema.org",
     "@type": ["WebApplication", "SoftwareApplication"],
     name: SITE_NAME,
-    url: absoluteUrl("/"),
+    url: absoluteUrl(path),
     description,
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web browser",
@@ -91,7 +108,7 @@ export function softwareApplicationJsonLd(
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,
-      url: absoluteUrl("/"),
+      url: absoluteUrl(path),
     },
   };
 }
@@ -100,10 +117,12 @@ export function webApplicationJsonLd({
   name,
   description,
   path,
+  homePath = "/",
 }: {
   name: string;
   description: string;
   path: string;
+  homePath?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -123,7 +142,7 @@ export function webApplicationJsonLd({
     provider: {
       "@type": "Organization",
       name: SITE_NAME,
-      url: absoluteUrl("/"),
+      url: absoluteUrl(homePath),
     },
   };
 }

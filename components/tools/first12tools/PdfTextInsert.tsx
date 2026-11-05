@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument, rgb } from "pdf-lib";
@@ -6,6 +8,7 @@ import { saveAs } from "file-saver";
 import { Upload, Download, FileText, Plus, Trash2 } from "lucide-react";
 
 export default function PdfTextInsert() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [processing, setProcessing] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
@@ -39,19 +42,19 @@ export default function PdfTextInsert() {
 
   const handleFileUpload = (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
     setPdfFile(file);
     setTextElements([]);
     setSelectedPage(1);
-    showToast("PDF loaded successfully");
+    showToast(t("PDF loaded successfully"));
   };
 
   const addTextElement = () => {
     if (!newText.trim()) {
-      showToast("Please enter some text");
+      showToast(t("Please enter some text"));
       return;
     }
 
@@ -182,12 +185,7 @@ export default function PdfTextInsert() {
       <div className="w-full max-w-4xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Add <span className="text-orange-500">Text</span> to PDF
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Insert custom text anywhere in your PDF documents
-          </p>
+          <ToolHeading toolId="add-text-to-pdf" />
         </div>
 
         {/* Upload Area */}
@@ -208,12 +206,8 @@ export default function PdfTextInsert() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only • Maximum file size: 100MB
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only • Maximum file size: 100MB")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -249,9 +243,7 @@ export default function PdfTextInsert() {
                 <button
                   onClick={resetAll}
                   className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-                >
-                  Change File
-                </button>
+                >{t("Change File")}</button>
               </div>
             </div>
 
@@ -267,9 +259,7 @@ export default function PdfTextInsert() {
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 {/* Text Input */}
                 <div className="sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Text Content
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t("Text Content")}</label>
                   <input
                     type="text"
                     value={newText}
@@ -281,9 +271,7 @@ export default function PdfTextInsert() {
 
                 {/* Page Selection */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Page Number
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t("Page Number")}</label>
                   <input
                     type="number"
                     min="1"
@@ -302,9 +290,7 @@ export default function PdfTextInsert() {
                     disabled={!newText.trim()}
                     className="w-full px-6 py-3 rounded-xl font-semibold text-white bg-orange-500 hover:bg-orange-600 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
                   >
-                    <Plus className="w-4 h-4" />
-                    Add Text
-                  </button>
+                    <Plus className="w-4 h-4" />{t("Add Text")}</button>
                 </div>
               </div>
 
@@ -325,9 +311,7 @@ export default function PdfTextInsert() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Text Color
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t("Text Color")}</label>
                   <div className="flex items-center gap-3">
                     <input
                       type="color"
@@ -352,9 +336,7 @@ export default function PdfTextInsert() {
                     onClick={clearAllText}
                     className="px-4 py-2 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 text-sm font-medium transition-all flex items-center gap-2"
                   >
-                    <Trash2 className="w-4 h-4" />
-                    Clear All
-                  </button>
+                    <Trash2 className="w-4 h-4" />{t("Clear All")}</button>
                 </div>
 
                 <div className="space-y-4">
@@ -458,9 +440,7 @@ export default function PdfTextInsert() {
                             updateTextProperty(element.id, "x", 50)
                           }
                           className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all"
-                        >
-                          Left
-                        </button>
+                        >{t("Left")}</button>
                         <button
                           onClick={() =>
                             updateTextProperty(element.id, "x", 300)
@@ -474,17 +454,13 @@ export default function PdfTextInsert() {
                             updateTextProperty(element.id, "x", 550)
                           }
                           className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all"
-                        >
-                          Right
-                        </button>
+                        >{t("Right")}</button>
                         <button
                           onClick={() =>
                             updateTextProperty(element.id, "y", 700)
                           }
                           className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all"
-                        >
-                          Top
-                        </button>
+                        >{t("Top")}</button>
                         <button
                           onClick={() =>
                             updateTextProperty(element.id, "y", 400)
@@ -498,9 +474,7 @@ export default function PdfTextInsert() {
                             updateTextProperty(element.id, "y", 50)
                           }
                           className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all"
-                        >
-                          Bottom
-                        </button>
+                        >{t("Bottom")}</button>
                       </div>
                     </div>
                   ))}
@@ -514,9 +488,7 @@ export default function PdfTextInsert() {
                 onClick={resetAll}
                 disabled={processing}
                 className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all hover:shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Cancel
-              </button>
+              >{t("Cancel")}</button>
 
               <button
                 onClick={addTextToPdf}

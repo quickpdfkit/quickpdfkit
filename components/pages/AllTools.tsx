@@ -6,31 +6,33 @@ import { useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ToolCard from "@/components/layout/ToolCard";
-import { allTools } from "@/config/toolsData";
+import { useI18n, useLocalizedHref } from "@/components/i18n/I18nProvider";
+import { useLocalizedTools } from "@/components/i18n/useLocalizedTools";
+
+const CATEGORY_KEYS = [
+  "All",
+  "Convert",
+  "Edit",
+  "Organize",
+  "Security",
+  "Optimize",
+  "View",
+] as const;
 
 export default function AllTools() {
+  const { dictionary } = useI18n();
+  const href = useLocalizedHref();
+  const copy = dictionary.toolsIndex;
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState<(typeof CATEGORY_KEYS)[number]>("All");
 
-  const tools = allTools;
-
-  const categories = [
-    "All",
-    "Convert",
-    "Edit",
-    "Organize",
-    "Security",
-    "Optimize",
-    "View",
-  ];
+  const tools = useLocalizedTools();
 
   // Filter tools based on search and category
   const filteredTools = tools.filter((tool) => {
-    const matchesSearch =
-      tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tool.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = tool.searchText.includes(searchQuery.toLowerCase());
     const matchesCategory =
-      selectedCategory === "All" || tool.category === selectedCategory;
+      selectedCategory === "All" || tool.categoryKey === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -52,24 +54,22 @@ export default function AllTools() {
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-white">
-              All <span className="text-orange-500">PDF Tools</span>
+              {copy.titleLead} <span className="text-orange-500">{copy.titleAccent}</span>
             </h1>
             <p className="text-gray-300 text-lg sm:text-xl max-w-3xl mx-auto mb-8">
-              Discover every free QuickPDFKit tool. Merge, split, compress,
-              convert, and edit PDFs in your browser — private and completely
-              free.
+              {copy.subtitle}
             </p>
 
             {/* Search Bar */}
             <div className="max-w-2xl mx-auto">
               <div className="relative group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-orange-500 transition-colors" />
+                <Search className="absolute start-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-orange-500 transition-colors" />
                 <input
                   type="text"
-                  placeholder="Search for tools... (e.g., merge, compress, convert)"
+                  placeholder={copy.searchPlaceholder}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-orange-500/50 focus:bg-white/15 transition-all"
+                  className="w-full ps-12 pe-4 py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-orange-500/50 focus:bg-white/15 transition-all"
                 />
               </div>
             </div>
@@ -90,13 +90,13 @@ export default function AllTools() {
             <div className="flex items-center gap-2 mb-6">
               <Filter className="w-5 h-5 text-orange-500" />
               <h3 className="text-xl font-semibold text-gray-900">
-                Filter by Category
+                {copy.filterByCategory}
               </h3>
             </div>
 
             {/* Category Pills */}
             <div className="flex flex-wrap gap-3">
-              {categories.map((category) => (
+              {CATEGORY_KEYS.map((category) => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
@@ -106,10 +106,10 @@ export default function AllTools() {
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-105"
                   }`}
                 >
-                  {category}
+                  {dictionary.categories[category]}
                   {category !== "All" && (
-                    <span className="ml-2 text-xs opacity-75">
-                      ({tools.filter((t) => t.category === category).length})
+                    <span className="ms-2 text-xs opacity-75">
+                      ({tools.filter((tool) => tool.categoryKey === category).length})
                     </span>
                   )}
                 </button>
@@ -120,18 +120,18 @@ export default function AllTools() {
           {/* Results Count */}
           <div className="mb-8 flex items-center justify-between">
             <p className="text-gray-600">
-              Showing{" "}
+              {copy.showing}{" "}
               <span className="font-semibold text-orange-600">
                 {filteredTools.length}
               </span>{" "}
-              {filteredTools.length === 1 ? "tool" : "tools"}
+              {filteredTools.length === 1 ? copy.toolSingular : copy.toolPlural}
             </p>
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
                 className="text-sm text-orange-500 hover:text-orange-600 underline"
               >
-                Clear search
+                {copy.clearSearch}
               </button>
             )}
           </div>
@@ -140,7 +140,7 @@ export default function AllTools() {
           {filteredTools.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredTools.map((tool, index) => (
-                <ToolCard key={tool.title} {...tool} index={index} />
+                <ToolCard key={tool.href} {...tool} index={index} />
               ))}
             </div>
           ) : (
@@ -150,11 +150,10 @@ export default function AllTools() {
                 <Search className="w-10 h-10 text-orange-500" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                No tools found
+                {copy.noToolsFound}
               </h3>
               <p className="text-gray-600 mb-6">
-                Try adjusting your search or filter to find what you're looking
-                for.
+                {copy.noToolsHint}
               </p>
               <button
                 onClick={() => {
@@ -163,7 +162,7 @@ export default function AllTools() {
                 }}
                 className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-medium transition-colors shadow-lg shadow-orange-500/30"
               >
-                Reset Filters
+                {copy.resetFilters}
               </button>
             </div>
           )}
@@ -178,19 +177,18 @@ export default function AllTools() {
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-white">
-            Can't Find What You Need?
+            {copy.ctaTitle}
           </h2>
           <p className="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">
-            We're constantly adding new tools and features. Get in touch and let
-            us know what you'd like to see next.
+            {copy.ctaText}
           </p>
           <Link
-            href="/contact"
+            href={href("/contact")}
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-orange-600 rounded-xl font-semibold hover:bg-gray-50 transition-all shadow-xl hover:scale-105"
           >
-            Contact Us
+            {copy.contactUs}
             <svg
-              className="w-5 h-5"
+              className="w-5 h-5 rtl:rotate-180"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

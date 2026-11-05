@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import { LucideIcon } from "lucide-react";
+import { useI18n } from "@/components/i18n/I18nProvider";
 
 interface ToolCardProps {
   title: string;
@@ -24,6 +25,7 @@ export default function ToolCard({
   gradient,
   index = 0,
 }: ToolCardProps) {
+  const { dictionary } = useI18n();
   return (
     <Link href={href} className="block h-full group">
       <div className="h-full bg-white border border-gray-200 hover:border-orange-400 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
@@ -44,7 +46,7 @@ export default function ToolCard({
 
         {/* Arrow Icon */}
         <div className="mt-4 flex items-center text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity">
-          <span className="text-sm font-medium mr-2">Get started</span>
+          <span className="text-sm font-medium me-2">{dictionary.toolsGrid.getStarted}</span>
           <svg
             className="w-5 h-5"
             fill="none"

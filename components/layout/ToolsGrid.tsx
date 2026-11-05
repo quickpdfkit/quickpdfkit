@@ -1,10 +1,13 @@
 "use client";
 
 import ToolCard from "./ToolCard";
-import { allTools } from "@/config/toolsData";
+import { useI18n } from "@/components/i18n/I18nProvider";
+import { useLocalizedTools } from "@/components/i18n/useLocalizedTools";
 
 export default function ToolsGrid() {
-  const tools = allTools;
+  const { dictionary } = useI18n();
+  const tools = useLocalizedTools();
+  const copy = dictionary.toolsGrid;
 
   return (
     <section
@@ -20,18 +23,17 @@ export default function ToolsGrid() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
-            Powerful <span className="text-orange-500">PDF Tools</span>
+            {copy.titleLead} <span className="text-orange-500">{copy.titleAccent}</span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Everything you need to work with PDFs -  tools, all
-            in one place
+            {copy.subtitle}
           </p>
         </div>
 
         {/* Tools Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {tools.map((tool, index) => (
-            <ToolCard key={tool.title} {...tool} index={index} />
+            <ToolCard key={tool.href} {...tool} index={index} />
           ))}
         </div>
       </div>

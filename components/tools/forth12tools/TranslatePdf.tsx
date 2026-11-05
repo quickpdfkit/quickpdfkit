@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
@@ -58,6 +60,7 @@ const LANGUAGES: Language[] = [
 ];
 
 export default function TranslatePdf() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [extractedText, setExtractedText] = useState<string>("");
   const [fileName, setFileName] = useState<string>("translated-document");
@@ -87,20 +90,20 @@ export default function TranslatePdf() {
     if (!file) return;
 
     if (file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
     try {
       setPdfFile(file);
       setFileName(file.name.replace(/\.pdf$/i, ""));
-      showToast("PDF loaded successfully");
+      showToast(t("PDF loaded successfully"));
       
       // Extract text from PDF
       await extractTextFromPdf(file);
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
     }
   };
 
@@ -132,7 +135,7 @@ export default function TranslatePdf() {
       }
       
       setExtractedText(fullText);
-      showToast("Text extracted successfully");
+      showToast(t("Text extracted successfully"));
     } catch (error) {
       console.error("Error extracting text:", error);
       showToast("Error extracting text from PDF");
@@ -372,7 +375,7 @@ export default function TranslatePdf() {
       showToast(`${translation.language.name} PDF downloaded!`);
     } catch (error) {
       console.error("Error creating PDF:", error);
-      showToast("Error creating PDF");
+      showToast(t("Error creating PDF"));
     }
   };
 
@@ -385,7 +388,7 @@ export default function TranslatePdf() {
     }
 
     try {
-      showToast("Creating ZIP file...");
+      showToast(t("Creating ZIP file..."));
       
       const zip = new JSZip();
       
@@ -420,7 +423,7 @@ export default function TranslatePdf() {
     setSelectedLanguages([]);
     setTranslations([]);
     setFileName("translated-document");
-    showToast("Cleared");
+    showToast(t("Cleared"));
   };
 
   const completedCount = translations.filter(t => t.status === "completed").length;
@@ -440,12 +443,7 @@ export default function TranslatePdf() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <Languages className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Translate <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Translate your PDF documents into multiple languages
-          </p>
+          <ToolHeading toolId="translate-pdf-text" />
         </div>
 
         <div className="space-y-6">
@@ -501,16 +499,14 @@ export default function TranslatePdf() {
                 <button
                   onClick={clearAll}
                   className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all text-sm font-medium"
-                >
-                  Clear
-                </button>
+                >{t("Clear")}</button>
 
                 <div className="ml-auto flex items-center gap-3">
                   <input
                     type="text"
                     value={fileName}
                     onChange={(e) => setFileName(e.target.value)}
-                    placeholder="Document name"
+                    placeholder={t("Document name")}
                     className="px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                   />
                   <button
@@ -533,7 +529,7 @@ export default function TranslatePdf() {
                   <div className="flex items-center gap-3">
                     <Loader2 className="w-5 h-5 text-blue-600 animate-spin flex-shrink-0" />
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-blue-900">Extracting text from PDF...</p>
+                      <p className="text-sm font-medium text-blue-900">{t("Extracting text from PDF...")}</p>
                     </div>
                   </div>
                 </div>
@@ -544,7 +540,7 @@ export default function TranslatePdf() {
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-green-900">Text extracted successfully</p>
+                      <p className="text-sm font-medium text-green-900">{t("Text extracted successfully")}</p>
                       <p className="text-xs text-green-700 mt-1">
                         Select languages and click translate
                       </p>
@@ -591,7 +587,7 @@ export default function TranslatePdf() {
                   {showPreview && extractedText && (
                     <div className="bg-white rounded-xl p-6 border border-gray-200">
                       <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-lg font-semibold text-gray-900">Extracted Text</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">{t("Extracted Text")}</h3>
                         <div className="text-xs text-gray-500">
                           {extractedText.length} characters
                         </div>
@@ -636,7 +632,7 @@ export default function TranslatePdf() {
                                 {translation.status === "translating" && (
                                   <div className="flex items-center gap-2">
                                     <Loader2 className="w-4 h-4 text-blue-500 animate-spin" />
-                                    <span className="text-xs text-blue-600">Translating...</span>
+                                    <span className="text-xs text-blue-600">{t("Translating...")}</span>
                                   </div>
                                 )}
                                 {translation.status === "completed" && (
@@ -646,15 +642,13 @@ export default function TranslatePdf() {
                                       onClick={() => downloadSingleTranslation(translation)}
                                       className="px-3 py-1 rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 transition-all text-xs font-medium flex items-center gap-1"
                                     >
-                                      <Download className="w-3 h-3" />
-                                      Download
-                                    </button>
+                                      <Download className="w-3 h-3" />{t("Download")}</button>
                                   </>
                                 )}
                                 {translation.status === "error" && (
                                   <div className="flex items-center gap-2">
                                     <AlertCircle className="w-4 h-4 text-red-500" />
-                                    <span className="text-xs text-red-600">Error</span>
+                                    <span className="text-xs text-red-600">{t("Error")}</span>
                                   </div>
                                 )}
                               </div>
@@ -736,22 +730,20 @@ export default function TranslatePdf() {
                   <div className="bg-white rounded-xl p-6 border border-gray-200">
                     <div className="flex items-center gap-2 mb-4">
                       <Settings className="w-5 h-5 text-gray-700" />
-                      <h3 className="text-lg font-semibold text-gray-900">PDF Settings</h3>
+                      <h3 className="text-lg font-semibold text-gray-900">{t("PDF Settings")}</h3>
                     </div>
 
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Page Size
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t("Page Size")}</label>
                         <select
                           value={pageSize}
                           onChange={(e) => setPageSize(e.target.value as any)}
                           className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                         >
                           <option value="A4">A4</option>
-                          <option value="Letter">Letter</option>
-                          <option value="Legal">Legal</option>
+                          <option value="Letter">{t("Letter")}</option>
+                          <option value="Legal">{t("Legal")}</option>
                         </select>
                       </div>
 
@@ -790,13 +782,13 @@ export default function TranslatePdf() {
                     </h3>
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-600">Characters</span>
+                        <span className="text-sm text-gray-600">{t("Characters")}</span>
                         <span className="text-sm font-semibold text-gray-900">
                           {extractedText.length.toLocaleString()}
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-600">Words</span>
+                        <span className="text-sm text-gray-600">{t("Words")}</span>
                         <span className="text-sm font-semibold text-gray-900">
                           {extractedText.split(/\s+/).filter(w => w).length.toLocaleString()}
                         </span>
@@ -840,9 +832,7 @@ export default function TranslatePdf() {
                   >
                     {isTranslating ? (
                       <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Translating...
-                      </>
+                        <Loader2 className="w-5 h-5 animate-spin" />{t("Translating...")}</>
                     ) : (
                       <>
                         <Languages className="w-5 h-5" />
