@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import mammoth from "mammoth";
@@ -19,6 +21,7 @@ type PageSize = "A4" | "Letter" | "Legal";
 type Orientation = "portrait" | "landscape";
 
 export default function WordToPdfSimple() {
+  const t = useT();
   const [wordFile, setWordFile] = useState<File | null>(null);
   const [htmlContent, setHtmlContent] = useState<string>("");
   const [loading, setLoading] = useState(false);
@@ -57,7 +60,7 @@ export default function WordToPdfSimple() {
     ];
 
     if (!validExtensions.includes(file.type) && !file.name.endsWith('.docx') && !file.name.endsWith('.doc')) {
-      showToast("Please upload a valid Word document (.docx or .doc)");
+      showToast(t("Please upload a valid Word document (.docx or .doc)"));
       return;
     }
 
@@ -102,11 +105,11 @@ export default function WordToPdfSimple() {
       `;
 
       setHtmlContent(styledHtml);
-      showToast("Document loaded successfully");
+      showToast(t("Document loaded successfully"));
 
     } catch (error) {
       console.error("Error loading Word document:", error);
-      showToast("Error loading document. Please try another file.");
+      showToast(t("Error loading document. Please try another file."));
     } finally {
       setLoading(false);
     }
@@ -114,14 +117,14 @@ export default function WordToPdfSimple() {
 
   const convertToPdf = async () => {
     if (!htmlContent || !previewRef.current) {
-      showToast("No document to convert");
+      showToast(t("No document to convert"));
       return;
     }
 
     setConverting(true);
 
     try {
-      showToast("Converting to PDF...");
+      showToast(t("Converting to PDF..."));
 
       const element = previewRef.current;
       
@@ -172,11 +175,11 @@ export default function WordToPdfSimple() {
       const fileName = wordFile?.name.replace(/\.(docx|doc)$/i, "") || "document";
       pdf.save(`${fileName}.pdf`);
 
-      showToast("PDF created successfully!");
+      showToast(t("PDF created successfully!"));
 
     } catch (error) {
       console.error("Error converting to PDF:", error);
-      showToast("Error converting to PDF. Please try again.");
+      showToast(t("Error converting to PDF. Please try again."));
     } finally {
       setConverting(false);
     }
@@ -204,12 +207,7 @@ export default function WordToPdfSimple() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <File className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Word to <span className="text-orange-500">PDF Simple</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Convert Word documents to PDF format
-          </p>
+          <ToolHeading toolId="word-to-pdf-simple" />
         </div>
 
         {/* Upload Area */}
@@ -229,12 +227,8 @@ export default function WordToPdfSimple() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  .docx or .doc files
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t(".docx or .doc files")}</span>
               </div>
               <input
                 id="word-upload"
@@ -251,14 +245,8 @@ export default function WordToPdfSimple() {
               <div className="flex gap-3">
                 <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
-                  <p className="text-sm text-blue-900 font-medium mb-1">
-                    Browser-Based Conversion
-                  </p>
-                  <p className="text-sm text-blue-700">
-                    This tool converts Word documents to PDF directly in your browser. 
-                    Complex formatting, advanced features, and some images may not be perfectly preserved. 
-                    For best results, use simple documents with standard formatting.
-                  </p>
+                  <p className="text-sm text-blue-900 font-medium mb-1">{t("Browser-Based Conversion")}</p>
+                  <p className="text-sm text-blue-700">{t("This tool converts Word documents to PDF directly in your browser. Complex formatting, advanced features, and some images may not be perfectly preserved. For best results, use simple documents with standard formatting.")}</p>
                 </div>
               </div>
             </div>
@@ -281,15 +269,13 @@ export default function WordToPdfSimple() {
               <button
                 onClick={resetAll}
                 className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-              >
-                Change File
-              </button>
+              >{t("Change File")}</button>
             </div>
 
             {loading && (
               <div className="text-center py-12">
                 <div className="inline-block w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-4" />
-                <p className="text-gray-600">Loading document...</p>
+                <p className="text-gray-600">{t("Loading document...")}</p>
               </div>
             )}
 
@@ -299,46 +285,40 @@ export default function WordToPdfSimple() {
                 <div className="bg-white rounded-xl p-6 border border-gray-200">
                   <div className="flex items-center gap-2 mb-4">
                     <Settings className="w-5 h-5 text-gray-700" />
-                    <h3 className="text-lg font-semibold text-gray-900">PDF Settings</h3>
+                    <h3 className="text-lg font-semibold text-gray-900">{t("PDF Settings")}</h3>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* Page Size */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Page Size
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Page Size")}</label>
                       <select
                         value={pageSize}
                         onChange={(e) => setPageSize(e.target.value as PageSize)}
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                       >
                         <option value="A4">A4 (210 × 297 mm)</option>
-                        <option value="Letter">Letter (8.5 × 11 in)</option>
-                        <option value="Legal">Legal (8.5 × 14 in)</option>
+                        <option value="Letter">{t("Letter (8.5 × 11 in)")}</option>
+                        <option value="Legal">{t("Legal (8.5 × 14 in)")}</option>
                       </select>
                     </div>
 
                     {/* Orientation */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Orientation
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Orientation")}</label>
                       <select
                         value={orientation}
                         onChange={(e) => setOrientation(e.target.value as Orientation)}
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                       >
-                        <option value="portrait">Portrait</option>
-                        <option value="landscape">Landscape</option>
+                        <option value="portrait">{t("Portrait")}</option>
+                        <option value="landscape">{t("Landscape")}</option>
                       </select>
                     </div>
 
                     {/* Preview Toggle */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Preview
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Preview")}</label>
                       <button
                         onClick={() => setShowPreview(!showPreview)}
                         className={`w-full px-4 py-2 rounded-lg border transition-all flex items-center justify-center gap-2 ${
@@ -358,12 +338,8 @@ export default function WordToPdfSimple() {
                 {showPreview && (
                   <div className="bg-white rounded-xl p-6 border border-gray-200">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-lg font-semibold text-gray-900">
-                        Document Preview
-                      </h3>
-                      <span className="text-sm text-gray-500">
-                        Preview may differ from final PDF
-                      </span>
+                      <h3 className="text-lg font-semibold text-gray-900">{t("Document Preview")}</h3>
+                      <span className="text-sm text-gray-500">{t("Preview may differ from final PDF")}</span>
                     </div>
 
                     <div className="border border-gray-200 rounded-lg overflow-hidden">
@@ -393,14 +369,12 @@ export default function WordToPdfSimple() {
                   <div className="flex gap-3">
                     <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <p className="text-sm text-yellow-900 font-medium mb-1">
-                        Before Converting
-                      </p>
+                      <p className="text-sm text-yellow-900 font-medium mb-1">{t("Before Converting")}</p>
                       <ul className="text-sm text-yellow-700 space-y-1">
-                        <li>• Check the preview to ensure content looks correct</li>
-                        <li>• Complex tables and images may require adjustment</li>
-                        <li>• Headers, footers, and page numbers may not transfer</li>
-                        <li>• For professional documents, consider using desktop software</li>
+                        <li>{t("• Check the preview to ensure content looks correct")}</li>
+                        <li>{t("• Complex tables and images may require adjustment")}</li>
+                        <li>{t("• Headers, footers, and page numbers may not transfer")}</li>
+                        <li>{t("• For professional documents, consider using desktop software")}</li>
                       </ul>
                     </div>
                   </div>
@@ -411,9 +385,7 @@ export default function WordToPdfSimple() {
                   <button
                     onClick={resetAll}
                     className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-                  >
-                    Cancel
-                  </button>
+                  >{t("Cancel")}</button>
                   <button
                     onClick={convertToPdf}
                     disabled={converting}
@@ -421,14 +393,10 @@ export default function WordToPdfSimple() {
                   >
                     {converting ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Converting...
-                      </>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Converting...")}</>
                     ) : (
                       <>
-                        <Download className="w-5 h-5" />
-                        Convert to PDF
-                      </>
+                        <Download className="w-5 h-5" />{t("Convert to PDF")}</>
                     )}
                   </button>
                 </div>

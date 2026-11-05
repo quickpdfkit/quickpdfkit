@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Script from "next/script";
+import "../globals.css";
 import {
   HOME_DESCRIPTION,
   HOME_KEYWORDS,
@@ -9,6 +8,9 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "@/lib/seo";
+import SiteScripts from "@/components/seo/SiteScripts";
+import { I18nProvider } from "@/components/i18n/I18nProvider";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -87,28 +89,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4916350136769682"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
-
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-FBM4Q0Q5XM"
-          strategy="afterInteractive"
-        />
-
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-FBM4Q0Q5XM');
-  `}
-        </Script>
-
-        {children}
+        <SiteScripts />
+        <I18nProvider locale="en" dictionary={getDictionary("en")}>
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );

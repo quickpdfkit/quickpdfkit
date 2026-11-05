@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import jsPDF from "jspdf";
@@ -21,6 +23,7 @@ type Orientation = "portrait" | "landscape";
 type DisplayMode = "pretty" | "tree" | "table";
 
 export default function JsonToPdf() {
+  const t = useT();
   const [jsonText, setJsonText] = useState<string>("");
   const [parsedJson, setParsedJson] = useState<any>(null);
   const [fileName, setFileName] = useState<string>("data");
@@ -88,7 +91,7 @@ export default function JsonToPdf() {
       setFileName(file.name.replace(/\.json$/i, ""));
       showToast("JSON file loaded successfully");
     } catch (error) {
-      showToast("Error reading file");
+      showToast(t("Error reading file"));
     }
   };
 
@@ -99,7 +102,7 @@ export default function JsonToPdf() {
       validateAndParseJson(clipboardText);
       showToast("JSON pasted from clipboard");
     } catch (error) {
-      showToast("Unable to access clipboard");
+      showToast(t("Unable to access clipboard"));
     }
   };
 
@@ -125,7 +128,7 @@ export default function JsonToPdf() {
     setIsValid(true);
     setErrorMsg("");
     setFileName("data");
-    showToast("Cleared");
+    showToast(t("Cleared"));
   };
 
   // Convert JSON to formatted string for PDF
@@ -222,7 +225,7 @@ export default function JsonToPdf() {
     setConverting(true);
 
     try {
-      showToast("Creating PDF...");
+      showToast(t("Creating PDF..."));
 
       const dimensions = getPageDimensions();
       const pdf = new jsPDF({
@@ -335,11 +338,11 @@ export default function JsonToPdf() {
 
       // Save PDF
       pdf.save(`${fileName}.pdf`);
-      showToast("PDF created successfully!");
+      showToast(t("PDF created successfully!"));
 
     } catch (error) {
       console.error("Error creating PDF:", error);
-      showToast("Error creating PDF. Please try again.");
+      showToast(t("Error creating PDF. Please try again."));
     } finally {
       setConverting(false);
     }
@@ -383,12 +386,7 @@ export default function JsonToPdf() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <Code className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            JSON to <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Convert JSON data to formatted PDF documents
-          </p>
+          <ToolHeading toolId="json-to-pdf" />
         </div>
 
         <div className="space-y-6">
@@ -421,9 +419,7 @@ export default function JsonToPdf() {
               onClick={formatJson}
               disabled={!parsedJson}
               className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm font-medium"
-            >
-              Format
-            </button>
+            >{t("Format")}</button>
 
             <button
               onClick={minifyJson}
@@ -437,16 +433,14 @@ export default function JsonToPdf() {
               onClick={clearAll}
               disabled={!jsonText}
               className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm font-medium"
-            >
-              Clear
-            </button>
+            >{t("Clear")}</button>
 
             <div className="ml-auto flex items-center gap-3">
               <input
                 type="text"
                 value={fileName}
                 onChange={(e) => setFileName(e.target.value)}
-                placeholder="Document name"
+                placeholder={t("Document name")}
                 className="px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
               />
               <button
@@ -528,37 +522,33 @@ export default function JsonToPdf() {
               <div className="bg-white rounded-xl p-6 border border-gray-200">
                 <div className="flex items-center gap-2 mb-4">
                   <Settings className="w-5 h-5 text-gray-700" />
-                  <h3 className="text-lg font-semibold text-gray-900">PDF Settings</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">{t("PDF Settings")}</h3>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Page Size
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t("Page Size")}</label>
                     <select
                       value={pageSize}
                       onChange={(e) => setPageSize(e.target.value as PageSize)}
                       className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                     >
                       <option value="A4">A4</option>
-                      <option value="Letter">Letter</option>
-                      <option value="Legal">Legal</option>
+                      <option value="Letter">{t("Letter")}</option>
+                      <option value="Legal">{t("Legal")}</option>
                       <option value="A3">A3</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Orientation
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t("Orientation")}</label>
                     <select
                       value={orientation}
                       onChange={(e) => setOrientation(e.target.value as Orientation)}
                       className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                     >
-                      <option value="portrait">Portrait</option>
-                      <option value="landscape">Landscape</option>
+                      <option value="portrait">{t("Portrait")}</option>
+                      <option value="landscape">{t("Landscape")}</option>
                     </select>
                   </div>
 
@@ -628,7 +618,7 @@ export default function JsonToPdf() {
                       </div>
                     )}
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">Characters</span>
+                      <span className="text-sm text-gray-600">{t("Characters")}</span>
                       <span className="text-sm font-semibold text-gray-900">{stats.characters.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between items-center">
@@ -644,7 +634,7 @@ export default function JsonToPdf() {
           {/* Preview */}
           {showPreview && parsedJson && (
             <div className="bg-white rounded-xl p-6 border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Preview</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("Preview")}</h3>
               <div className="border border-gray-300 rounded-lg p-4 max-h-96 overflow-auto bg-gray-50">
                 <pre className="text-xs font-mono text-gray-700">
                   {JSON.stringify(parsedJson, null, 2)}
@@ -662,14 +652,10 @@ export default function JsonToPdf() {
             >
               {converting ? (
                 <>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Creating PDF...
-                </>
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Creating PDF...")}</>
               ) : (
                 <>
-                  <Download className="w-5 h-5" />
-                  Convert to PDF
-                </>
+                  <Download className="w-5 h-5" />{t("Convert to PDF")}</>
               )}
             </button>
           </div>

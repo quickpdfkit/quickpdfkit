@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef, useEffect } from "react";
 import { PDFDocument, degrees } from "pdf-lib";
@@ -25,6 +27,7 @@ interface PageRotation {
 }
 
 export default function ReversePdf() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -118,7 +121,7 @@ export default function ReversePdf() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -134,10 +137,10 @@ export default function ReversePdf() {
       setPageRotations({});
       setPageImages({});
       
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
     } finally {
       setLoading(false);
     }
@@ -187,7 +190,7 @@ export default function ReversePdf() {
       for (let i = 1; i <= totalPages; i++) {
         reloadPage(i);
       }
-      showToast("All rotations reset");
+      showToast(t("All rotations reset"));
     } else {
       const newRotations = { ...pageRotations };
       delete newRotations[currentPage];
@@ -199,14 +202,14 @@ export default function ReversePdf() {
 
   const saveRotatedPdf = async () => {
     if (!pdfFile || Object.keys(pageRotations).length === 0) {
-      showToast("No rotations to apply");
+      showToast(t("No rotations to apply"));
       return;
     }
 
     setRotating(true);
 
     try {
-      showToast("Applying rotations...");
+      showToast(t("Applying rotations..."));
 
       const arrayBuffer = await pdfFile.arrayBuffer();
       const pdfLibDoc = await PDFDocument.load(arrayBuffer);
@@ -229,10 +232,10 @@ export default function ReversePdf() {
       const fileName = pdfFile.name.replace(".pdf", "");
       saveAs(blob, `${fileName}_rotated.pdf`);
 
-      showToast("PDF rotated successfully!");
+      showToast(t("PDF rotated successfully!"));
     } catch (error) {
       console.error("Error rotating PDF:", error);
-      showToast("Error rotating PDF");
+      showToast(t("Error rotating PDF"));
     } finally {
       setRotating(false);
     }
@@ -267,12 +270,7 @@ export default function ReversePdf() {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
          
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Reverse <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Rotate PDF pages to the correct orientation
-          </p>
+          <ToolHeading toolId="reverse-pdf" />
         </div>
 
         {/* Upload Area */}
@@ -292,12 +290,8 @@ export default function ReversePdf() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -327,15 +321,13 @@ export default function ReversePdf() {
               <button
                 onClick={resetAll}
                 className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-              >
-                Change File
-              </button>
+              >{t("Change File")}</button>
             </div>
 
             {loading && (
               <div className="text-center py-12">
                 <div className="inline-block w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-4" />
-                <p className="text-gray-600">Loading PDF...</p>
+                <p className="text-gray-600">{t("Loading PDF...")}</p>
               </div>
             )}
 
@@ -351,17 +343,13 @@ export default function ReversePdf() {
                         className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"
                         title="Rotate 90° counter-clockwise"
                       >
-                        <RotateCcw className="w-4 h-4" />
-                        90° Left
-                      </button>
+                        <RotateCcw className="w-4 h-4" />{t("90° Left")}</button>
                       <button
                         onClick={() => handleRotate(90)}
                         className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"
                         title="Rotate 90° clockwise"
                       >
-                        <RotateCw className="w-4 h-4" />
-                        90° Right
-                      </button>
+                        <RotateCw className="w-4 h-4" />{t("90° Right")}</button>
                       <button
                         onClick={() => handleRotate(180)}
                         className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"
@@ -374,9 +362,7 @@ export default function ReversePdf() {
                         onClick={resetRotation}
                         className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all"
                         title="Reset rotation"
-                      >
-                        Reset
-                      </button>
+                      >{t("Reset")}</button>
                     </div>
 
                     {/* Options */}
@@ -388,7 +374,7 @@ export default function ReversePdf() {
                           onChange={(e) => setApplyToAll(e.target.checked)}
                           className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-400"
                         />
-                        <span className="text-sm text-gray-700">Apply to all pages</span>
+                        <span className="text-sm text-gray-700">{t("Apply to all pages")}</span>
                       </label>
                       <button
                         onClick={() => setViewMode(viewMode === "single" ? "grid" : "single")}
@@ -451,7 +437,7 @@ export default function ReversePdf() {
                       ) : (
                         <div className="text-center py-12">
                           <div className="inline-block w-8 h-8 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-4" />
-                          <p className="text-gray-600">Loading page...</p>
+                          <p className="text-gray-600">{t("Loading page...")}</p>
                         </div>
                       )}
                     </div>
@@ -462,9 +448,7 @@ export default function ReversePdf() {
                 {viewMode === "grid" && (
                   <div className="bg-white rounded-xl p-4 border border-gray-200">
                     <div className="mb-4">
-                      <p className="text-sm text-gray-600">
-                        Click on any page to rotate it individually, or use "Apply to all pages" option
-                      </p>
+                      <p className="text-sm text-gray-600">{t("Click on any page to rotate it individually, or use \"Apply to all pages\" option")}</p>
                     </div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-h-[600px] overflow-auto p-2">
@@ -519,14 +503,12 @@ export default function ReversePdf() {
                       </div>
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm text-blue-900 font-medium mb-1">
-                        Rotation Tips
-                      </p>
+                      <p className="text-sm text-blue-900 font-medium mb-1">{t("Rotation Tips")}</p>
                       <ul className="text-sm text-blue-700 space-y-1">
-                        <li>• Use 90° Left/Right for portrait/landscape orientation</li>
-                        <li>• Use 180° to flip pages upside down</li>
-                        <li>• Enable "Apply to all pages" to rotate all pages at once</li>
-                        <li>• Switch to grid view to see all pages at once</li>
+                        <li>{t("• Use 90° Left/Right for portrait/landscape orientation")}</li>
+                        <li>{t("• Use 180° to flip pages upside down")}</li>
+                        <li>{t("• Enable \"Apply to all pages\" to rotate all pages at once")}</li>
+                        <li>{t("• Switch to grid view to see all pages at once")}</li>
                       </ul>
                     </div>
                   </div>
@@ -537,9 +519,7 @@ export default function ReversePdf() {
                   <button
                     onClick={resetAll}
                     className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-                  >
-                    Cancel
-                  </button>
+                  >{t("Cancel")}</button>
                   <button
                     onClick={saveRotatedPdf}
                     disabled={rotating || getRotatedPagesCount() === 0}
@@ -547,9 +527,7 @@ export default function ReversePdf() {
                   >
                     {rotating ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Saving...
-                      </>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Saving...")}</>
                     ) : (
                       <>
                         <Download className="w-5 h-5" />

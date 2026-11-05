@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument } from "pdf-lib";
@@ -27,6 +29,7 @@ interface PdfMetadata {
 }
 
 export default function PdfMetadataEditor() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [processing, setProcessing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -65,7 +68,7 @@ export default function PdfMetadataEditor() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -222,12 +225,7 @@ export default function PdfMetadataEditor() {
       <div className="w-full max-w-4xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            PDF <span className="text-orange-500">Metadata</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            View, edit, and manage PDF document metadata
-          </p>
+          <ToolHeading toolId="add-pdf-meta-data" />
         </div>
 
         {/* Upload Area */}
@@ -241,12 +239,8 @@ export default function PdfMetadataEditor() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -279,9 +273,7 @@ export default function PdfMetadataEditor() {
                 <button
                   onClick={resetAll}
                   className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-                >
-                  Change File
-                </button>
+                >{t("Change File")}</button>
               </div>
             </div>
 
@@ -306,9 +298,7 @@ export default function PdfMetadataEditor() {
                   <button
                     onClick={clearAllMetadata}
                     className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-                  >
-                    Clear All
-                  </button>
+                  >{t("Clear All")}</button>
                 </div>
 
                 <form
@@ -468,9 +458,7 @@ export default function PdfMetadataEditor() {
                       type="button"
                       onClick={resetAll}
                       className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all hover:shadow-sm active:scale-95"
-                    >
-                      Cancel
-                    </button>
+                    >{t("Cancel")}</button>
 
                     <button
                       type="submit"

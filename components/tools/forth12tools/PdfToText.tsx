@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { saveAs } from "file-saver";
@@ -28,6 +30,7 @@ type OutputFormat = "plain" | "formatted";
 type LineBreakStyle = "single" | "double" | "none";
 
 export default function PdfToText() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -90,7 +93,7 @@ export default function PdfToText() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -104,7 +107,7 @@ export default function PdfToText() {
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
       
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
 
       // Extract text from all pages
       const pagesData: PageText[] = [];
@@ -122,11 +125,11 @@ export default function PdfToText() {
       }
 
       setPages(pagesData);
-      showToast("Text extraction complete");
+      showToast(t("Text extraction complete"));
 
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
     } finally {
       setLoading(false);
       setProgress(0);
@@ -188,7 +191,7 @@ export default function PdfToText() {
       showToast("Text copied to clipboard!");
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
-      showToast("Failed to copy to clipboard");
+      showToast(t("Failed to copy to clipboard"));
     }
   };
 
@@ -256,12 +259,7 @@ export default function PdfToText() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <FileText className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            PDF to <span className="text-orange-500">Text</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Extract text content from PDF documents
-          </p>
+          <ToolHeading toolId="pdf-to-text" />
         </div>
 
         {/* Upload Area */}
@@ -281,12 +279,8 @@ export default function PdfToText() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -316,9 +310,7 @@ export default function PdfToText() {
               <button
                 onClick={resetAll}
                 className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-              >
-                Change File
-              </button>
+              >{t("Change File")}</button>
             </div>
 
             {/* Loading Progress */}
@@ -326,7 +318,7 @@ export default function PdfToText() {
               <div className="bg-white rounded-xl p-6 border border-gray-200">
                 <div className="flex items-center gap-3 mb-4">
                   <Loader className="w-5 h-5 text-orange-500 animate-spin" />
-                  <p className="text-gray-700 font-medium">Extracting text from PDF...</p>
+                  <p className="text-gray-700 font-medium">{t("Extracting text from PDF...")}</p>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
@@ -345,7 +337,7 @@ export default function PdfToText() {
                   {/* Text Display - Takes 2 columns */}
                   <div className="lg:col-span-2 bg-white rounded-xl p-6 border border-gray-200">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-lg font-semibold text-gray-900">Extracted Text</h3>
+                      <h3 className="text-lg font-semibold text-gray-900">{t("Extracted Text")}</h3>
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => setShowPreview(!showPreview)}
@@ -383,9 +375,7 @@ export default function PdfToText() {
                             <button
                               onClick={selectText}
                               className="px-3 py-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm transition-all"
-                            >
-                              Select All
-                            </button>
+                            >{t("Select All")}</button>
                             <button
                               onClick={copyToClipboard}
                               disabled={!getFormattedText()}
@@ -393,14 +383,10 @@ export default function PdfToText() {
                             >
                               {copied ? (
                                 <>
-                                  <CheckCircle className="w-4 h-4 text-green-600" />
-                                  Copied!
-                                </>
+                                  <CheckCircle className="w-4 h-4 text-green-600" />{t("Copied!")}</>
                               ) : (
                                 <>
-                                  <Copy className="w-4 h-4" />
-                                  Copy
-                                </>
+                                  <Copy className="w-4 h-4" />{t("Copy")}</>
                               )}
                             </button>
                           </div>
@@ -415,14 +401,12 @@ export default function PdfToText() {
                     <div className="bg-white rounded-xl p-6 border border-gray-200">
                       <div className="flex items-center gap-2 mb-4">
                         <Settings className="w-5 h-5 text-gray-700" />
-                        <h3 className="text-lg font-semibold text-gray-900">Settings</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">{t("Settings")}</h3>
                       </div>
 
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Output Format
-                          </label>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">{t("Output Format")}</label>
                           <select
                             value={outputFormat}
                             onChange={(e) => setOutputFormat(e.target.value as OutputFormat)}
@@ -432,9 +416,7 @@ export default function PdfToText() {
                             <option value="formatted">Formatted</option>
                             <option value="plain">Plain</option>
                           </select>
-                          <p className="text-xs text-gray-500 mt-1">
-                            Requires re-upload to change
-                          </p>
+                          <p className="text-xs text-gray-500 mt-1">{t("Requires re-upload to change")}</p>
                         </div>
 
                         <div>
@@ -484,24 +466,22 @@ export default function PdfToText() {
 
                     {/* Statistics */}
                     <div className="bg-white rounded-xl p-6 border border-gray-200">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                        Statistics
-                      </h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("Statistics")}</h3>
                       <div className="space-y-3">
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Total Pages</span>
+                          <span className="text-sm text-gray-600">{t("Total Pages")}</span>
                           <span className="text-sm font-semibold text-gray-900">{totalPages}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Selected</span>
+                          <span className="text-sm text-gray-600">{t("Selected")}</span>
                           <span className="text-sm font-semibold text-orange-500">{getSelectedCount()}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Characters</span>
+                          <span className="text-sm text-gray-600">{t("Characters")}</span>
                           <span className="text-sm font-semibold text-gray-900">{getCharCount().toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Words</span>
+                          <span className="text-sm text-gray-600">{t("Words")}</span>
                           <span className="text-sm font-semibold text-gray-900">{getWordCount().toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between items-center">
@@ -549,9 +529,7 @@ export default function PdfToText() {
                   <button
                     onClick={resetAll}
                     className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-                  >
-                    Cancel
-                  </button>
+                  >{t("Cancel")}</button>
                   <button
                     onClick={copyToClipboard}
                     disabled={getSelectedCount() === 0}

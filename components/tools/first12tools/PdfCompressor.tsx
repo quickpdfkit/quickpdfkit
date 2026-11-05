@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument } from "pdf-lib";
@@ -7,6 +9,7 @@ import { FileText, X, Minimize2, Upload } from "lucide-react";
 import { loadPdfjs } from "@/lib/pdfjs-client";
 
 export default function PdfCompressorWithPreview() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pagePreviews, setPagePreviews] = useState<string[]>([]);
   const [originalSize, setOriginalSize] = useState<number | null>(null);
@@ -33,7 +36,7 @@ export default function PdfCompressorWithPreview() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -57,10 +60,10 @@ export default function PdfCompressorWithPreview() {
         previews.push(canvas.toDataURL());
       }
       setPagePreviews(previews);
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
     } catch (err) {
       console.error(err);
-      showToast("Failed to load PDF pages");
+      showToast(t("Failed to load PDF pages"));
     }
   };
 
@@ -85,10 +88,10 @@ export default function PdfCompressorWithPreview() {
       setCompressedSize(compressedBlob.size);
 
       saveAs(compressedBlob, `compressed-${pdfFile.name}`);
-      showToast("PDF compressed successfully!");
+      showToast(t("PDF compressed successfully!"));
     } catch (err) {
       console.error(err);
-      showToast("Failed to compress PDF");
+      showToast(t("Failed to compress PDF"));
     } finally {
       setIsCompressing(false);
     }
@@ -113,12 +116,7 @@ export default function PdfCompressorWithPreview() {
       <div className="w-full max-w-6xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Compress <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Reduce PDF file size while maintaining quality and preview pages
-          </p>
+          <ToolHeading toolId="compress-pdf" />
         </div>
 
         {/* Upload Area */}
@@ -131,12 +129,8 @@ export default function PdfCompressorWithPreview() {
               <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
             </div>
             <div className="text-center">
-              <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                Click to upload or drag & drop
-              </span>
-              <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                PDF files only • Single file
-              </span>
+              <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+              <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only • Single file")}</span>
             </div>
             <input
               id="pdf-upload"
@@ -159,12 +153,11 @@ export default function PdfCompressorWithPreview() {
                 <div>
                   <p className="text-gray-900 font-medium">{pdfFile.name}</p>
                   <p className="text-gray-500 text-sm">
-                    Original: {formatSize(originalSize)}
+                    {t("Original: {size}", { size: formatSize(originalSize) })}
                   </p>
                   {compressedSize && (
                     <p className="text-orange-500 text-sm">
-                      Compressed: {formatSize(compressedSize)} ({getReduction()}
-                      % reduction)
+                      {t("Compressed: {size} ({reduction}% reduction)", { size: formatSize(compressedSize), reduction: getReduction() ?? "" })}
                     </p>
                   )}
                 </div>
@@ -186,7 +179,7 @@ export default function PdfCompressorWithPreview() {
                 >
                   <img
                     src={src}
-                    alt={`Page ${i + 1}`}
+                    alt={t("Page {count}", { count: i + 1 })}
                     className="w-full object-cover"
                   />
                   <div className="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded">
@@ -203,25 +196,22 @@ export default function PdfCompressorWithPreview() {
               className="w-full py-3 mt-2 rounded-xl font-semibold text-white bg-orange-500 hover:bg-orange-600 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
             >
               {isCompressing ? (
-                "Compressing..."
+                t("Compressing...")
               ) : (
                 <>
-                  <Minimize2 className="w-5 h-5" /> Compress PDF
-                </>
+                  <Minimize2 className="w-5 h-5" />{t("Compress PDF")}</>
               )}
             </button>
 
             {/* Tips */}
             <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4 text-gray-700 text-sm">
-              <h2 className="font-semibold text-gray-900 mb-2">
-                📘 How to Reduce PDF Size Manually
-              </h2>
+              <h2 className="font-semibold text-gray-900 mb-2">{t("📘 How to Reduce PDF Size Manually")}</h2>
               <ul className="list-disc list-inside space-y-1">
-                <li>Reduce image resolution (150 DPI recommended)</li>
-                <li>Remove unused pages or annotations</li>
-                <li>Use standard fonts instead of embedded custom fonts</li>
-                <li>Avoid scanning at very high resolutions</li>
-                <li>Print to PDF with optimization</li>
+                <li>{t("Reduce image resolution (150 DPI recommended)")}</li>
+                <li>{t("Remove unused pages or annotations")}</li>
+                <li>{t("Use standard fonts instead of embedded custom fonts")}</li>
+                <li>{t("Avoid scanning at very high resolutions")}</li>
+                <li>{t("Print to PDF with optimization")}</li>
               </ul>
             </div>
           </div>

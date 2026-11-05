@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef, useEffect } from "react";
 import { saveAs } from "file-saver";
@@ -28,6 +30,7 @@ import { loadPdfjs } from "@/lib/pdfjs-client";
 type FitMode = "auto" | "page" | "width";
 
 export default function PdfViewer() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -96,7 +99,7 @@ export default function PdfViewer() {
       setPageImage(canvas.toDataURL());
     } catch (error) {
       console.error("Error loading page:", error);
-      showToast("Error loading page");
+      showToast(t("Error loading page"));
     }
   };
 
@@ -138,7 +141,7 @@ export default function PdfViewer() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -152,10 +155,10 @@ export default function PdfViewer() {
       setTotalPages(pdf.numPages);
       setCurrentPage(1);
       
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
     } finally {
       setLoading(false);
     }
@@ -250,12 +253,7 @@ export default function PdfViewer() {
       <div className="w-full max-w-7xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            View <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Open and view PDF documents with advanced features
-          </p>
+          <ToolHeading toolId="pdf-reader" />
         </div>
 
         {/* Upload Area */}
@@ -275,12 +273,8 @@ export default function PdfViewer() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -312,22 +306,18 @@ export default function PdfViewer() {
                   onClick={downloadPdf}
                   className="px-3 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition-all flex items-center gap-2 text-sm"
                 >
-                  <Download className="w-4 h-4" />
-                  Download
-                </button>
+                  <Download className="w-4 h-4" />{t("Download")}</button>
                 <button
                   onClick={resetAll}
                   className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-                >
-                  Close
-                </button>
+                >{t("Close")}</button>
               </div>
             </div>
 
             {loading && (
               <div className="text-center py-12">
                 <div className="inline-block w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-4" />
-                <p className="text-gray-600">Loading PDF...</p>
+                <p className="text-gray-600">{t("Loading PDF...")}</p>
               </div>
             )}
 
@@ -513,7 +503,7 @@ export default function PdfViewer() {
                       ) : (
                         <div className="text-center">
                           <div className="inline-block w-8 h-8 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-4" />
-                          <p className="text-gray-600">Loading page...</p>
+                          <p className="text-gray-600">{t("Loading page...")}</p>
                         </div>
                       )}
                     </div>

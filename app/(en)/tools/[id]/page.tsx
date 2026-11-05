@@ -5,9 +5,17 @@ import type { Metadata } from "next";
 import ToolPageWrapper from "@/components/layout/ToolPageWrapper";
 import JsonLd from "@/components/seo/JsonLd";
 import { howToJsonLd, pageMetadata, webApplicationJsonLd } from "@/lib/seo";
+import { languageAlternates } from "@/lib/i18n/paths";
 
 interface ToolPageProps {
   params: Promise<{ id: string }>;
+}
+
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return Object.keys(toolsMap).map((id) => ({ id }));
 }
 
 export async function generateMetadata({
@@ -29,6 +37,7 @@ export async function generateMetadata({
     description: toolData.metadata.description,
     path: `/tools/${id}`,
     keywords: toolData.metadata.keywords,
+    languages: languageAlternates(`/tools/${id}`),
   });
 }
 

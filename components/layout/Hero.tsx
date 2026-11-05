@@ -2,12 +2,16 @@
 
 import { FileText, Sparkles, Zap, Shield } from "lucide-react";
 import Link from "next/link";
+import { useI18n, useLocalizedHref } from "@/components/i18n/I18nProvider";
 
 export default function Hero() {
+  const { dictionary } = useI18n();
+  const href = useLocalizedHref();
+  const copy = dictionary.hero;
   const features = [
-    { icon: Zap, text: "Lightning Fast" },
-    { icon: Shield, text: "100% Secure" },
-    { icon: Sparkles, text: "Free Forever" },
+    { icon: Zap, text: copy.fast },
+    { icon: Shield, text: copy.secure },
+    { icon: Sparkles, text: copy.freeForever },
   ];
 
   return (
@@ -22,21 +26,20 @@ export default function Hero() {
         <div className="inline-flex mt-10 items-center gap-2 px-4 py-2 bg-white border border-orange-200 rounded-full mb-8 shadow-sm">
           <Sparkles className="w-4 h-4 text-orange-500" />
           <span className="text-sm text-orange-600 font-medium">
-            Free, private, in-browser PDF tools
+            {copy.badge}
           </span>
         </div>
 
         {/* Main Heading */}
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-gray-900">
-          Transform and Fix Your 
+          {copy.titleLead}{" "}
           <br />
-          <span className="text-orange-500">PDFs In Seconds</span>
+          <span className="text-orange-500">{copy.titleAccent}</span>
         </h1>
 
         {/* Subheading */}
         <p className="text-md sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Merge, split, compress, and convert your PDF files with our powerful
-          suite of tools. No registration required, completely free.
+          {copy.subtitle}
         </p>
 
         {/* Features */}
@@ -56,27 +59,23 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/tools">
+          <Link href={href("/tools")}>
             <button className="inline-flex px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 gap-2">
               <FileText className="w-5 h-5" />
-              Explore Tools
+              {copy.exploreTools}
             </button>
           </Link>
 
           <Link href="#features">
             <button className="inline-flex px-8 py-4 bg-white hover:bg-gray-50 border border-gray-300 hover:border-orange-400 text-gray-700 rounded-xl font-semibold text-lg shadow-sm hover:shadow-md transition-all duration-300">
-              Learn More
+              {copy.learnMore}
             </button>
           </Link>
         </div>
 
         {/* Stats */}
         <div className="mt-20 hidden grid grid-cols-2 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
-          {[
-            { label: "Free Tools", value: "48" },
-            { label: "In-Browser", value: "100%" },
-            { label: "Signup Needed", value: "No" },
-          ].map((stat, index) => (
+          {copy.stats.map((stat, index) => (
             <div
               key={index}
               className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow"

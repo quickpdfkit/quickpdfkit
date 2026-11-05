@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument } from "pdf-lib-plus-encrypt";
@@ -15,6 +17,7 @@ import {
 } from "lucide-react";
 
 export default function PdfProtector() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [protecting, setProtecting] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
@@ -46,12 +49,12 @@ export default function PdfProtector() {
 
   const handleFileUpload = (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
     setPdfFile(file);
-    showToast("PDF loaded successfully");
+    showToast(t("PDF loaded successfully"));
   };
 
   const validatePasswords = (): boolean => {
@@ -148,12 +151,7 @@ export default function PdfProtector() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <Lock className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Protect <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Secure your PDF files with password protection
-          </p>
+          <ToolHeading toolId="protect-pdf" />
         </div>
 
         {/* Upload Area */}
@@ -174,12 +172,8 @@ export default function PdfProtector() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only • Maximum file size: 100MB
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only • Maximum file size: 100MB")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -215,9 +209,7 @@ export default function PdfProtector() {
                 <button
                   onClick={resetAll}
                   className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-                >
-                  Change File
-                </button>
+                >{t("Change File")}</button>
               </div>
             </div>
             {/* Password Settings */}
@@ -448,9 +440,7 @@ export default function PdfProtector() {
                 onClick={resetAll}
                 disabled={protecting}
                 className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all hover:shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Cancel
-              </button>
+              >{t("Cancel")}</button>
 
               <button
                 onClick={protectPdfWithPassword}

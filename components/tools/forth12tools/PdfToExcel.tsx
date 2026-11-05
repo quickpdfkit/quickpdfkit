@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import * as XLSX from "xlsx";
@@ -30,6 +32,7 @@ interface PageData {
 type ExtractionMode = "text" | "table";
 
 export default function PdfToExcel() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -127,7 +130,7 @@ export default function PdfToExcel() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -141,7 +144,7 @@ export default function PdfToExcel() {
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
       
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
 
       // Extract data from all pages
       const pagesData: PageData[] = [];
@@ -153,11 +156,11 @@ export default function PdfToExcel() {
       }
 
       setPages(pagesData);
-      showToast("Data extraction complete");
+      showToast(t("Data extraction complete"));
 
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
     } finally {
       setLoading(false);
       setProgress(0);
@@ -182,7 +185,7 @@ export default function PdfToExcel() {
     const selectedPages = pages.filter(page => page.selected);
 
     if (selectedPages.length === 0) {
-      showToast("Please select at least one page");
+      showToast(t("Please select at least one page"));
       return;
     }
 
@@ -266,12 +269,7 @@ export default function PdfToExcel() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <TableIcon className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            PDF to <span className="text-orange-500">Excel</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Extract data from PDF and convert to Excel spreadsheet
-          </p>
+          <ToolHeading toolId="convert-pdf-to-excel" />
         </div>
 
         {/* Upload Area */}
@@ -292,12 +290,8 @@ export default function PdfToExcel() {
                   <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
                 </div>
                 <div className="text-center">
-                  <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                    Click to upload or drag & drop
-                  </span>
-                  <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                    PDF files only
-                  </span>
+                  <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                  <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
                 </div>
                 <input
                   id="pdf-upload"
@@ -324,7 +318,7 @@ export default function PdfToExcel() {
                   <div className="space-y-2">
                     <div className="flex items-start gap-2">
                       <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-yellow-700">Works with text-based PDFs</p>
+                      <p className="text-sm text-yellow-700">{t("Works with text-based PDFs")}</p>
                     </div>
                     <div className="flex items-start gap-2">
                       <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
@@ -365,9 +359,7 @@ export default function PdfToExcel() {
               <button
                 onClick={resetAll}
                 className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-              >
-                Change File
-              </button>
+              >{t("Change File")}</button>
             </div>
 
             {/* Loading Progress */}
@@ -418,9 +410,7 @@ export default function PdfToExcel() {
 
                     {/* Selected Count */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Selected Pages
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Selected Pages")}</label>
                       <div className="flex items-center gap-2 h-10">
                         <span className="text-2xl font-bold text-orange-500">
                           {getSelectedCount()}
@@ -435,27 +425,25 @@ export default function PdfToExcel() {
 
                 {/* Extraction Summary */}
                 <div className="bg-white rounded-xl p-6 border border-gray-200">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    Extraction Summary
-                  </h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("Extraction Summary")}</h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="bg-gray-50 rounded-lg p-4">
                       <p className="text-sm text-gray-600 mb-1">Pages</p>
                       <p className="text-2xl font-bold text-orange-500">{pages.length}</p>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-1">Total Rows</p>
+                      <p className="text-sm text-gray-600 mb-1">{t("Total Rows")}</p>
                       <p className="text-2xl font-bold text-orange-500">{getTotalRows()}</p>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-1">Selected</p>
+                      <p className="text-sm text-gray-600 mb-1">{t("Selected")}</p>
                       <p className="text-2xl font-bold text-orange-500">{getSelectedCount()}</p>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-1">Status</p>
+                      <p className="text-sm text-gray-600 mb-1">{t("Status")}</p>
                       <div className="flex items-center gap-2">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <p className="text-sm font-medium text-green-700">Ready</p>
+                        <p className="text-sm font-medium text-green-700">{t("Ready")}</p>
                       </div>
                     </div>
                   </div>
@@ -464,9 +452,7 @@ export default function PdfToExcel() {
                 {/* Pages Selection */}
                 <div className="bg-white rounded-xl p-6 border border-gray-200">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      Select Pages
-                    </h3>
+                    <h3 className="text-lg font-semibold text-gray-900">{t("Select Pages")}</h3>
                     <button
                       onClick={toggleSelectAll}
                       className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all text-sm"
@@ -520,9 +506,7 @@ export default function PdfToExcel() {
                       <button
                         onClick={() => setShowPreview(false)}
                         className="text-sm text-orange-600 hover:text-orange-700 font-medium"
-                      >
-                        Hide Preview
-                      </button>
+                      >{t("Hide Preview")}</button>
                     </div>
 
                     <div className="overflow-x-auto">
@@ -556,9 +540,7 @@ export default function PdfToExcel() {
                   <div className="flex gap-3">
                     <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <p className="text-sm text-blue-900 font-medium mb-1">
-                        Before Converting
-                      </p>
+                      <p className="text-sm text-blue-900 font-medium mb-1">{t("Before Converting")}</p>
                       <ul className="text-sm text-blue-700 space-y-1">
                         <li>• Check the preview to verify data structure</li>
                         <li>• Each page will become a separate sheet in Excel</li>
@@ -574,9 +556,7 @@ export default function PdfToExcel() {
                   <button
                     onClick={resetAll}
                     className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-                  >
-                    Cancel
-                  </button>
+                  >{t("Cancel")}</button>
                   <button
                     onClick={convertToExcel}
                     disabled={converting || getSelectedCount() === 0}
@@ -584,9 +564,7 @@ export default function PdfToExcel() {
                   >
                     {converting ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Converting...
-                      </>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Converting...")}</>
                     ) : (
                       <>
                         <Download className="w-5 h-5" />

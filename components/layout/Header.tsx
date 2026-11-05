@@ -20,9 +20,15 @@ import {
   ArrowRight,
   Repeat,
 } from "lucide-react";
-import { allTools } from "@/config/toolsData";
+import { useI18n, useLocalizedHref } from "@/components/i18n/I18nProvider";
+import { useLocalizedTools } from "@/components/i18n/useLocalizedTools";
+import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 
 export default function Header() {
+  const { dictionary } = useI18n();
+  const href = useLocalizedHref();
+  const copy = dictionary.nav;
+  const localizedTools = useLocalizedTools();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -40,11 +46,8 @@ export default function Header() {
 
   // Filter tools based on search query
   const filteredTools = searchQuery
-    ? allTools.filter(
-        (tool) =>
-          tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          tool.category.toLowerCase().includes(searchQuery.toLowerCase())
+    ? localizedTools.filter((tool) =>
+        tool.searchText.includes(searchQuery.toLowerCase()),
       )
     : [];
 
@@ -64,18 +67,18 @@ export default function Header() {
   };
 
   const convertToPdfTools = [
-    { name: "Image to PDF", href: "/tools/image-to-pdf-converter", icon: ImageIcon },
-    { name: "JPG to PDF", href: "/tools/jpg-to-pdf", icon: ImageIcon },
-    { name: "PNG to PDF", href: "/tools/png-to-pdf-converter", icon: ImageIcon },
-    { name: "WEBP to PDF", href: "/tools/webp-to-pdf-converter", icon: ImageIcon },
+    { name: copy.imageToPdf, href: href("/tools/image-to-pdf-converter"), icon: ImageIcon },
+    { name: copy.jpgToPdf, href: href("/tools/jpg-to-pdf"), icon: ImageIcon },
+    { name: copy.pngToPdf, href: href("/tools/png-to-pdf-converter"), icon: ImageIcon },
+    { name: copy.webpToPdf, href: href("/tools/webp-to-pdf-converter"), icon: ImageIcon },
   ];
 
   const editTools = [
-    { name: "Merge PDF", href: "/tools/merge-pdf", icon: FileText },
-    { name: "Split PDF", href: "/tools/split-pdf-online", icon: Scissors },
-    { name: "Compress PDF", href: "/tools/compress-pdf", icon: Minimize2 },
-    { name: "Protect PDF", href: "/tools/protect-pdf", icon: Lock },
-    { name: "Edit PDF", href: "/tools/edit-pdf", icon: FileEdit },
+    { name: copy.mergePdf, href: href("/tools/merge-pdf"), icon: FileText },
+    { name: copy.splitPdf, href: href("/tools/split-pdf-online"), icon: Scissors },
+    { name: copy.compressPdf, href: href("/tools/compress-pdf"), icon: Minimize2 },
+    { name: copy.protectPdf, href: href("/tools/protect-pdf"), icon: Lock },
+    { name: copy.editPdf, href: href("/tools/edit-pdf"), icon: FileEdit },
   ];
 
   return (
@@ -90,7 +93,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
+            <Link href={href("/")} className="flex items-center gap-2 group">
               <div className="relative">
                 <Repeat className="w-7 h-7 sm:w-8 sm:h-8 fill-orange-500 text-orange-500 transition-transform group-hover:scale-110" />
               </div>
@@ -102,10 +105,10 @@ export default function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
               <Link
-                href="/"
+                href={href("/")}
                 className="px-4 py-2 text-gray-600 hover:text-orange-500 transition-colors relative group"
               >
-                Home
+                {copy.home}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300" />
               </Link>
 
@@ -116,7 +119,7 @@ export default function Header() {
                 onMouseLeave={() => setIsToolsOpen(false)}
               >
                 <button className="px-4 py-2 text-gray-600 hover:text-orange-500 transition-colors flex items-center gap-1 group">
-                  Tools
+                  {copy.tools}
                   <ChevronDown
                     className={`w-4 h-4 transition-transform duration-300 ${
                       isToolsOpen ? "rotate-180" : ""
@@ -127,14 +130,14 @@ export default function Header() {
 
                 {/* Dropdown Menu - Added pt-2 to bridge the gap */}
                 {isToolsOpen && (
-                  <div className="absolute top-full left-[-160px] pt-2">
+                  <div className="absolute top-full ltr:left-[-160px] rtl:right-[-160px] pt-2">
                     <div className="w-[800px] bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
                       <div className="grid grid-cols-3 gap-6 p-6">
                         {/* Convert to PDF */}
                         <div>
                           <h4 className="text-sm font-semibold text-orange-600 mb-3 flex items-center gap-2">
                             <FileText className="w-4 h-4" />
-                            Convert to PDF
+                            {copy.convertToPdf}
                           </h4>
                           <ul className="space-y-2">
                             {convertToPdfTools.map((tool) => (
@@ -159,7 +162,7 @@ export default function Header() {
                         <div>
                           <h4 className="text-sm font-semibold text-orange-600 mb-3 flex items-center gap-2">
                             <FileEdit className="w-4 h-4" />
-                            Edit & Organize
+                            {copy.editOrganize}
                           </h4>
                           <ul className="space-y-2">
                             {editTools.map((tool) => (
@@ -184,7 +187,7 @@ export default function Header() {
                         <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 border border-orange-200">
                           <h4 className="text-sm font-semibold text-orange-600 mb-3 flex items-center gap-2">
                             <Star className="w-4 h-4 fill-orange-500 text-orange-500" />
-                            Featured
+                            {copy.featured}
                           </h4>
                           <div className="space-y-3">
                             <div className="p-3 bg-white rounded-lg border border-orange-200">
@@ -192,22 +195,22 @@ export default function Header() {
                                 <Lock className="w-4 h-4 text-orange-500 mt-0.5" />
                                 <div>
                                   <p className="text-sm font-medium text-gray-900">
-                                    Protect PDF
+                                    {copy.protectPdf}
                                   </p>
                                   <p className="text-xs text-gray-600">
-                                    Secure your files
+                                    {copy.secureYourFiles}
                                   </p>
                                 </div>
                               </div>
                               <span className="text-xs px-2 py-1 bg-orange-100 text-orange-600 rounded-full">
-                                Most Popular
+                                {copy.mostPopular}
                               </span>
                             </div>
                             <Link
-                              href="/tools"
+                              href={href("/tools")}
                               className="block w-full py-2 px-4 text-sm text-center bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-all shadow-sm"
                             >
-                              View All Tools →
+                              {copy.viewAllTools}
                             </Link>
                           </div>
                         </div>
@@ -221,7 +224,7 @@ export default function Header() {
                 href="/about"
                 className="px-4 py-2 text-gray-600 hover:text-orange-500 transition-colors relative group"
               >
-                About
+                {copy.about}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300" />
               </Link>
 
@@ -229,7 +232,7 @@ export default function Header() {
                 href="/contact"
                 className="px-4 py-2 text-gray-600 hover:text-orange-500 transition-colors relative group"
               >
-                Contact
+                {copy.contact}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300" />
               </Link>
             </nav>
@@ -240,17 +243,18 @@ export default function Header() {
               <button
                 onClick={() => setIsSearchOpen(true)}
                 className="p-2 text-gray-600 hover:text-orange-500 transition-colors hover:scale-105 active:scale-95"
-                aria-label="Search"
+                aria-label={copy.search}
               >
                 <Search className="w-5 h-5" />
               </button>
 
               {/* Login Button - Desktop */}
+              <LanguageSwitcher />
               <Link
-                href="/tools"
+                href={href("/tools")}
                 className="hidden sm:flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-all shadow-sm hover:shadow-md"
               >
-                Tools
+                {copy.tools}
               </Link>
 
               {/* Mobile Menu Button */}
@@ -259,7 +263,7 @@ export default function Header() {
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="lg:hidden p-2 text-gray-600 hover:text-orange-500 transition-colors hover:scale-105 active:scale-95"
-                aria-label="Toggle menu"
+                aria-label={copy.toggleMenu}
               >
                 {isMenuOpen ? (
                   <X className="w-6 h-6" />
@@ -275,32 +279,32 @@ export default function Header() {
           <div className="lg:hidden bg-white border-t border-gray-200 animate-slideDown">
             <div className="px-4 py-6 space-y-2">
               <Link
-                href="/"
+                href={href("/")}
                 className="block px-4 py-2 text-gray-600 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Home
+                {copy.home}
               </Link>
               <Link
-                href="/tools"
+                href={href("/tools")}
                 className="block px-4 py-2 text-gray-600 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >
-                All Tools
+                {copy.allTools}
               </Link>
               <Link
                 href="/about"
                 className="block px-4 py-2 text-gray-600 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >
-                About
+                {copy.about}
               </Link>
               <Link
                 href="/contact"
                 className="block px-4 py-2 text-gray-600 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact
+                {copy.contact}
               </Link>
             </div>
           </div>
@@ -325,7 +329,7 @@ export default function Header() {
               <Search className="w-6 h-6 text-orange-500" />
               <input
                 type="text"
-                placeholder="Search for tools..."
+                placeholder={copy.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -349,15 +353,15 @@ export default function Header() {
                 // Default suggestions
                 <div className="p-6">
                   <p className="text-sm text-gray-500 mb-4">
-                    Popular searches:
+                    {copy.popularSearches}
                   </p>
                   <div className="space-y-2">
-                    {["Merge PDF", "Compress PDF", "Convert to PDF", "Protect PDF", "Edit PDF"].map(
+                    {copy.suggestions.map(
                       (suggestion) => (
                         <button
                           key={suggestion}
                           onClick={() => setSearchQuery(suggestion)}
-                          className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 rounded-lg transition-all group"
+                          className="block w-full text-start px-4 py-3 text-gray-700 hover:bg-orange-50 rounded-lg transition-all group"
                         >
                           <div className="flex items-center gap-3">
                             <Search className="w-4 h-4 text-gray-400 group-hover:text-orange-500" />
@@ -379,7 +383,7 @@ export default function Header() {
                       <button
                         key={tool.href}
                         onClick={() => handleToolClick(tool.href)}
-                        className="w-full text-left px-4 py-4 hover:bg-orange-50 rounded-lg transition-all group"
+                        className="w-full text-start px-4 py-4 hover:bg-orange-50 rounded-lg transition-all group"
                       >
                         <div className="flex items-center gap-4">
                           <div className={`p-3 rounded-xl bg-gradient-to-br ${tool.gradient}`}>
@@ -402,13 +406,13 @@ export default function Header() {
                     <div className="px-4 py-3 text-center border-t border-gray-100 mt-2">
                       <button
                         onClick={() => {
-                          router.push("/tools");
+                          router.push(href("/tools"));
                           setIsSearchOpen(false);
                           setSearchQuery("");
                         }}
                         className="text-sm text-orange-600 hover:text-orange-700 font-medium"
                       >
-                        View all {filteredTools.length} results →
+                        {copy.viewAllResults.replace("{count}", String(filteredTools.length))}
                       </button>
                     </div>
                   )}
@@ -420,16 +424,16 @@ export default function Header() {
                     <Search className="w-8 h-8 text-orange-500" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    No tools found
+                    {copy.noToolsFound}
                   </h3>
                   <p className="text-sm text-gray-500 mb-4">
-                    Try searching for "merge", "compress", or "convert"
+                    {copy.trySearching}
                   </p>
                   <button
                     onClick={() => setSearchQuery("")}
                     className="text-sm text-orange-600 hover:text-orange-700 font-medium"
                   >
-                    Clear search
+                    {copy.clearSearch}
                   </button>
                 </div>
               )}
@@ -439,9 +443,11 @@ export default function Header() {
             {searchQuery && searchResults.length > 0 && (
               <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
                 <p className="text-xs text-gray-500 flex items-center justify-between">
-                  <span>Press Enter to select first result</span>
+                  <span>{copy.pressEnter}</span>
                   <span className="font-medium">
-                    {searchResults.length} of {filteredTools.length} results
+                    {copy.resultsCount
+                      .replace("{shown}", String(searchResults.length))
+                      .replace("{total}", String(filteredTools.length))}
                   </span>
                 </p>
               </div>
