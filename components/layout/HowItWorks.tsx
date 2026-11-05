@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { howItWorksSteps } from "@/config/howItWorks";
 
 export default function HowItWorksBlock() {
   return (
@@ -17,29 +18,13 @@ export default function HowItWorksBlock() {
 
         {/* Content Blocks */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-orange-50 p-6 rounded-xl text-center">
-            <div className="text-orange-500 font-bold text-2xl mb-3">01</div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Upload Your File</h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
-              Drag and drop your PDF or click to browse. Multiple file support included.
-            </p>
-          </div>
-
-          <div className="bg-orange-50 p-6 rounded-xl text-center">
-            <div className="text-orange-500 font-bold text-2xl mb-3">02</div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Choose Your Options</h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
-              Select the operation and customize settings according to your needs.
-            </p>
-          </div>
-
-          <div className="bg-orange-50 p-6 rounded-xl text-center">
-            <div className="text-orange-500 font-bold text-2xl mb-3">03</div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Download Result</h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
-              Your file is processed instantly. Download it with a single click.
-            </p>
-          </div>
+          {howItWorksSteps.map((step) => (
+            <div key={step.name} className="bg-orange-50 p-6 rounded-xl text-center">
+              <div className="text-orange-500 font-bold text-2xl mb-3">{step.positionLabel}</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{step.name}</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">{step.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -49,7 +34,7 @@ export default function HowItWorksBlock() {
         Trusted by professionals worldwide
       </h3>
       <p className="text-gray-700 text-sm  sm:text-lg md:w-4xl">
-        QuickFixPdf is your reliable web app for editing PDFs efficiently. Enjoy all the tools you need while keeping your data secure.
+        QuickPDFKit is your reliable web app for editing PDFs efficiently. Enjoy all the tools you need while keeping your data secure.
       </p>
       <div className="flex justify-between md:w-lg gap-6 mt-10">
         <Image

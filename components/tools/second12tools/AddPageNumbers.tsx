@@ -4,16 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { Upload, FileText, Download, X, AlignCenter, Eye } from "lucide-react";
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
-
-// Load pdf.js worker only in browser
-if (typeof window !== "undefined") {
-  const workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-  ).toString();
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-}
+import { loadPdfjs } from "@/lib/pdfjs-client";
 
 export default function AddPageNumbers() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -38,7 +29,7 @@ export default function AddPageNumbers() {
     setLoading(true);
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await (await loadPdfjs()).getDocument({ data: arrayBuffer }).promise;
       setPdfFile(file);
       setPageCount(pdf.numPages);
 

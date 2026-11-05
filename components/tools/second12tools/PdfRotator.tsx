@@ -18,18 +18,7 @@ import {
 
 
 
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import { GlobalWorkerOptions } from "pdfjs-dist/build/pdf";
-GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.394/pdf.worker.min.js";
-
-
-if (typeof window !== "undefined") {
-  const workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-  ).toString();
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-}
+import { loadPdfjs } from "@/lib/pdfjs-client";
 
 interface PageRotation {
   [pageNumber: number]: number;
@@ -138,7 +127,7 @@ export default function PdfRotator() {
 
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await (await loadPdfjs()).getDocument({ data: arrayBuffer }).promise;
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
       setCurrentPage(1);

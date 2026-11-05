@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { PDFDocument, rgb } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { Upload, Download, FileText, Plus, Trash2 } from "lucide-react";
+import { toolHowToById } from "@/config/toolGuides";
 
 export default function PdfPageManager() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -392,10 +393,7 @@ export default function PdfPageManager() {
                     How it works
                   </p>
                   <p className="text-sm text-blue-700">
-                    Add blank pages to your PDF document by specifying the
-                    position and page number. The blank pages will be inserted
-                    with the same dimensions as your original PDF pages and
-                    include a subtle watermark for identification.
+                    {toolHowToById["add-blank-pages-to-pdf"].steps[0].text}
                   </p>
                 </div>
               </div>

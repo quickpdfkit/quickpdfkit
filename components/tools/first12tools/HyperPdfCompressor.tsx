@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { PDFDocument } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { Upload, Download, FileText, Minimize2, Zap, Image as ImageIcon, AlertCircle } from "lucide-react";
+import { toolHowToById } from "@/config/toolGuides";
 
 interface CompressionLevel {
   id: string;
@@ -436,7 +437,7 @@ export default function PdfCompressor() {
                     How it works
                   </p>
                   <p className="text-sm text-blue-700">
-                    This tool optimizes PDF structure by removing metadata, unnecessary data, and applying compression algorithms. Results vary based on the original PDF optimization. Some PDFs may already be well-optimized and won't compress further.
+                    {toolHowToById["hyper-compress-pdf"].steps[0].text}
                   </p>
                 </div>
               </div>

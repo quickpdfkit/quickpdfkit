@@ -16,16 +16,7 @@ import {
 } from "lucide-react";
 
 
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
-
-// Load pdf.js worker only in browser
-if (typeof window !== "undefined") {
-  const workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-  ).toString();
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-}
+import { loadPdfjs } from "@/lib/pdfjs-client";
 
 interface PageText {
   pageNumber: number;
@@ -109,7 +100,7 @@ export default function PdfToText() {
 
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await (await loadPdfjs()).getDocument({ data: arrayBuffer }).promise;
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
       

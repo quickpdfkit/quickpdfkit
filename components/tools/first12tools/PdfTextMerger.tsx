@@ -5,17 +5,7 @@ import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { FileText, X, GripVertical, Upload, Download, Eye, EyeOff } from "lucide-react";
 
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
-
-if (typeof window !== "undefined") {
-  const workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-  ).toString();
-
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-}
-
+import { loadPdfjs } from "@/lib/pdfjs-client";
 
 interface PdfTextFile {
   file: File;
@@ -43,7 +33,7 @@ export default function PdfTextMerger() {
   const extractTextFromPdf = async (file: File): Promise<{ text: string; pageCount: number }> => {
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await (await loadPdfjs()).getDocument({ data: arrayBuffer }).promise;
       const pageCount = pdf.numPages;
       let fullText = "";
 

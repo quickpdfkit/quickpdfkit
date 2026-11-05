@@ -3,15 +3,7 @@
 import { useState, useRef } from "react";
 import { FileText, Upload, Download, X, FileDown } from "lucide-react";
 import { saveAs } from "file-saver";
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
-
-if (typeof window !== "undefined") {
-  const workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-  ).toString();
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-}
+import { loadPdfjs } from "@/lib/pdfjs-client";
 
 export default function PdfTextSplitter() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -37,7 +29,7 @@ export default function PdfTextSplitter() {
     setLoading(true);
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await (await loadPdfjs()).getDocument({ data: arrayBuffer }).promise;
       setPdfFile(file);
       setPageCount(pdf.numPages);
       showToast(`PDF loaded: ${pdf.numPages} pages`);
@@ -70,7 +62,7 @@ export default function PdfTextSplitter() {
     setExtracting(true);
     try {
       const arrayBuffer = await pdfFile.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await (await loadPdfjs()).getDocument({ data: arrayBuffer }).promise;
       const texts: string[] = [];
 
       for (let i = 1; i <= pdf.numPages; i++) {
