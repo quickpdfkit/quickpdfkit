@@ -6,7 +6,7 @@ import { useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ToolCard from "@/components/layout/ToolCard";
-import { useI18n } from "@/components/i18n/I18nProvider";
+import { useI18n, useLocalizedHref } from "@/components/i18n/I18nProvider";
 import { useLocalizedTools } from "@/components/i18n/useLocalizedTools";
 
 const CATEGORY_KEYS = [
@@ -21,6 +21,7 @@ const CATEGORY_KEYS = [
 
 export default function AllTools() {
   const { dictionary } = useI18n();
+  const href = useLocalizedHref();
   const copy = dictionary.toolsIndex;
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<(typeof CATEGORY_KEYS)[number]>("All");
@@ -182,7 +183,7 @@ export default function AllTools() {
             {copy.ctaText}
           </p>
           <Link
-            href="/contact"
+            href={href("/contact")}
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-orange-600 rounded-xl font-semibold hover:bg-gray-50 transition-all shadow-xl hover:scale-105"
           >
             {copy.contactUs}

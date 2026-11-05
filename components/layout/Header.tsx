@@ -229,7 +229,7 @@ export default function Header() {
               </Link>
 
               <Link
-                href="/contact"
+                href={href("/contact")}
                 className="px-4 py-2 text-gray-600 hover:text-orange-500 transition-colors relative group"
               >
                 {copy.contact}
@@ -300,7 +300,7 @@ export default function Header() {
                 {copy.about}
               </Link>
               <Link
-                href="/contact"
+                href={href("/contact")}
                 className="block px-4 py-2 text-gray-600 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >

@@ -180,7 +180,32 @@ export const ptUi: UiCopy = {
     about: "Sobre nós",
     contact: "Fale conosco",
     blog: "Blog",
+    email: "E-mail",
     rights: "Todos os direitos reservados.",
+  },
+  contactPage: {
+    metaTitle: "Fale conosco",
+    metaDescription:
+      "Fale com a equipe do QuickPDFKit sobre suporte, feedback ou parcerias das nossas ferramentas de PDF gratuitas no navegador.",
+    metaKeywords: [
+      "Contato QuickPDFKit",
+      "Suporte QuickPDFKit",
+      "Ajuda com ferramentas PDF",
+      "Feedback QuickPDFKit",
+    ],
+    titleLead: "Fale",
+    titleAccent: "conosco",
+    intro:
+      "Tem perguntas, sugestões ou comentários? Preencha o formulário e responderemos em breve.",
+    emailLead: "Ou envie um e-mail direto para",
+    namePlaceholder: "Seu nome",
+    emailPlaceholder: "Seu e-mail",
+    messagePlaceholder: "Sua mensagem",
+    send: "Enviar mensagem",
+    mailtoNote: "Seu aplicativo de e-mail será aberto com esta mensagem pronta para enviar.",
+    subject: "Mensagem do QuickPDFKit de {name}",
+    bodyName: "Nome",
+    bodyEmail: "E-mail",
   },
   categories: {
     All: "Todas",

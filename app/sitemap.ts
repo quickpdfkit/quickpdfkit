@@ -17,7 +17,7 @@ const staticRoutes: {
   { path: "/faq", changeFrequency: "monthly", priority: 0.6 },
   { path: "/blog", changeFrequency: "weekly", priority: 0.6 },
   { path: "/about", changeFrequency: "yearly", priority: 0.5 },
-  { path: "/contact", changeFrequency: "yearly", priority: 0.5 },
+  { path: "/contact", changeFrequency: "yearly", priority: 0.5, localized: true },
   { path: "/privacy-policy", changeFrequency: "yearly", priority: 0.3 },
   { path: "/terms-conditions", changeFrequency: "yearly", priority: 0.3 },
   { path: "/cookies", changeFrequency: "yearly", priority: 0.3 },

@@ -130,7 +130,25 @@ export interface Dictionary {
     about: string;
     contact: string;
     blog: string;
+    email: string;
     rights: string;
+  };
+  contactPage: {
+    metaTitle: string;
+    metaDescription: string;
+    metaKeywords: string[];
+    titleLead: string;
+    titleAccent: string;
+    intro: string;
+    emailLead: string;
+    namePlaceholder: string;
+    emailPlaceholder: string;
+    messagePlaceholder: string;
+    send: string;
+    mailtoNote: string;
+    subject: string;
+    bodyName: string;
+    bodyEmail: string;
   };
   categories: {
     All: string;

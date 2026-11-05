@@ -2,8 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/components/i18n/I18nProvider";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 export default function AboutUs() {
+  const { dictionary } = useI18n();
+  const emailLead = dictionary.contactPage.emailLead;
+
   return (
     <section className="py-32 px-4 bg-gradient-to-br from-orange-50 via-white to-gray-50">
       <div className="max-w-7xl mx-auto space-y-32">
@@ -18,6 +23,16 @@ export default function AboutUs() {
             documents. From powerful batch processing to advanced team
             features, we aim to save time, boost productivity, and simplify
             workflows for millions of users worldwide.
+          </p>
+          <p className="text-gray-700 text-base sm:text-lg">
+            {emailLead}{" "}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              dir="ltr"
+              className="font-semibold text-orange-500 hover:text-orange-600"
+            >
+              {CONTACT_EMAIL}
+            </a>
           </p>
         </div>
 
@@ -144,9 +159,19 @@ export default function AboutUs() {
           <h2 className="text-3xl font-semibold text-gray-900 mb-4">
             Join Our Journey
           </h2>
-          <p className="text-gray-700 text-base sm:text-lg mb-6">
+          <p className="text-gray-700 text-base sm:text-lg mb-4">
             Whether you want to collaborate, provide feedback, or join our team,
             we’d love to hear from you. Let’s make document management effortless together!
+          </p>
+          <p className="text-gray-700 text-base sm:text-lg mb-6">
+            {emailLead}{" "}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              dir="ltr"
+              className="font-semibold text-orange-500 hover:text-orange-600"
+            >
+              {CONTACT_EMAIL}
+            </a>
           </p>
           <Link
             href="/contact"
