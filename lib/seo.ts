@@ -170,6 +170,86 @@ export function howToJsonLd({
   };
 }
 
+export function blogPostingJsonLd({
+  title,
+  description,
+  path,
+  datePublished,
+  dateModified,
+  imagePath,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified?: string;
+  imagePath?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description,
+    datePublished,
+    dateModified: dateModified ?? datePublished,
+    mainEntityOfPage: absoluteUrl(path),
+    url: absoluteUrl(path),
+    image: absoluteUrl(imagePath ?? "/og-image.png"),
+    inLanguage: "en",
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/og-image.png"),
+      },
+    },
+  };
+}
+
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  };
+}
+
+export function blogIndexJsonLd(
+  posts: { title: string; path: string; description: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: `${SITE_NAME} Blog`,
+    url: absoluteUrl("/blog"),
+    description:
+      "Guides from QuickPDFKit on merging, compressing, converting, splitting, and sharing PDFs privately in the browser.",
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      url: absoluteUrl(post.path),
+    })),
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  };
+}
+
 export function faqPageJsonLd(items: { question: string; answer: string }[]) {
   return {
     "@context": "https://schema.org",
