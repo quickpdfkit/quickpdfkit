@@ -182,7 +182,32 @@ export const enUi: UiCopy = {
     about: "About us",
     contact: "Contact us",
     blog: "Blog",
+    email: "Email",
     rights: "All rights reserved.",
+  },
+  contactPage: {
+    metaTitle: "Contact Us",
+    metaDescription:
+      "Contact the QuickPDFKit team for support, feedback, or partnership questions about our free in-browser PDF tools.",
+    metaKeywords: [
+      "Contact QuickPDFKit",
+      "QuickPDFKit support",
+      "PDF tools help",
+      "QuickPDFKit feedback",
+    ],
+    titleLead: "Contact",
+    titleAccent: "Us",
+    intro:
+      "Have questions, suggestions, or feedback? Fill out the form below and we'll get back to you shortly.",
+    emailLead: "Or email us directly at",
+    namePlaceholder: "Your Name",
+    emailPlaceholder: "Your Email",
+    messagePlaceholder: "Your Message",
+    send: "Send Message",
+    mailtoNote: "Your email app will open with this message ready to send.",
+    subject: "QuickPDFKit message from {name}",
+    bodyName: "Name",
+    bodyEmail: "Email",
   },
   categories: {
     All: "All",

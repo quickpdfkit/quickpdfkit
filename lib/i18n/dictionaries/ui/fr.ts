@@ -181,7 +181,32 @@ export const frUi: UiCopy = {
     about: "À propos",
     contact: "Contact",
     blog: "Blog",
+    email: "E-mail",
     rights: "Tous droits réservés.",
+  },
+  contactPage: {
+    metaTitle: "Nous contacter",
+    metaDescription:
+      "Contactez l'équipe QuickPDFKit pour une question, un avis ou un partenariat au sujet de nos outils PDF gratuits dans le navigateur.",
+    metaKeywords: [
+      "Contacter QuickPDFKit",
+      "Assistance QuickPDFKit",
+      "Aide outils PDF",
+      "Avis QuickPDFKit",
+    ],
+    titleLead: "Nous",
+    titleAccent: "contacter",
+    intro:
+      "Une question, une suggestion ou un avis ? Remplissez le formulaire et nous vous répondrons rapidement.",
+    emailLead: "Ou écrivez-nous directement à",
+    namePlaceholder: "Votre nom",
+    emailPlaceholder: "Votre e-mail",
+    messagePlaceholder: "Votre message",
+    send: "Envoyer le message",
+    mailtoNote: "Votre application de messagerie s'ouvrira avec ce message prêt à être envoyé.",
+    subject: "Message QuickPDFKit de {name}",
+    bodyName: "Nom",
+    bodyEmail: "E-mail",
   },
   categories: {
     All: "Tous",

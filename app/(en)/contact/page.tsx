@@ -1,19 +1,18 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import ContactUs from "@/components/pages/ContactUs";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { languageAlternates } from "@/lib/i18n/paths";
 import { pageMetadata } from "@/lib/seo";
 
+const copy = getDictionary("en").contactPage;
+
 export const metadata = pageMetadata({
-  title: "Contact Us",
-  description:
-    "Contact the QuickPDFKit team for support, feedback, or partnership questions about our free in-browser PDF tools.",
+  title: copy.metaTitle,
+  description: copy.metaDescription,
   path: "/contact",
-  keywords: [
-    "Contact QuickPDFKit",
-    "QuickPDFKit support",
-    "PDF tools help",
-    "QuickPDFKit feedback",
-  ],
+  keywords: copy.metaKeywords,
+  languages: languageAlternates("/contact"),
 });
 
 const page = () => {

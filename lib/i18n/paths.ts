@@ -2,10 +2,12 @@ import { isLocale, type AppLocale, type Locale } from "./locales";
 
 const LOCALE_LIST: AppLocale[] = ["en", "es", "ar", "fr", "pt", "hi"];
 
+const LOCALIZED_STATIC_PATHS = new Set(["/tools", "/contact"]);
+
 export function localizedPath(locale: AppLocale, englishPath: string): string {
   if (locale === "en") return englishPath;
   if (englishPath === "/") return `/${locale}`;
-  if (englishPath === "/tools") return `/${locale}/tools`;
+  if (LOCALIZED_STATIC_PATHS.has(englishPath)) return `/${locale}${englishPath}`;
   if (englishPath.startsWith("/tools/")) {
     return `/${locale}/${englishPath.slice("/tools/".length)}`;
   }
@@ -20,7 +22,9 @@ export function toEnglishPath(pathname: string): string {
   }
   const rest = parts.slice(1);
   if (rest.length === 0) return "/";
-  if (rest[0] === "tools" && rest.length === 1) return "/tools";
+  if (rest.length === 1 && LOCALIZED_STATIC_PATHS.has(`/${rest[0]}`)) {
+    return `/${rest[0]}`;
+  }
   if (rest.length === 1) return `/tools/${rest[0]}`;
   return "/";
 }

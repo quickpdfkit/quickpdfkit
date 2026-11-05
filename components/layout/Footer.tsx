@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useI18n, useLocalizedHref } from "@/components/i18n/I18nProvider";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 export default function Footer() {
   const { dictionary } = useI18n();
@@ -36,7 +37,7 @@ export default function Footer() {
 
   const companyLinks = [
     { name: copy.about, href: "/about" },
-    { name: copy.contact, href: "/contact" },
+    { name: copy.contact, href: href("/contact") },
     { name: copy.blog, href: "/blog" },
   ];
 
@@ -80,7 +81,18 @@ export default function Footer() {
 
         <div>
           <h4 className="text-lg font-semibold mb-4">{copy.company}</h4>
-          <ul>{renderLinks(companyLinks)}</ul>
+          <ul>
+            {renderLinks(companyLinks)}
+            <li className="mb-2">
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="text-gray-700 hover:text-orange-500 transition-colors text-sm"
+              >
+                {copy.email}{" "}
+                <span dir="ltr">{CONTACT_EMAIL}</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
