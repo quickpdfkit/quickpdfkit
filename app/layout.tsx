@@ -71,6 +71,9 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: "/favicon.ico" }],
   },
+  other: {
+    "google-adsense-account": "ca-pub-4916350136769682",
+  },
   category: "Technology",
 };
 
@@ -84,6 +87,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4916350136769682"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-FBM4Q0Q5XM"
           strategy="afterInteractive"
