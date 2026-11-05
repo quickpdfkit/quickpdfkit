@@ -2,28 +2,16 @@
 
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { useI18n } from "@/components/i18n/I18nProvider";
+
+const cardImages = ["/img/desktop.webp", "/img/mobile.webp", "/img/business.webp"];
 
 export default function InfoCards() {
-  const cards = [
-    {
-      title: "Work offline with Desktop",
-      description:
-        "Batch edit and manage documents locally with no internet and no limits.",
-      image: "/img/desktop.webp", // replace with your image path
-    },
-    {
-      title: "On-the-go with Mobile",
-      description:
-        "Your favorite tools, right in your pocket. Keep working anytime, anywhere.",
-      image: "/img/mobile.webp", // replace with your image path
-    },
-    {
-      title: "Built for business",
-      description:
-        "Automate workflows, onboard teams easily, and scale with flexible plans.",
-      image: "/img/business.webp", // replace with your image path
-    },
-  ];
+  const { dictionary } = useI18n();
+  const cards = dictionary.features.cards.map((card, index) => ({
+    ...card,
+    image: cardImages[index],
+  }));
 
   return (
 <section className="py-24 bg-gradient-to-br from-orange-50 via-white to-gray-50 px-4">

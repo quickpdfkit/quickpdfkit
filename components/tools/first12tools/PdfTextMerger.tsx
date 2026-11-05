@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
@@ -16,6 +18,7 @@ interface PdfTextFile {
 }
 
 export default function PdfTextMerger() {
+  const t = useT();
   const [pdfFiles, setPdfFiles] = useState<PdfTextFile[]>([]);
   const [outputFilename, setOutputFilename] = useState("merged-text");
   const [outputFormat, setOutputFormat] = useState<"txt" | "pdf">("txt");
@@ -57,7 +60,7 @@ export default function PdfTextMerger() {
     if (!files) return;
     const newFiles = Array.from(files).filter((f) => f.type === "application/pdf");
 
-    if (newFiles.length === 0) return showToast("No PDF files selected");
+    if (newFiles.length === 0) return showToast(t("No PDF files selected"));
 
     // Add files with pending status
     const filesWithData: PdfTextFile[] = newFiles.map((f) => ({
@@ -102,13 +105,13 @@ export default function PdfTextMerger() {
 
   const removeFile = (id: string) => {
     setPdfFiles((prev) => prev.filter((f) => f.id !== id));
-    showToast("File removed");
+    showToast(t("File removed"));
   };
 
   const clearAll = () => {
     setPdfFiles([]);
     setShowPreviews({});
-    showToast("All files cleared");
+    showToast(t("All files cleared"));
   };
 
   const togglePreview = (id: string) => {
@@ -127,7 +130,7 @@ export default function PdfTextMerger() {
   const mergeAsTextFile = () => {
     const completedFiles = pdfFiles.filter((f) => f.status === "completed");
     if (completedFiles.length === 0) {
-      return showToast("No text extracted to merge");
+      return showToast(t("No text extracted to merge"));
     }
 
     const mergedText = completedFiles
@@ -150,7 +153,7 @@ export default function PdfTextMerger() {
   const mergeAsPdf = async () => {
     const completedFiles = pdfFiles.filter((f) => f.status === "completed");
     if (completedFiles.length === 0) {
-      return showToast("No text extracted to merge");
+      return showToast(t("No text extracted to merge"));
     }
 
     setLoading(true);
@@ -238,7 +241,7 @@ export default function PdfTextMerger() {
       showToast("PDF file created successfully!");
     } catch (error) {
       console.error(error);
-      showToast("Error creating PDF");
+      showToast(t("Error creating PDF"));
     } finally {
       setLoading(false);
     }
@@ -285,12 +288,7 @@ export default function PdfTextMerger() {
       <div className="w-full max-w-4xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Merge PDF <span className="text-orange-500">Text</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Extract and combine text content from multiple PDFs
-          </p>
+          <ToolHeading toolId="merge-pdf-text" />
         </div>
 
         {/* Upload Area */}
@@ -309,9 +307,7 @@ export default function PdfTextMerger() {
               <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
             </div>
             <div className="text-center">
-              <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                Click to upload or drag & drop
-              </span>
+              <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
               <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
                 PDF files only • Text will be extracted automatically
               </span>
@@ -367,9 +363,7 @@ export default function PdfTextMerger() {
                               {f.file.name}
                             </p>
                             {f.status === "extracting" && (
-                              <span className="px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-600">
-                                Extracting...
-                              </span>
+                              <span className="px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-600">{t("Extracting...")}</span>
                             )}
                             {f.status === "completed" && (
                               <span className="px-2 py-0.5 text-xs rounded-full bg-green-100 text-green-600">
@@ -377,9 +371,7 @@ export default function PdfTextMerger() {
                               </span>
                             )}
                             {f.status === "error" && (
-                              <span className="px-2 py-0.5 text-xs rounded-full bg-red-100 text-red-600">
-                                Error
-                              </span>
+                              <span className="px-2 py-0.5 text-xs rounded-full bg-red-100 text-red-600">{t("Error")}</span>
                             )}
                           </div>
                           <p className="text-gray-500 text-xs sm:text-sm mt-0.5">
@@ -399,9 +391,7 @@ export default function PdfTextMerger() {
                           >
                             {showPreviews[f.id] ? (
                               <>
-                                <EyeOff className="w-4 h-4" />
-                                Hide Preview
-                              </>
+                                <EyeOff className="w-4 h-4" />{t("Hide Preview")}</>
                             ) : (
                               <>
                                 <Eye className="w-4 h-4" />
@@ -436,9 +426,7 @@ export default function PdfTextMerger() {
             {/* Output Settings */}
             <div className="pt-4 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Output Format
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t("Output Format")}</label>
                 <div className="flex gap-3">
                   <button
                     onClick={() => setOutputFormat("txt")}
@@ -462,9 +450,7 @@ export default function PdfTextMerger() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Output Filename
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t("Output Filename")}</label>
                 <div className="flex gap-2">
                   <input
                     type="text"
@@ -485,9 +471,7 @@ export default function PdfTextMerger() {
               <button
                 onClick={clearAll}
                 className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all hover:shadow-sm active:scale-95"
-              >
-                Clear All
-              </button>
+              >{t("Clear All")}</button>
 
               <button
                 onClick={handleMerge}
@@ -512,9 +496,7 @@ export default function PdfTextMerger() {
 
         {/* Empty State */}
         {pdfFiles.length === 0 && (
-          <div className="text-center mt-12 text-gray-500 text-sm">
-            No files uploaded yet. Start by adding some PDFs above.
-          </div>
+          <div className="text-center mt-12 text-gray-500 text-sm">{t("No files uploaded yet. Start by adding some PDFs above.")}</div>
         )}
       </div>
 

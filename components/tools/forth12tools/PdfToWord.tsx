@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from "docx";
@@ -23,6 +25,7 @@ interface PageContent {
 }
 
 export default function PdfToWord() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -61,7 +64,7 @@ export default function PdfToWord() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -75,7 +78,7 @@ export default function PdfToWord() {
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
       
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
 
       // Extract text from all pages
       const contentArray: PageContent[] = [];
@@ -87,11 +90,11 @@ export default function PdfToWord() {
       }
 
       setExtractedContent(contentArray);
-      showToast("Text extraction complete");
+      showToast(t("Text extraction complete"));
 
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
     } finally {
       setLoading(false);
       setProgress(0);
@@ -122,7 +125,7 @@ export default function PdfToWord() {
 
   const convertToWord = async () => {
     if (extractedContent.length === 0) {
-      showToast("No content to convert");
+      showToast(t("No content to convert"));
       return;
     }
 
@@ -130,7 +133,7 @@ export default function PdfToWord() {
     setProgress(0);
 
     try {
-      showToast("Creating Word document...");
+      showToast(t("Creating Word document..."));
 
       const docParagraphs: Paragraph[] = [];
 
@@ -227,11 +230,11 @@ export default function PdfToWord() {
       const fileName = pdfFile?.name.replace(".pdf", "") || "document";
       saveAs(blob, `${fileName}.docx`);
 
-      showToast("Word document created successfully!");
+      showToast(t("Word document created successfully!"));
 
     } catch (error) {
       console.error("Error converting to Word:", error);
-      showToast("Error converting to Word. Please try again.");
+      showToast(t("Error converting to Word. Please try again."));
     } finally {
       setConverting(false);
       setProgress(0);
@@ -270,12 +273,7 @@ export default function PdfToWord() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <File className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            PDF to <span className="text-orange-500">Word</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Convert PDF documents to editable Word format
-          </p>
+          <ToolHeading toolId="convert-pdf-to-word" />
         </div>
 
         {/* Upload Area */}
@@ -296,12 +294,8 @@ export default function PdfToWord() {
                   <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
                 </div>
                 <div className="text-center">
-                  <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                    Click to upload or drag & drop
-                  </span>
-                  <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                    PDF files only
-                  </span>
+                  <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                  <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
                 </div>
                 <input
                   id="pdf-upload"
@@ -319,32 +313,28 @@ export default function PdfToWord() {
               <div className="flex gap-3">
                 <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
-                  <p className="text-sm text-blue-900 font-medium mb-2">
-                    Browser-Based Text Extraction
-                  </p>
-                  <p className="text-sm text-blue-700 mb-3">
-                    This tool extracts text from PDF and creates a Word document. Due to browser limitations:
-                  </p>
+                  <p className="text-sm text-blue-900 font-medium mb-2">{t("Browser-Based Text Extraction")}</p>
+                  <p className="text-sm text-blue-700 mb-3">{t("This tool extracts text from PDF and creates a Word document. Due to browser limitations:")}</p>
                   <div className="space-y-2">
                     <div className="flex items-start gap-2">
                       <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-blue-700">Works with text-based PDFs</p>
+                      <p className="text-sm text-blue-700">{t("Works with text-based PDFs")}</p>
                     </div>
                     <div className="flex items-start gap-2">
                       <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-blue-700">Preserves basic text content</p>
+                      <p className="text-sm text-blue-700">{t("Preserves basic text content")}</p>
                     </div>
                     <div className="flex items-start gap-2">
                       <XCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-blue-700">Complex layouts may not transfer perfectly</p>
+                      <p className="text-sm text-blue-700">{t("Complex layouts may not transfer perfectly")}</p>
                     </div>
                     <div className="flex items-start gap-2">
                       <XCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-blue-700">Images, tables, and formatting are limited</p>
+                      <p className="text-sm text-blue-700">{t("Images, tables, and formatting are limited")}</p>
                     </div>
                     <div className="flex items-start gap-2">
                       <XCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-blue-700">Scanned PDFs require OCR (not supported here)</p>
+                      <p className="text-sm text-blue-700">{t("Scanned PDFs require OCR (not supported here)")}</p>
                     </div>
                   </div>
                 </div>
@@ -369,9 +359,7 @@ export default function PdfToWord() {
               <button
                 onClick={resetAll}
                 className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-              >
-                Change File
-              </button>
+              >{t("Change File")}</button>
             </div>
 
             {/* Loading Progress */}
@@ -379,7 +367,7 @@ export default function PdfToWord() {
               <div className="bg-white rounded-xl p-6 border border-gray-200">
                 <div className="flex items-center gap-3 mb-4">
                   <Loader className="w-5 h-5 text-orange-500 animate-spin" />
-                  <p className="text-gray-700 font-medium">Extracting text from PDF...</p>
+                  <p className="text-gray-700 font-medium">{t("Extracting text from PDF...")}</p>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
@@ -396,7 +384,7 @@ export default function PdfToWord() {
               <div className="bg-white rounded-xl p-6 border border-gray-200">
                 <div className="flex items-center gap-3 mb-4">
                   <Loader className="w-5 h-5 text-orange-500 animate-spin" />
-                  <p className="text-gray-700 font-medium">Creating Word document...</p>
+                  <p className="text-gray-700 font-medium">{t("Creating Word document...")}</p>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
@@ -412,31 +400,29 @@ export default function PdfToWord() {
               <>
                 {/* Extraction Summary */}
                 <div className="bg-white rounded-xl p-6 border border-gray-200">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    Extraction Summary
-                  </h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("Extraction Summary")}</h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-1">Pages Processed</p>
+                      <p className="text-sm text-gray-600 mb-1">{t("Pages Processed")}</p>
                       <p className="text-2xl font-bold text-orange-500">{extractedContent.length}</p>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-1">Total Characters</p>
+                      <p className="text-sm text-gray-600 mb-1">{t("Total Characters")}</p>
                       <p className="text-2xl font-bold text-orange-500">
                         {extractedContent.reduce((sum, page) => sum + page.text.length, 0).toLocaleString()}
                       </p>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-1">Estimated Words</p>
+                      <p className="text-sm text-gray-600 mb-1">{t("Estimated Words")}</p>
                       <p className="text-2xl font-bold text-orange-500">
                         {Math.round(extractedContent.reduce((sum, page) => sum + page.text.split(/\s+/).length, 0)).toLocaleString()}
                       </p>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-1">Status</p>
+                      <p className="text-sm text-gray-600 mb-1">{t("Status")}</p>
                       <div className="flex items-center gap-2">
                         <CheckCircle className="w-5 h-5 text-green-500" />
-                        <p className="text-sm font-medium text-green-700">Ready</p>
+                        <p className="text-sm font-medium text-green-700">{t("Ready")}</p>
                       </div>
                     </div>
                   </div>
@@ -445,9 +431,7 @@ export default function PdfToWord() {
                 {/* Text Preview */}
                 <div className="bg-white rounded-xl p-6 border border-gray-200">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      Extracted Text Preview
-                    </h3>
+                    <h3 className="text-lg font-semibold text-gray-900">{t("Extracted Text Preview")}</h3>
                     <button
                       onClick={() => setShowPreview(!showPreview)}
                       className="text-sm text-orange-600 hover:text-orange-700 font-medium"
@@ -471,14 +455,12 @@ export default function PdfToWord() {
                   <div className="flex gap-3">
                     <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <p className="text-sm text-yellow-900 font-medium mb-1">
-                        Before Converting
-                      </p>
+                      <p className="text-sm text-yellow-900 font-medium mb-1">{t("Before Converting")}</p>
                       <ul className="text-sm text-yellow-700 space-y-1">
-                        <li>• Review the preview to check extracted text quality</li>
-                        <li>• The Word document will contain plain text with basic formatting</li>
-                        <li>• You may need to manually adjust formatting after conversion</li>
-                        <li>• Images, complex tables, and special layouts won't be preserved</li>
+                        <li>{t("• Review the preview to check extracted text quality")}</li>
+                        <li>{t("• The Word document will contain plain text with basic formatting")}</li>
+                        <li>{t("• You may need to manually adjust formatting after conversion")}</li>
+                        <li>{t("• Images, complex tables, and special layouts won't be preserved")}</li>
                       </ul>
                     </div>
                   </div>
@@ -489,9 +471,7 @@ export default function PdfToWord() {
                   <button
                     onClick={resetAll}
                     className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-                  >
-                    Cancel
-                  </button>
+                  >{t("Cancel")}</button>
                   <button
                     onClick={convertToWord}
                     disabled={converting}
@@ -499,14 +479,10 @@ export default function PdfToWord() {
                   >
                     {converting ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Converting...
-                      </>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Converting...")}</>
                     ) : (
                       <>
-                        <Download className="w-5 h-5" />
-                        Convert to Word
-                      </>
+                        <Download className="w-5 h-5" />{t("Convert to Word")}</>
                     )}
                   </button>
                 </div>

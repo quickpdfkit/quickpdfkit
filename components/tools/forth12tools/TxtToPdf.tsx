@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import jsPDF from "jspdf";
@@ -23,6 +25,7 @@ type FontFamily = "helvetica" | "times" | "courier";
 type TextAlignment = "left" | "center" | "right" | "justify";
 
 export default function TxtToPdf() {
+  const t = useT();
   const [text, setText] = useState<string>("");
   const [fileName, setFileName] = useState<string>("document");
   const [converting, setConverting] = useState(false);
@@ -61,10 +64,10 @@ export default function TxtToPdf() {
       const text = await file.text();
       setText(text);
       setFileName(file.name.replace(/\.(txt|md)$/i, ""));
-      showToast("File loaded successfully");
+      showToast(t("File loaded successfully"));
     } catch (error) {
       console.error("Error reading file:", error);
-      showToast("Error reading file");
+      showToast(t("Error reading file"));
     }
   };
 
@@ -115,14 +118,14 @@ export default function TxtToPdf() {
 
   const convertToPdf = async () => {
     if (!text.trim()) {
-      showToast("Please enter some text");
+      showToast(t("Please enter some text"));
       return;
     }
 
     setConverting(true);
 
     try {
-      showToast("Creating PDF...");
+      showToast(t("Creating PDF..."));
 
       const dimensions = getPageDimensions();
       
@@ -218,11 +221,11 @@ export default function TxtToPdf() {
 
       // Save PDF
       pdf.save(`${fileName}.pdf`);
-      showToast("PDF created successfully!");
+      showToast(t("PDF created successfully!"));
 
     } catch (error) {
       console.error("Error creating PDF:", error);
-      showToast("Error creating PDF. Please try again.");
+      showToast(t("Error creating PDF. Please try again."));
     } finally {
       setConverting(false);
     }
@@ -235,16 +238,16 @@ export default function TxtToPdf() {
   const clearAll = () => {
     setText("");
     setFileName("document");
-    showToast("Text cleared");
+    showToast(t("Text cleared"));
   };
 
   const pasteFromClipboard = async () => {
     try {
       const clipboardText = await navigator.clipboard.readText();
       setText(clipboardText);
-      showToast("Text pasted from clipboard");
+      showToast(t("Text pasted from clipboard"));
     } catch (error) {
-      showToast("Unable to access clipboard");
+      showToast(t("Unable to access clipboard"));
     }
   };
 
@@ -262,12 +265,7 @@ export default function TxtToPdf() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <Type className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            TXT to <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Convert plain text to professionally formatted PDF documents
-          </p>
+          <ToolHeading toolId="txt-to-pdf-converter" />
         </div>
 
         <div className="space-y-6">
@@ -277,9 +275,7 @@ export default function TxtToPdf() {
               htmlFor="text-file-upload"
               className="px-4 py-2 rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 transition-all cursor-pointer flex items-center gap-2 text-sm font-medium"
             >
-              <Upload className="w-4 h-4" />
-              Upload TXT File
-            </label>
+              <Upload className="w-4 h-4" />{t("Upload TXT File")}</label>
             <input
               id="text-file-upload"
               type="file"
@@ -292,24 +288,20 @@ export default function TxtToPdf() {
             <button
               onClick={pasteFromClipboard}
               className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all text-sm font-medium"
-            >
-              Paste from Clipboard
-            </button>
+            >{t("Paste from Clipboard")}</button>
 
             <button
               onClick={clearAll}
               disabled={!text}
               className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm font-medium"
-            >
-              Clear All
-            </button>
+            >{t("Clear All")}</button>
 
             <div className="ml-auto flex items-center gap-3">
               <input
                 type="text"
                 value={fileName}
                 onChange={(e) => setFileName(e.target.value)}
-                placeholder="Document name"
+                placeholder={t("Document name")}
                 className="px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
               />
               <button
@@ -331,7 +323,7 @@ export default function TxtToPdf() {
             {/* Text Input - Takes 2 columns */}
             <div className="lg:col-span-2 bg-white rounded-xl p-6 border border-gray-200">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Text Content</h3>
+                <h3 className="text-lg font-semibold text-gray-900">{t("Text Content")}</h3>
                 <div className="flex items-center gap-4 text-xs text-gray-500">
                   <span>{getCharCount()} characters</span>
                   <span>•</span>
@@ -345,7 +337,7 @@ export default function TxtToPdf() {
                 ref={textAreaRef}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="Enter your text here or upload a .txt file..."
+                placeholder={t("Enter your text here or upload a .txt file...")}
                 className="w-full h-[500px] px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-400 focus:border-transparent resize-none font-mono text-sm"
                 style={{
                   fontFamily: fontFamily === "courier" ? "monospace" : 
@@ -363,50 +355,44 @@ export default function TxtToPdf() {
               <div className="bg-white rounded-xl p-6 border border-gray-200">
                 <div className="flex items-center gap-2 mb-4">
                   <Settings className="w-5 h-5 text-gray-700" />
-                  <h3 className="text-lg font-semibold text-gray-900">Page Settings</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">{t("Page Settings")}</h3>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Page Size
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t("Page Size")}</label>
                     <select
                       value={pageSize}
                       onChange={(e) => setPageSize(e.target.value as PageSize)}
                       className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                     >
                       <option value="A4">A4</option>
-                      <option value="Letter">Letter</option>
-                      <option value="Legal">Legal</option>
+                      <option value="Letter">{t("Letter")}</option>
+                      <option value="Legal">{t("Legal")}</option>
                       <option value="A3">A3</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Orientation
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t("Orientation")}</label>
                     <select
                       value={orientation}
                       onChange={(e) => setOrientation(e.target.value as Orientation)}
                       className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                     >
-                      <option value="portrait">Portrait</option>
-                      <option value="landscape">Landscape</option>
+                      <option value="portrait">{t("Portrait")}</option>
+                      <option value="landscape">{t("Landscape")}</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Margins (mm)
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t("Margins (mm)")}</label>
                     <div className="grid grid-cols-2 gap-2">
                       <input
                         type="number"
                         value={marginTop}
                         onChange={(e) => setMarginTop(Number(e.target.value))}
-                        placeholder="Top"
+                        placeholder={t("Top")}
                         min="0"
                         max="100"
                         className="px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
@@ -415,7 +401,7 @@ export default function TxtToPdf() {
                         type="number"
                         value={marginRight}
                         onChange={(e) => setMarginRight(Number(e.target.value))}
-                        placeholder="Right"
+                        placeholder={t("Right")}
                         min="0"
                         max="100"
                         className="px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
@@ -424,7 +410,7 @@ export default function TxtToPdf() {
                         type="number"
                         value={marginBottom}
                         onChange={(e) => setMarginBottom(Number(e.target.value))}
-                        placeholder="Bottom"
+                        placeholder={t("Bottom")}
                         min="0"
                         max="100"
                         className="px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
@@ -433,7 +419,7 @@ export default function TxtToPdf() {
                         type="number"
                         value={marginLeft}
                         onChange={(e) => setMarginLeft(Number(e.target.value))}
-                        placeholder="Left"
+                        placeholder={t("Left")}
                         min="0"
                         max="100"
                         className="px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
@@ -447,22 +433,20 @@ export default function TxtToPdf() {
               <div className="bg-white rounded-xl p-6 border border-gray-200">
                 <div className="flex items-center gap-2 mb-4">
                   <Type className="w-5 h-5 text-gray-700" />
-                  <h3 className="text-lg font-semibold text-gray-900">Text Format</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">{t("Text Format")}</h3>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Font Family
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t("Font Family")}</label>
                     <select
                       value={fontFamily}
                       onChange={(e) => setFontFamily(e.target.value as FontFamily)}
                       className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                     >
-                      <option value="helvetica">Helvetica (Sans-serif)</option>
-                      <option value="times">Times (Serif)</option>
-                      <option value="courier">Courier (Monospace)</option>
+                      <option value="helvetica">{t("Helvetica (Sans-serif)")}</option>
+                      <option value="times">{t("Times (Serif)")}</option>
+                      <option value="courier">{t("Courier (Monospace)")}</option>
                     </select>
                   </div>
 
@@ -496,9 +480,7 @@ export default function TxtToPdf() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Alignment
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t("Alignment")}</label>
                     <div className="grid grid-cols-4 gap-2">
                       <button
                         onClick={() => setTextAlignment("left")}
@@ -507,7 +489,7 @@ export default function TxtToPdf() {
                             ? "border-orange-500 bg-orange-50 text-orange-700"
                             : "border-gray-300 text-gray-700 hover:bg-gray-50"
                         }`}
-                        title="Left"
+                        title={t("Left")}
                       >
                         <AlignLeft className="w-5 h-5 mx-auto" />
                       </button>
@@ -529,7 +511,7 @@ export default function TxtToPdf() {
                             ? "border-orange-500 bg-orange-50 text-orange-700"
                             : "border-gray-300 text-gray-700 hover:bg-gray-50"
                         }`}
-                        title="Right"
+                        title={t("Right")}
                       >
                         <AlignRight className="w-5 h-5 mx-auto" />
                       </button>
@@ -554,7 +536,7 @@ export default function TxtToPdf() {
           {/* Preview (Optional) */}
           {showPreview && text && (
             <div className="bg-white rounded-xl p-6 border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Preview</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("Preview")}</h3>
               <div 
                 className="border border-gray-300 rounded-lg p-8 max-h-96 overflow-y-auto bg-white shadow-inner"
                 style={{
@@ -581,14 +563,10 @@ export default function TxtToPdf() {
             >
               {converting ? (
                 <>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Creating PDF...
-                </>
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Creating PDF...")}</>
               ) : (
                 <>
-                  <Download className="w-5 h-5" />
-                  Convert to PDF
-                </>
+                  <Download className="w-5 h-5" />{t("Convert to PDF")}</>
               )}
             </button>
           </div>

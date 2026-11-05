@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument } from "pdf-lib";
@@ -7,6 +9,7 @@ import { FileText, Upload, Download, X, Layers } from "lucide-react";
 import { loadPdfjs } from "@/lib/pdfjs-client";
 
 export default function PdfDivideByParts() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState<number>(0);
   const [pagePreviews, setPagePreviews] = useState<string[]>([]);
@@ -23,7 +26,7 @@ export default function PdfDivideByParts() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -33,7 +36,7 @@ export default function PdfDivideByParts() {
       const pdf = await (await loadPdfjs()).getDocument({ data: arrayBuffer }).promise;
       setPdfFile(file);
       setPageCount(pdf.numPages);
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
 
       const previews: string[] = [];
       for (let i = 1; i <= pdf.numPages; i++) {
@@ -51,7 +54,7 @@ export default function PdfDivideByParts() {
       setPagePreviews(previews);
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Failed to load PDF");
+      showToast(t("Failed to load PDF"));
     } finally {
       setLoading(false);
     }
@@ -96,7 +99,7 @@ export default function PdfDivideByParts() {
       showToast(`Successfully split into ${partCount} part(s)`);
     } catch (error) {
       console.error("Error splitting PDF:", error);
-      showToast("Error splitting PDF");
+      showToast(t("Error splitting PDF"));
     } finally {
       setSplitting(false);
     }
@@ -121,12 +124,7 @@ export default function PdfDivideByParts() {
       <div className="w-full max-w-6xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Split PDF into <span className="text-orange-500">Parts</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Divide your PDF into a specific number of equal parts
-          </p>
+          <ToolHeading toolId="split-pdf-into-parts" />
         </div>
 
         {/* Upload Area */}
@@ -139,12 +137,8 @@ export default function PdfDivideByParts() {
               <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
             </div>
             <div className="text-center">
-              <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                Click to upload or drag & drop
-              </span>
-              <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                PDF files only • Single file
-              </span>
+              <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+              <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only • Single file")}</span>
             </div>
             <input
               id="pdf-upload"
@@ -161,7 +155,7 @@ export default function PdfDivideByParts() {
         {loading && (
           <div className="text-center py-12">
             <div className="inline-block w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-4" />
-            <p className="text-gray-600">Loading PDF...</p>
+            <p className="text-gray-600">{t("Loading PDF...")}</p>
           </div>
         )}
 
@@ -194,7 +188,7 @@ export default function PdfDivideByParts() {
                 >
                   <img
                     src={src}
-                    alt={`Page ${i + 1}`}
+                    alt={t("Page {count}", { count: i + 1 })}
                     className="w-full object-cover"
                   />
                   <div className="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded">
@@ -230,9 +224,7 @@ export default function PdfDivideByParts() {
               <button
                 onClick={resetAll}
                 className="flex-1 px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all hover:shadow-sm active:scale-95"
-              >
-                Upload New PDF
-              </button>
+              >{t("Upload New PDF")}</button>
 
               <button
                 onClick={handleSplit}
@@ -241,14 +233,10 @@ export default function PdfDivideByParts() {
               >
                 {splitting ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Splitting...
-                  </>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Splitting...")}</>
                 ) : (
                   <>
-                    <Download className="w-5 h-5" />
-                    Split & Download
-                  </>
+                    <Download className="w-5 h-5" />{t("Split & Download")}</>
                 )}
               </button>
             </div>

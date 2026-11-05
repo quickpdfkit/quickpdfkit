@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument, rgb } from "pdf-lib";
@@ -15,6 +17,7 @@ interface FileItem {
 }
 
 export default function PdfImageMerger() {
+  const t = useT();
   const [files, setFiles] = useState<FileItem[]>([]);
   const [outputFilename, setOutputFilename] = useState("merged-document.pdf");
   const [loading, setLoading] = useState(false);
@@ -77,12 +80,12 @@ export default function PdfImageMerger() {
 
   const removeFile = (id: string) => {
     setFiles((prev) => prev.filter((f) => f.id !== id));
-    showToast("File removed");
+    showToast(t("File removed"));
   };
 
   const clearAll = () => {
     setFiles([]);
-    showToast("All files cleared");
+    showToast(t("All files cleared"));
   };
 
   const updatePageRange = (id: string, range: string) => {
@@ -242,12 +245,7 @@ export default function PdfImageMerger() {
       <div className="w-full max-w-4xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Merge PDFs & <span className="text-orange-500">Images</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Combine PDFs and images into a single PDF document
-          </p>
+          <ToolHeading toolId="merge-pdf-and-images" />
         </div>
 
         {/* Upload Area */}
@@ -266,9 +264,7 @@ export default function PdfImageMerger() {
               <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
             </div>
             <div className="text-center">
-              <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                Click to upload or drag & drop
-              </span>
+              <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
               <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
                 PDF, JPG, PNG, WEBP • Multiple files supported
               </span>
@@ -326,7 +322,7 @@ export default function PdfImageMerger() {
                       <div className="flex-shrink-0">
                         <img
                           src={f.preview}
-                          alt="Preview"
+                          alt={t("Preview")}
                           className="w-12 h-12 object-cover rounded-lg border border-gray-200"
                         />
                       </div>
@@ -367,7 +363,7 @@ export default function PdfImageMerger() {
                             type="text"
                             value={f.pageRange}
                             onChange={(e) => updatePageRange(f.id, e.target.value)}
-                            placeholder="e.g., 1-3, 5, 7-9 (leave empty for all)"
+                            placeholder={t("e.g., 1-3, 5, 7-9 (leave empty for all)")}
                             className="w-full px-3 py-2 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-400 border border-gray-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all"
                           />
                         </div>
@@ -388,9 +384,7 @@ export default function PdfImageMerger() {
 
             {/* Output Settings */}
             <div className="pt-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Output Filename
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">{t("Output Filename")}</label>
               <input
                 type="text"
                 value={outputFilename}
@@ -405,9 +399,7 @@ export default function PdfImageMerger() {
               <button
                 onClick={clearAll}
                 className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all hover:shadow-sm active:scale-95"
-              >
-                Clear All
-              </button>
+              >{t("Clear All")}</button>
 
               <button
                 onClick={mergePdfsAndImages}
@@ -416,9 +408,7 @@ export default function PdfImageMerger() {
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Merging...
-                  </span>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Merging...")}</span>
                 ) : (
                   "Merge to PDF"
                 )}

@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument } from "pdf-lib";
@@ -17,6 +19,7 @@ interface CompressionLevel {
 }
 
 export default function PdfCompressor() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [compressing, setCompressing] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
@@ -69,14 +72,14 @@ export default function PdfCompressor() {
 
   const handleFileUpload = (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
     setPdfFile(file);
     setOriginalSize(file.size);
     setCompressedSize(0);
-    showToast("PDF loaded successfully");
+    showToast(t("PDF loaded successfully"));
   };
 
   const compressPdfAdvanced = async () => {
@@ -204,12 +207,7 @@ export default function PdfCompressor() {
       <div className="w-full max-w-4xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-           Hyper Compress <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Optimize your PDF files by removing unnecessary data
-          </p>
+          <ToolHeading toolId="hyper-compress-pdf" />
         </div>
 
         {/* Upload Area */}
@@ -230,12 +228,8 @@ export default function PdfCompressor() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only • Maximum file size: 100MB
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only • Maximum file size: 100MB")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -269,9 +263,7 @@ export default function PdfCompressor() {
                 <button
                   onClick={resetAll}
                   className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-                >
-                  Change File
-                </button>
+                >{t("Change File")}</button>
               </div>
 
               {/* Size Comparison */}
@@ -379,9 +371,7 @@ export default function PdfCompressor() {
             {compressing && (
               <div className="bg-white rounded-xl p-6 border border-gray-200">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700">
-                    Compressing...
-                  </span>
+                  <span className="text-sm font-medium text-gray-700">{t("Compressing...")}</span>
                   <span className="text-sm font-semibold text-orange-600">
                     {compressionProgress}%
                   </span>
@@ -401,9 +391,7 @@ export default function PdfCompressor() {
                 onClick={resetAll}
                 disabled={compressing}
                 className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all hover:shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Cancel
-              </button>
+              >{t("Cancel")}</button>
 
               <button
                 onClick={compressPdfAdvanced}
@@ -433,9 +421,7 @@ export default function PdfCompressor() {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm text-blue-900 font-medium mb-1">
-                    How it works
-                  </p>
+                  <p className="text-sm text-blue-900 font-medium mb-1">{t("How it works")}</p>
                   <p className="text-sm text-blue-700">
                     {toolHowToById["hyper-compress-pdf"].steps[0].text}
                   </p>

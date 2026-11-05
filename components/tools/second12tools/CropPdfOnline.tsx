@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef, useEffect } from "react";
 import { PDFDocument } from "pdf-lib";
@@ -33,6 +35,7 @@ interface PageCrops {
 }
 
 export default function CropPdfOnline() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -98,13 +101,13 @@ export default function CropPdfOnline() {
       }
     } catch (error) {
       console.error("Error loading page:", error);
-      showToast("Error loading page");
+      showToast(t("Error loading page"));
     }
   };
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -118,10 +121,10 @@ export default function CropPdfOnline() {
       setTotalPages(pdf.numPages);
       setCurrentPage(1);
       
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
     } finally {
       setLoading(false);
     }
@@ -405,7 +408,7 @@ export default function CropPdfOnline() {
 
   const resetCropArea = () => {
     setCropArea(null);
-    showToast("Crop area reset");
+    showToast(t("Crop area reset"));
   };
 
   const setFullPageCrop = () => {
@@ -415,12 +418,12 @@ export default function CropPdfOnline() {
       width: canvasSize.width,
       height: canvasSize.height,
     });
-    showToast("Full page selected");
+    showToast(t("Full page selected"));
   };
 
   const applyCrop = () => {
     if (!cropArea) {
-      showToast("Please select a crop area first");
+      showToast(t("Please select a crop area first"));
       return;
     }
 
@@ -444,14 +447,14 @@ export default function CropPdfOnline() {
 
   const saveCroppedPdf = async () => {
     if (!pdfFile || Object.keys(pageCrops).length === 0) {
-      showToast("Please apply crop to at least one page");
+      showToast(t("Please apply crop to at least one page"));
       return;
     }
 
     setCropping(true);
 
     try {
-      showToast("Cropping PDF...");
+      showToast(t("Cropping PDF..."));
 
       const arrayBuffer = await pdfFile.arrayBuffer();
       const pdfLibDoc = await PDFDocument.load(arrayBuffer);
@@ -484,10 +487,10 @@ export default function CropPdfOnline() {
       const fileName = pdfFile.name.replace(".pdf", "");
       saveAs(blob, `${fileName}_cropped.pdf`);
 
-      showToast("PDF cropped successfully!");
+      showToast(t("PDF cropped successfully!"));
     } catch (error) {
       console.error("Error cropping PDF:", error);
-      showToast("Error cropping PDF");
+      showToast(t("Error cropping PDF"));
     } finally {
       setCropping(false);
     }
@@ -523,12 +526,7 @@ export default function CropPdfOnline() {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
         
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Crop <span className="text-orange-500">PDF Online</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Trim and crop your PDF pages to focus on what matters
-          </p>
+          <ToolHeading toolId="crop-pdf-online" />
         </div>
 
         {/* Upload Area */}
@@ -548,12 +546,8 @@ export default function CropPdfOnline() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -583,15 +577,13 @@ export default function CropPdfOnline() {
               <button
                 onClick={resetAll}
                 className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-              >
-                Change File
-              </button>
+              >{t("Change File")}</button>
             </div>
 
             {loading && (
               <div className="text-center py-12">
                 <div className="inline-block w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-4" />
-                <p className="text-gray-600">Loading PDF...</p>
+                <p className="text-gray-600">{t("Loading PDF...")}</p>
               </div>
             )}
 
@@ -606,17 +598,13 @@ export default function CropPdfOnline() {
                         className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"
                         title="Select full page"
                       >
-                        <Maximize2 className="w-4 h-4" />
-                        Full Page
-                      </button>
+                        <Maximize2 className="w-4 h-4" />{t("Full Page")}</button>
                       <button
                         onClick={resetCropArea}
                         className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"
                         title="Reset crop"
                       >
-                        <RefreshCw className="w-4 h-4" />
-                        Reset
-                      </button>
+                        <RefreshCw className="w-4 h-4" />{t("Reset")}</button>
                     </div>
 
                     <div className="flex items-center gap-3">
@@ -627,16 +615,14 @@ export default function CropPdfOnline() {
                           onChange={(e) => setApplyToAll(e.target.checked)}
                           className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-400"
                         />
-                        <span className="text-sm text-gray-700">Apply to all pages</span>
+                        <span className="text-sm text-gray-700">{t("Apply to all pages")}</span>
                       </label>
                       <button
                         onClick={applyCrop}
                         disabled={!cropArea}
                         className="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
                       >
-                        <Check className="w-4 h-4" />
-                        Apply Crop
-                      </button>
+                        <Check className="w-4 h-4" />{t("Apply Crop")}</button>
                     </div>
                   </div>
                 </div>
@@ -727,7 +713,7 @@ export default function CropPdfOnline() {
 
                   <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
                     <p className="text-sm text-blue-800">
-                      <strong>Tip:</strong> Use zoom controls to see details. Drag to create crop area. Use handles to resize. Click and drag inside to move.
+                      <strong>{t("Tip:")}</strong> Use zoom controls to see details. Drag to create crop area. Use handles to resize. Click and drag inside to move.
                     </p>
                   </div>
                 </div>
@@ -737,9 +723,7 @@ export default function CropPdfOnline() {
                   <button
                     onClick={resetAll}
                     className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-                  >
-                    Cancel
-                  </button>
+                  >{t("Cancel")}</button>
                   <button
                     onClick={saveCroppedPdf}
                     disabled={cropping || getCroppedPagesCount() === 0}
@@ -747,9 +731,7 @@ export default function CropPdfOnline() {
                   >
                     {cropping ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Cropping...
-                      </>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Cropping...")}</>
                     ) : (
                       <>
                         <Download className="w-5 h-5" />

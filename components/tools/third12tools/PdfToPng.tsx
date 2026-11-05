@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef, useEffect } from "react";
 import JSZip from "jszip";
@@ -28,6 +30,7 @@ type ImageFormat = "png" | "jpg" | "webp";
 type ImageQuality = "low" | "medium" | "high";
 
 export default function PdfToPng() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -74,7 +77,7 @@ export default function PdfToPng() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -87,7 +90,7 @@ export default function PdfToPng() {
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
       
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
 
       // Load all page previews using the same logic as AddPageNumbers
       const previews: PagePreview[] = [];
@@ -111,7 +114,7 @@ export default function PdfToPng() {
 
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
     } finally {
       setLoading(false);
     }
@@ -171,7 +174,7 @@ export default function PdfToPng() {
       showToast(`Page ${pageNumber} downloaded`);
     } catch (error) {
       console.error("Error converting page:", error);
-      showToast("Error converting page");
+      showToast(t("Error converting page"));
     } finally {
       setConverting(false);
     }
@@ -181,7 +184,7 @@ export default function PdfToPng() {
     const selectedPages = pages.filter(page => page.selected);
     
     if (selectedPages.length === 0) {
-      showToast("Please select at least one page");
+      showToast(t("Please select at least one page"));
       return;
     }
 
@@ -193,7 +196,7 @@ export default function PdfToPng() {
         await downloadSingleImage(selectedPages[0].pageNumber);
       } else {
         // Download multiple images as ZIP
-        showToast("Creating ZIP file...");
+        showToast(t("Creating ZIP file..."));
         
         const zip = new JSZip();
         const fileName = pdfFile?.name.replace(".pdf", "") || "document";
@@ -213,7 +216,7 @@ export default function PdfToPng() {
       }
     } catch (error) {
       console.error("Error converting pages:", error);
-      showToast("Error converting pages");
+      showToast(t("Error converting pages"));
     } finally {
       setConverting(false);
     }
@@ -254,12 +257,7 @@ export default function PdfToPng() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <ImageIcon className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            PDF to <span className="text-orange-500">PNG</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Convert PDF pages to high-quality images
-          </p>
+          <ToolHeading toolId="pdf-to-png" />
         </div>
 
         {/* Upload Area */}
@@ -279,12 +277,8 @@ export default function PdfToPng() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -314,15 +308,13 @@ export default function PdfToPng() {
               <button
                 onClick={resetAll}
                 className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-              >
-                Change File
-              </button>
+              >{t("Change File")}</button>
             </div>
 
             {loading && (
               <div className="text-center py-12">
                 <div className="inline-block w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-4" />
-                <p className="text-gray-600">Loading pages...</p>
+                <p className="text-gray-600">{t("Loading pages...")}</p>
               </div>
             )}
 
@@ -330,14 +322,12 @@ export default function PdfToPng() {
               <>
                 {/* Settings Panel */}
                 <div className="bg-white rounded-xl p-6 border border-gray-200">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Image Settings</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("Image Settings")}</h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* Image Format */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Format
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Format")}</label>
                       <select
                         value={imageFormat}
                         onChange={(e) => setImageFormat(e.target.value as ImageFormat)}
@@ -351,25 +341,21 @@ export default function PdfToPng() {
 
                     {/* Quality */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Quality
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Quality")}</label>
                       <select
                         value={imageQuality}
                         onChange={(e) => setImageQuality(e.target.value as ImageQuality)}
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                       >
-                        <option value="low">Low (Faster)</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High (Best)</option>
+                        <option value="low">{t("Low (Faster)")}</option>
+                        <option value="medium">{t("Medium")}</option>
+                        <option value="high">{t("High (Best)")}</option>
                       </select>
                     </div>
 
                     {/* Selected Count */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Selected
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Selected")}</label>
                       <div className="flex items-center gap-2 h-10">
                         <span className="text-2xl font-bold text-orange-500">
                           {getSelectedCount()}
@@ -385,9 +371,7 @@ export default function PdfToPng() {
                 {/* Pages Grid/List */}
                 <div className="bg-white rounded-xl p-6 border border-gray-200">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      Select Pages
-                    </h3>
+                    <h3 className="text-lg font-semibold text-gray-900">{t("Select Pages")}</h3>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={toggleSelectAll}
@@ -395,14 +379,10 @@ export default function PdfToPng() {
                       >
                         {selectAll ? (
                           <>
-                            <X className="w-4 h-4" />
-                            Deselect All
-                          </>
+                            <X className="w-4 h-4" />{t("Deselect All")}</>
                         ) : (
                           <>
-                            <Check className="w-4 h-4" />
-                            Select All
-                          </>
+                            <Check className="w-4 h-4" />{t("Select All")}</>
                         )}
                       </button>
                       <button
@@ -511,13 +491,11 @@ export default function PdfToPng() {
                       </div>
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm text-blue-900 font-medium mb-1">
-                        Conversion Info
-                      </p>
+                      <p className="text-sm text-blue-900 font-medium mb-1">{t("Conversion Info")}</p>
                       <ul className="text-sm text-blue-700 space-y-1">
-                        <li>• Click pages to select/deselect for conversion</li>
-                        <li>• Multiple pages will be downloaded as a ZIP file</li>
-                        <li>• Higher quality produces larger file sizes</li>
+                        <li>{t("• Click pages to select/deselect for conversion")}</li>
+                        <li>{t("• Multiple pages will be downloaded as a ZIP file")}</li>
+                        <li>{t("• Higher quality produces larger file sizes")}</li>
                       </ul>
                     </div>
                   </div>
@@ -528,9 +506,7 @@ export default function PdfToPng() {
                   <button
                     onClick={resetAll}
                     className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-                  >
-                    Cancel
-                  </button>
+                  >{t("Cancel")}</button>
                   
                   {getSelectedCount() > 1 && (
                     <button
@@ -540,9 +516,7 @@ export default function PdfToPng() {
                     >
                       {converting ? (
                         <>
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          Converting...
-                        </>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Converting...")}</>
                       ) : (
                         <>
                           <Archive className="w-5 h-5" />
@@ -560,14 +534,10 @@ export default function PdfToPng() {
                     >
                       {converting ? (
                         <>
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          Converting...
-                        </>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Converting...")}</>
                       ) : (
                         <>
-                          <Download className="w-5 h-5" />
-                          Download Image
-                        </>
+                          <Download className="w-5 h-5" />{t("Download Image")}</>
                       )}
                     </button>
                   )}

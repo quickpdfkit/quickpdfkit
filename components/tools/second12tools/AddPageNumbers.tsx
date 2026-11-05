@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef, useEffect } from "react";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
@@ -7,6 +9,7 @@ import { Upload, FileText, Download, X, AlignCenter, Eye } from "lucide-react";
 import { loadPdfjs } from "@/lib/pdfjs-client";
 
 export default function AddPageNumbers() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pagePreviews, setPagePreviews] = useState<string[]>([]);
   const [pageCount, setPageCount] = useState(0);
@@ -23,7 +26,7 @@ export default function AddPageNumbers() {
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
     setLoading(true);
@@ -135,12 +138,7 @@ export default function AddPageNumbers() {
       <div className="w-full max-w-6xl relative z-10">
         {/* Header */}
         <div className="text-center mb-10">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            Add <span className="text-orange-500">Page Numbers</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Preview and insert page numbers anywhere in your PDF
-          </p>
+          <ToolHeading toolId="add-page-number-to-pdf" />
         </div>
 
         {/* Upload */}
@@ -153,12 +151,8 @@ export default function AddPageNumbers() {
               <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
             </div>
             <div className="text-center">
-              <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                Click to upload or drag & drop
-              </span>
-              <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                PDF files only
-              </span>
+              <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+              <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
             </div>
             <input
               id="pdf-upload"
@@ -208,7 +202,7 @@ export default function AddPageNumbers() {
                 >
                   <img
                     src={src}
-                    alt={`Page ${i + 1}`}
+                    alt={t("Page {count}", { count: i + 1 })}
                     className="w-full object-cover"
                   />
                   <div className="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded">
@@ -243,9 +237,7 @@ export default function AddPageNumbers() {
               <button
                 onClick={resetAll}
                 className="flex-1 px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all hover:shadow-sm active:scale-95"
-              >
-                Upload New PDF
-              </button>
+              >{t("Upload New PDF")}</button>
 
               <button
                 onClick={addPageNumbers}

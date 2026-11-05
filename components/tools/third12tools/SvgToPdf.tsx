@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument, rgb } from "pdf-lib";
@@ -28,6 +30,7 @@ type PageSize = "A4" | "Letter" | "Legal" | "A3" | "Custom";
 type Orientation = "portrait" | "landscape";
 
 export default function SvgToPdf() {
+  const t = useT();
   const [images, setImages] = useState<ImageFile[]>([]);
   const [converting, setConverting] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
@@ -70,7 +73,7 @@ export default function SvgToPdf() {
     );
 
     if (validFiles.length === 0) {
-      showToast("Please upload valid image files");
+      showToast(t("Please upload valid image files"));
       return;
     }
 
@@ -93,7 +96,7 @@ export default function SvgToPdf() {
       }
       return prev.filter(img => img.id !== id);
     });
-    showToast("Image removed");
+    showToast(t("Image removed"));
   };
 
   const rotateImage = (id: string) => {
@@ -167,14 +170,14 @@ export default function SvgToPdf() {
 
   const convertToPdf = async () => {
     if (images.length === 0) {
-      showToast("Please add at least one image");
+      showToast(t("Please add at least one image"));
       return;
     }
 
     setConverting(true);
 
     try {
-      showToast("Creating PDF...");
+      showToast(t("Creating PDF..."));
 
       const pdfDoc = await PDFDocument.create();
       const pageDimensions = getPageDimensions();
@@ -259,7 +262,7 @@ export default function SvgToPdf() {
       });
 
       saveAs(blob, `images_${Date.now()}.pdf`);
-      showToast("PDF created successfully!");
+      showToast(t("PDF created successfully!"));
 
       // Reset after short delay
       setTimeout(() => {
@@ -268,7 +271,7 @@ export default function SvgToPdf() {
 
     } catch (error) {
       console.error("Error creating PDF:", error);
-      showToast("Error creating PDF. Please try again.");
+      showToast(t("Error creating PDF. Please try again."));
     } finally {
       setConverting(false);
     }
@@ -287,7 +290,7 @@ export default function SvgToPdf() {
     
     if (confirm(`Remove all ${images.length} images?`)) {
       resetAll();
-      showToast("All images removed");
+      showToast(t("All images removed"));
     }
   };
 
@@ -305,12 +308,7 @@ export default function SvgToPdf() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <FileImage className="w-8 h-8 text-orange-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            SVG to <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Convert SVG image to PDF documents
-          </p>
+          <ToolHeading toolId="svg-to-pdf-converter" />
         </div>
 
         {/* Upload Area */}
@@ -329,9 +327,7 @@ export default function SvgToPdf() {
               <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
             </div>
             <div className="text-center">
-              <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                Click to upload or drag & drop
-              </span>
+              <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
               <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
                 SVG files supported
               </span>
@@ -352,47 +348,41 @@ export default function SvgToPdf() {
           <div className="space-y-6">
             {/* Settings Panel */}
             <div className="bg-white rounded-xl p-6 border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">PDF Settings</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("PDF Settings")}</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Page Size */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Page Size
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t("Page Size")}</label>
                   <select
                     value={pageSize}
                     onChange={(e) => setPageSize(e.target.value as PageSize)}
                     className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                   >
                     <option value="A4">A4 (210 × 297 mm)</option>
-                    <option value="Letter">Letter (8.5 × 11 in)</option>
-                    <option value="Legal">Legal (8.5 × 14 in)</option>
+                    <option value="Letter">{t("Letter (8.5 × 11 in)")}</option>
+                    <option value="Legal">{t("Legal (8.5 × 14 in)")}</option>
                     <option value="A3">A3 (297 × 420 mm)</option>
-                    <option value="Custom">Custom</option>
+                    <option value="Custom">{t("Custom")}</option>
                   </select>
                 </div>
 
                 {/* Orientation */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Orientation
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t("Orientation")}</label>
                   <select
                     value={orientation}
                     onChange={(e) => setOrientation(e.target.value as Orientation)}
                     className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                   >
-                    <option value="portrait">Portrait</option>
-                    <option value="landscape">Landscape</option>
+                    <option value="portrait">{t("Portrait")}</option>
+                    <option value="landscape">{t("Landscape")}</option>
                   </select>
                 </div>
 
                 {/* Image Count */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Total Images
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t("Total Images")}</label>
                   <div className="flex items-center gap-2 h-10">
                     <span className="text-2xl font-bold text-orange-500">{images.length}</span>
                     <span className="text-sm text-gray-600">image{images.length !== 1 ? 's' : ''}</span>
@@ -404,9 +394,7 @@ export default function SvgToPdf() {
               {pageSize === "Custom" && (
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Width (px)
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t("Width (px)")}</label>
                     <input
                       type="number"
                       value={customWidth}
@@ -415,9 +403,7 @@ export default function SvgToPdf() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Height (px)
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t("Height (px)")}</label>
                     <input
                       type="number"
                       value={customHeight}
@@ -440,9 +426,7 @@ export default function SvgToPdf() {
                     htmlFor="add-more"
                     className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all cursor-pointer flex items-center gap-2 text-sm"
                   >
-                    <Plus className="w-4 h-4" />
-                    Add More
-                  </label>
+                    <Plus className="w-4 h-4" />{t("Add More")}</label>
                   <input
                     id="add-more"
                     type="file"
@@ -455,9 +439,7 @@ export default function SvgToPdf() {
                     onClick={clearAll}
                     className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2 text-sm"
                   >
-                    <Trash2 className="w-4 h-4" />
-                    Clear All
-                  </button>
+                    <Trash2 className="w-4 h-4" />{t("Clear All")}</button>
                 </div>
               </div>
 
@@ -542,8 +524,7 @@ export default function SvgToPdf() {
 
               <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
                 <p className="text-sm text-blue-800">
-                  <strong>Tip:</strong> Drag and drop images to reorder them. Each image will become a separate page in the PDF.
-                </p>
+                  <strong>{t("Tip:")}</strong>{t("Drag and drop images to reorder them. Each image will become a separate page in the PDF.")}</p>
               </div>
             </div>
 
@@ -552,9 +533,7 @@ export default function SvgToPdf() {
               <button
                 onClick={resetAll}
                 className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-              >
-                Cancel
-              </button>
+              >{t("Cancel")}</button>
               <button
                 onClick={convertToPdf}
                 disabled={converting || images.length === 0}
@@ -562,9 +541,7 @@ export default function SvgToPdf() {
               >
                 {converting ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Creating PDF...
-                  </>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Creating PDF...")}</>
                 ) : (
                   <>
                     <Download className="w-5 h-5" />

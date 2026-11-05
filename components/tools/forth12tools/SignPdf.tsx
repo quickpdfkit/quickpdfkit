@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef, useEffect } from "react";
 import { PDFDocument, rgb } from "pdf-lib";
@@ -39,6 +41,7 @@ interface SignaturePosition {
 type Mode = "place" | "draw" | "type" | "select";
 
 export default function SignPdf() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [pdfLibDoc, setPdfLibDoc] = useState<any>(null);
@@ -104,13 +107,13 @@ export default function SignPdf() {
       setPageImage(canvas.toDataURL());
     } catch (error) {
       console.error("Error loading page:", error);
-      showToast("Error loading page");
+      showToast(t("Error loading page"));
     }
   };
 
   const handleFileUpload = async (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
@@ -129,10 +132,10 @@ export default function SignPdf() {
       const pdfLib = await PDFDocument.load(pdfLibBuffer);
       setPdfLibDoc(pdfLib);
 
-      showToast(`PDF loaded: ${pdf.numPages} pages`);
+      showToast(t("PDF loaded: {count} pages", { count: pdf.numPages }));
     } catch (error) {
       console.error("Error loading PDF:", error);
-      showToast("Error loading PDF file");
+      showToast(t("Error loading PDF file"));
     } finally {
       setLoading(false);
     }
@@ -284,7 +287,7 @@ export default function SignPdf() {
     setCurrentSignature(signatureData);
     setShowSignaturePad(false);
     setMode("place");
-    showToast("Click on the PDF to place your signature");
+    showToast(t("Click on the PDF to place your signature"));
   };
 
   const handleSignatureImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -301,7 +304,7 @@ export default function SignPdf() {
       const signatureData = event.target?.result as string;
       setCurrentSignature(signatureData);
       setMode("place");
-      showToast("Click on the PDF to place your signature");
+      showToast(t("Click on the PDF to place your signature"));
     };
     reader.readAsDataURL(file);
   };
@@ -331,7 +334,7 @@ export default function SignPdf() {
     setCurrentSignature(signatureData);
     setShowTextInput(false);
     setMode("place");
-    showToast("Click on the PDF to place your signature");
+    showToast(t("Click on the PDF to place your signature"));
   };
 
   const getMousePos = (e: React.MouseEvent<HTMLCanvasElement>): { x: number; y: number } => {
@@ -544,7 +547,7 @@ export default function SignPdf() {
 
     } catch (error) {
       console.error("Error saving PDF:", error);
-      showToast("Error saving PDF. Please try again.");
+      showToast(t("Error saving PDF. Please try again."));
     } finally {
       setSaving(false);
     }
@@ -577,12 +580,7 @@ export default function SignPdf() {
       <div className="w-full max-w-7xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-3 text-gray-900">
-            Sign <span className="text-orange-500">PDF</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Add your signature to PDF documents
-          </p>
+          <ToolHeading toolId="sign-pdf" />
         </div>
 
         {/* Upload Area */}
@@ -602,12 +600,8 @@ export default function SignPdf() {
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -642,9 +636,7 @@ export default function SignPdf() {
                 >
                   {saving ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Saving...
-                    </>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t("Saving...")}</>
                   ) : (
                     <>
                       <Save className="w-4 h-4" />
@@ -655,16 +647,14 @@ export default function SignPdf() {
                 <button
                   onClick={resetAll}
                   className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-                >
-                  Close
-                </button>
+                >{t("Close")}</button>
               </div>
             </div>
 
             {loading && (
               <div className="text-center py-12">
                 <div className="inline-block w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-4" />
-                <p className="text-gray-600">Loading PDF...</p>
+                <p className="text-gray-600">{t("Loading PDF...")}</p>
               </div>
             )}
 
@@ -808,9 +798,7 @@ export default function SignPdf() {
                     disabled={currentPage === 1}
                     className="px-4 py-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm flex items-center gap-2"
                   >
-                    <ChevronLeft className="w-4 h-4" />
-                    Previous
-                  </button>
+                    <ChevronLeft className="w-4 h-4" />{t("Previous")}</button>
 
                   <span className="text-sm text-gray-700 font-medium">
                     Page {currentPage} of {totalPages}
@@ -825,9 +813,7 @@ export default function SignPdf() {
                     onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                     disabled={currentPage === totalPages}
                     className="px-4 py-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm flex items-center gap-2"
-                  >
-                    Next
-                    <ChevronRight className="w-4 h-4" />
+                  >{t("Next")}<ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -868,16 +854,12 @@ export default function SignPdf() {
                 onClick={clearSignaturePad}
                 className="flex-1 px-4 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all flex items-center justify-center gap-2"
               >
-                <RotateCcw className="w-4 h-4" />
-                Clear
-              </button>
+                <RotateCcw className="w-4 h-4" />{t("Clear")}</button>
               <button
                 onClick={saveDrawnSignature}
                 className="flex-1 px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 font-medium transition-all flex items-center justify-center gap-2"
               >
-                <Check className="w-4 h-4" />
-                Use Signature
-              </button>
+                <Check className="w-4 h-4" />{t("Use Signature")}</button>
             </div>
           </div>
         </div>
@@ -918,17 +900,13 @@ export default function SignPdf() {
               <button
                 onClick={() => setShowTextInput(false)}
                 className="flex-1 px-4 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all"
-              >
-                Cancel
-              </button>
+              >{t("Cancel")}</button>
               <button
                 onClick={createTextSignature}
                 disabled={!signatureText.trim()}
                 className="flex-1 px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all flex items-center justify-center gap-2"
               >
-                <Check className="w-4 h-4" />
-                Use Signature
-              </button>
+                <Check className="w-4 h-4" />{t("Use Signature")}</button>
             </div>
           </div>
         </div>

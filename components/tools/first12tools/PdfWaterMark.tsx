@@ -1,4 +1,6 @@
 "use client";
+import { useT } from "@/components/i18n/I18nProvider";
+import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument, rgb, degrees } from "pdf-lib";
@@ -13,6 +15,7 @@ import {
 } from "lucide-react";
 
 export default function PdfWatermark() {
+  const t = useT();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [processing, setProcessing] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
@@ -43,12 +46,12 @@ export default function PdfWatermark() {
 
   const handleFileUpload = (file: File | null) => {
     if (!file || file.type !== "application/pdf") {
-      showToast("Please upload a valid PDF file");
+      showToast(t("Please upload a valid PDF file"));
       return;
     }
 
     setPdfFile(file);
-    showToast("PDF loaded successfully");
+    showToast(t("PDF loaded successfully"));
   };
 
   const handleImageUpload = (file: File | null) => {
@@ -236,12 +239,7 @@ const blob = new Blob([safeBytes], { type: "application/pdf" });
       <div className="w-full max-w-4xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 text-gray-900">
-            PDF <span className="text-orange-500">Watermark</span>
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Add text or image watermarks to your PDF documents
-          </p>
+          <ToolHeading toolId="add-watermark-to-pdf" />
         </div>
 
         {/* Upload Area */}
@@ -262,12 +260,8 @@ const blob = new Blob([safeBytes], { type: "application/pdf" });
                 <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
               </div>
               <div className="text-center">
-                <span className="text-gray-900 text-base sm:text-lg font-medium block">
-                  Click to upload or drag & drop
-                </span>
-                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">
-                  PDF files only • Maximum file size: 100MB
-                </span>
+                <span className="text-gray-900 text-base sm:text-lg font-medium block">{t("Click to upload or drag & drop")}</span>
+                <span className="text-gray-500 text-xs sm:text-sm mt-1 block">{t("PDF files only • Maximum file size: 100MB")}</span>
               </div>
               <input
                 id="pdf-upload"
@@ -303,9 +297,7 @@ const blob = new Blob([safeBytes], { type: "application/pdf" });
                 <button
                   onClick={resetAll}
                   className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all"
-                >
-                  Change File
-                </button>
+                >{t("Change File")}</button>
               </div>
             </div>
 
@@ -382,9 +374,7 @@ const blob = new Blob([safeBytes], { type: "application/pdf" });
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Text Color
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Text Color")}</label>
                       <div className="flex items-center gap-3">
                         <input
                           type="color"
@@ -435,9 +425,7 @@ const blob = new Blob([safeBytes], { type: "application/pdf" });
             {/* Image Watermark Options */}
             {watermarkType === "image" && (
               <div className="bg-white rounded-xl p-6 border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-6">
-                  Image Settings
-                </h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-6">{t("Image Settings")}</h3>
 
                 <div className="space-y-4">
                   {!watermarkImage ? (
@@ -523,9 +511,7 @@ const blob = new Blob([safeBytes], { type: "application/pdf" });
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Position
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">{t("Position")}</label>
                   <div className="space-y-2">
                     {[
                       {
@@ -595,9 +581,7 @@ const blob = new Blob([safeBytes], { type: "application/pdf" });
                 onClick={resetAll}
                 disabled={processing}
                 className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium transition-all hover:shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Cancel
-              </button>
+              >{t("Cancel")}</button>
 
               <button
                 onClick={addWatermarkToPdf}
