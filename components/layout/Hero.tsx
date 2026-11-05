@@ -73,9 +73,9 @@ export default function Hero() {
         {/* Stats */}
         <div className="mt-20 hidden grid grid-cols-2 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
           {[
-            { label: "Tools Available", value: "15+" },
-            { label: "Files Processed", value: "1M+" },
-            { label: "Happy Users", value: "500K+" },
+            { label: "Free Tools", value: "48" },
+            { label: "In-Browser", value: "100%" },
+            { label: "Signup Needed", value: "No" },
           ].map((stat, index) => (
             <div
               key={index}
