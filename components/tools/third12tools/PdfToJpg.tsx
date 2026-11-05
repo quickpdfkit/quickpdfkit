@@ -16,16 +16,7 @@ import {
   List,
 } from "lucide-react";
 
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
-
-// Load pdf.js worker only in browser
-if (typeof window !== "undefined") {
-  const workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-  ).toString();
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-}
+import { loadPdfjs } from "@/lib/pdfjs-client";
 
 interface PagePreview {
   pageNumber: number;
@@ -44,7 +35,7 @@ export default function PdfToJpg() {
   const [loading, setLoading] = useState(false);
   const [converting, setConverting] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
-  const [imageFormat, setImageFormat] = useState<ImageFormat>("png");
+  const [imageFormat, setImageFormat] = useState<ImageFormat>("jpg");
   const [imageQuality, setImageQuality] = useState<ImageQuality>("high");
   const [scale, setScale] = useState(2);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -92,7 +83,7 @@ export default function PdfToJpg() {
 
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await (await loadPdfjs()).getDocument({ data: arrayBuffer }).promise;
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
       

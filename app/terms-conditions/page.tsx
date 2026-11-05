@@ -1,36 +1,28 @@
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
-import TermsAndConditions from '@/components/pages/TermsAndConditions'
-import React from 'react'
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import TermsAndConditions from "@/components/pages/TermsAndConditions";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: {
-    default: "Terms and Conditions - Fix PDF Tools",
-    template: "%s | Fix PDF Tools"
-  },
-  description: "Read the Terms and Conditions of Fix PDF Tools to understand the rules, responsibilities, and guidelines for using our 48+ free online Fix PDF Tools safely and responsibly.",
+export const metadata = pageMetadata({
+  title: "Terms and Conditions",
+  description:
+    "Terms and conditions for using QuickPDFKit, the free in-browser toolkit for converting, editing, and protecting PDFs.",
+  path: "/terms-conditions",
   keywords: [
-    "Fix PDF Tools terms and conditions",
-    "Fix PDF Tools usage rules",
-    "online Fix PDF Tools policy",
-    "Fix PDF Tools guidelines",
-    "PDF editor terms",
-    "PDF converter terms",
-    "website terms",
-    "PDF services rules",
-    "Fix PDF Tools legal",
-    "user agreement"
-  ]
-}
+    "QuickPDFKit terms",
+    "PDF tools terms of use",
+    "QuickPDFKit legal",
+  ],
+});
 
 const page = () => {
   return (
     <div>
-      <Header/>
-      <TermsAndConditions/>
-      <Footer/>
+      <Header />
+      <TermsAndConditions />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

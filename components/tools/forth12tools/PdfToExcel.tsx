@@ -18,19 +18,7 @@ import {
 } from "lucide-react";
 
 
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import { GlobalWorkerOptions } from "pdfjs-dist/build/pdf";
-GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.394/pdf.worker.min.js";
-
-
-if (typeof window !== "undefined") {
-  const workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-  ).toString();
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-}
-
+import { loadPdfjs } from "@/lib/pdfjs-client";
 
 interface PageData {
   pageNumber: number;
@@ -149,7 +137,7 @@ export default function PdfToExcel() {
 
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await (await loadPdfjs()).getDocument({ data: arrayBuffer }).promise;
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
       
@@ -575,7 +563,7 @@ export default function PdfToExcel() {
                         <li>• Check the preview to verify data structure</li>
                         <li>• Each page will become a separate sheet in Excel</li>
                         <li>• You may need to clean up the data after conversion</li>
-                        <li>• For complex tables, consider using professional Fix PDF Tools</li>
+                        <li>• For complex tables, consider using professional spreadsheet software</li>
                       </ul>
                     </div>
                   </div>

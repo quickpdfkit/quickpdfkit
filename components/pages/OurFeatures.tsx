@@ -11,7 +11,7 @@ export default function OurFeatures() {
         </>
       ),
       description:
-        "Not so computer-savvy? No problem. Even if it’s your first time using iLovePDF, we made it extremely simple. Our interface is user friendly. Our tools know how to do their job. So you shouldn’t encounter any setbacks.",
+        "Not so computer-savvy? No problem. Even if it’s your first time using QuickPDFKit, we made it extremely simple. Our interface is user friendly. Our tools know how to do their job. So you shouldn’t encounter any setbacks.",
       image: "/img/feature1.svg",
       imageAlt: "Fast processing",
     },
@@ -33,7 +33,7 @@ export default function OurFeatures() {
         </>
       ),
       description:
-        "Sometimes, a little extra makes all the difference. Upgrade your iLovePDF experience to boost your document productivity—manage your own team and share default actions, add watermarks with your corporate logo, or customize page number formats. Take our tools to the next level by processing larger files, handling more documents at once, and enjoying an ad-free workspace with unlimited access to all our services.",
+        "Sometimes, a little extra makes all the difference. Use QuickPDFKit to boost your document productivity—organize files, add watermarks, and customize page numbers. Process documents in your browser with free access to the full toolkit.",
       image: "/img/feature3.png",
       imageAlt: "All tools in one",
     },
@@ -42,6 +42,9 @@ export default function OurFeatures() {
   return (
     <section className="py-32 px-4  bg-gradient-to-br from-orange-50 via-white to-gray-50">
       <div className="max-w-7xl mx-auto space-y-24">
+        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 text-center">
+          QuickPDFKit <span className="text-orange-500">Features</span>
+        </h1>
         {features.map((feature, index) => (
           <div
             key={index}

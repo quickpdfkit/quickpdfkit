@@ -4,15 +4,7 @@ import { useState, useRef } from "react";
 import { PDFDocument } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { FileText, Upload, Download, X, Layers } from "lucide-react";
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
-
-if (typeof window !== "undefined") {
-  const workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-  ).toString();
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-}
+import { loadPdfjs } from "@/lib/pdfjs-client";
 
 export default function PdfDivideByParts() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -38,7 +30,7 @@ export default function PdfDivideByParts() {
     setLoading(true);
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await (await loadPdfjs()).getDocument({ data: arrayBuffer }).promise;
       setPdfFile(file);
       setPageCount(pdf.numPages);
       showToast(`PDF loaded: ${pdf.numPages} pages`);

@@ -6,13 +6,13 @@ export default function BlogPage() {
     {
       title: "Boost Your PDF Productivity",
       description:
-        "Discover how QuickFixPdf can save you time and streamline your workflow. Learn about batch processing, document editing, and advanced features that enhance productivity across teams.",
+        "Discover how QuickPDFKit can save you time and streamline your workflow. Learn about batch processing, document editing, and advanced features that enhance productivity across teams.",
       image: "/img/blog1.png",
     },
     {
       title: "Secure Document Management",
       description:
-        "Security is our top priority. Understand how QuickFixPdf ensures your documents remain private with advanced encryption and secure cloud processing.",
+        "Security is our top priority. Understand how QuickPDFKit keeps documents private by processing files in your browser instead of uploading them.",
       image: "/img/blog2.png",
     },
     {
@@ -24,13 +24,13 @@ export default function BlogPage() {
     {
       title: "Collaborate Seamlessly with Teams",
       description:
-        "QuickFixPdf makes teamwork effortless. Learn how to share templates, watermarks, and actions with your team to boost productivity and consistency.",
+        "QuickPDFKit makes teamwork effortless. Learn how to share templates, watermarks, and actions with your team to boost productivity and consistency.",
       image: "/img/blog4.png",
     },
     {
       title: "Mobile PDF Management",
       description:
-        "Manage PDFs on the go with iLovePDF Mobile. Explore features and tips for editing, converting, and compressing documents on your smartphone.",
+        "Manage PDFs on the go with QuickPDFKit in your mobile browser. Edit, convert, and compress documents on your smartphone.",
       image: "/img/blog5.png",
     },
     {

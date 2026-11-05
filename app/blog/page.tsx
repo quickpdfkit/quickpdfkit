@@ -1,38 +1,31 @@
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
-import BlogPage from '@/components/pages/BlogPage'
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import BlogPage from "@/components/pages/BlogPage";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: {
-    default: "Blog - Fix PDF Tools",
-    template: "%s | Fix PDF Tools"
-  },
-  description: "Read the latest updates, tips, and guides about Fix PDF Tools. Learn how to convert, edit, merge, split, compress, and manage PDFs efficiently with 48+ free online tools.",
+export const metadata = pageMetadata({
+  title: "Blog",
+  description:
+    "Tips and guides from QuickPDFKit on merging, splitting, compressing, and editing PDFs privately in your browser.",
+  path: "/blog",
   keywords: [
-    "Fix PDF Tools blog",
+    "QuickPDFKit blog",
     "PDF tips",
     "PDF guides",
-    "online Fix PDF Tools",
-    "PDF editor",
-    "PDF converter",
     "merge PDF",
-    "split PDF",
     "compress PDF",
-    "PDF updates",
-    "free Fix PDF Tools",
-    "PDF tutorials",
-    "PDF management"
-  ]
-}
+    "edit PDF online",
+  ],
+});
 
 const page = () => {
   return (
     <div>
-      <Header/>
-      <BlogPage/>
-      <Footer/>
+      <Header />
+      <BlogPage />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
           </h1>
           <p className="text-black text-base sm:text-lg">
             Your privacy is important to us. This Privacy Policy explains how
-            QuickFixPdf collects, uses, and protects your personal information
+            QuickPDFKit collects, uses, and protects your personal information
             when you use our services.
           </p>
         </div>
@@ -30,7 +30,7 @@ export default function PrivacyPolicy() {
             Introduction
           </h2>
           <p className="text-gray-700 text-sm sm:text-base">
-            QuickFixPdf is committed to protecting your privacy. By using our
+            QuickPDFKit is committed to protecting your privacy. By using our
             services, you agree to the collection and use of information in
             accordance with this policy. We aim to be transparent and provide
             you with control over your data.
@@ -149,10 +149,10 @@ export default function PrivacyPolicy() {
             If you have questions about this Privacy Policy or our practices,
             please contact us at{" "}
             <a
-              href="mailto:support@QuickFixPdf.com"
+              href="mailto:support@quickpdfkit.com"
               className="text-orange-500 underline"
             >
-              support@QuickFixPdf.com
+              support@quickpdfkit.com
             </a>
             .
           </p>

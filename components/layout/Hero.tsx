@@ -22,7 +22,7 @@ export default function Hero() {
         <div className="inline-flex mt-10 items-center gap-2 px-4 py-2 bg-white border border-orange-200 rounded-full mb-8 shadow-sm">
           <Sparkles className="w-4 h-4 text-orange-500" />
           <span className="text-sm text-orange-600 font-medium">
-            Free Online Fix PDF Tools
+            Free, private, in-browser PDF tools
           </span>
         </div>
 

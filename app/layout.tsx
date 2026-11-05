@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import {
+  HOME_DESCRIPTION,
+  HOME_KEYWORDS,
+  HOME_TITLE,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,35 +21,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://quickpdfkit.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Fix PDF Tools - Free Online PDF Converter & Editor | 48+ Tools",
-    template: "%s | Fix PDF Tools"
+    default: HOME_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: "Free online Could Fix Fix PDF Tools for all your needs. Convert, merge, split, compress, edit, and protect PDFs. 48+ powerful tools including PDF to Word, Image to PDF, and more. No registration required.",
-  keywords: [
-    "Fix PDF Tools",
-    "PDF converter",
-    "merge PDF",
-    "split PDF",
-    "compress PDF",
-    "PDF editor",
-    "PDF to Word",
-    "Image to PDF",
-    "protect PDF",
-    "free Fix PDF Tools",
-    "online PDF converter",
-    "PDF merger",
-    "PDF splitter",
-    "edit PDF online",
-    "convert PDF",
-    "PDF watermark",
-    "Could Fix It"
-
-  ],
-  authors: [{ name: "Fix PDF Tools Team" }],
-  creator: "Could Fix It",
-  publisher: "Could Fix It",
+  description: HOME_DESCRIPTION,
+  keywords: HOME_KEYWORDS,
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   formatDetection: {
     email: false,
     address: false,
@@ -51,25 +39,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://quickpdfkit.com",
-    siteName: "Fix PDF Tools",
-    title: "Fix PDF Tools - Free Online Could Fix PDF Converter & Editor",
-    description: "Free online Fix PDF Tools for all your needs. Convert, merge, split, compress, edit, and protect PDFs. 48+ powerful tools available.",
+    siteName: SITE_NAME,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Fix PDF Tools - Free Online PDF Converter & Editor"
-      }
-    ]
+        alt: "QuickPDFKit — free, private, in-browser PDF tools",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fix PDF Tools - Free Online Could Fix PDF Converter & Editor",
-    description: "Free online Fix PDF Tools for all your needs. Convert, merge, split, compress, edit, and protect PDFs.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     images: ["/twitter-image.png"],
-    creator: "@QuickFixPdf"
   },
   robots: {
     index: true,
@@ -77,24 +63,13 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png" },
-    ],
-  },
-  manifest: "/site.webmanifest",
-  alternates: {
-    canonical: "https://quickpdfkit.com",
+    icon: [{ url: "/favicon.ico" }],
   },
   category: "Technology",
 };
@@ -105,10 +80,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-
     <html lang="en">
       <body
-
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Script

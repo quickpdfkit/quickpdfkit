@@ -1,36 +1,28 @@
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
-import CookiePolicy from '@/components/pages/CookiePolicy'
-import React from 'react'
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import CookiePolicy from "@/components/pages/CookiePolicy";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: {
-    default: "Cookie Policy - Fix PDF Tools",
-    template: "%s | Fix PDF Tools"
-  },
-  description: "Read Fix PDF Tools' Cookie Policy to understand how we use cookies on our website to enhance your experience, improve functionality, and analyze usage.",
+export const metadata = pageMetadata({
+  title: "Cookie Policy",
+  description:
+    "Read how QuickPDFKit uses cookies to keep the site working and understand usage. PDF files are processed in your browser.",
+  path: "/cookies",
   keywords: [
-    "Fix PDF Tools cookie policy",
-    "cookies usage",
-    "online Fix PDF Tools privacy",
-    "website cookies",
-    "Fix PDF Tools data policy",
-    "cookie management",
-    "user tracking",
-    "Fix PDF Tools website",
-    "privacy and cookies",
-    "online PDF services"
-  ]
-}
+    "QuickPDFKit cookie policy",
+    "cookies",
+    "PDF tools privacy",
+  ],
+});
 
 const page = () => {
   return (
     <div>
-      <Header/>
-      <CookiePolicy/>
-      <Footer/>
+      <Header />
+      <CookiePolicy />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
