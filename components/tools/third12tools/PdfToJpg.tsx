@@ -35,7 +35,7 @@ export default function PdfToJpg() {
   const [loading, setLoading] = useState(false);
   const [converting, setConverting] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
-  const [imageFormat, setImageFormat] = useState<ImageFormat>("png");
+  const [imageFormat, setImageFormat] = useState<ImageFormat>("jpg");
   const [imageQuality, setImageQuality] = useState<ImageQuality>("high");
   const [scale, setScale] = useState(2);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
