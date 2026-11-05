@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none" role="img" aria-labelledby="title">
+  <title id="title">A locked PDF ready to share</title>
+  <rect width="800" height="450" fill="#FFF7ED"/>
+  <rect x="250" y="68" width="300" height="314" rx="20" fill="#FFFFFF" stroke="#F97316" stroke-width="4"/>
+  <rect x="282" y="100" width="140" height="14" rx="7" fill="#F97316"/>
+  <rect x="282" y="134" width="236" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="282" y="154" width="210" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="282" y="174" width="224" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="282" y="206" width="160" height="28" rx="8" fill="#FFEDD5"/>
+  <text x="362" y="225" text-anchor="middle" fill="#C2410C" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700">DRAFT</text>
+  <rect x="346" y="258" width="108" height="86" rx="16" fill="#FFF7ED" stroke="#F97316" stroke-width="3"/>
+  <path d="M372 294v-16a28 28 0 0 1 56 0v16" stroke="#F97316" stroke-width="6" stroke-linecap="round"/>
+  <rect x="368" y="294" width="64" height="36" rx="8" fill="#F97316"/>
+  <circle cx="400" cy="312" r="4" fill="#FFFFFF"/>
+</svg>

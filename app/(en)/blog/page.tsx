@@ -1,7 +1,9 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import BlogPage from "@/components/pages/BlogPage";
-import { pageMetadata } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
+import { blogPosts } from "@/config/blogPosts";
+import { blogIndexJsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Blog",
@@ -21,6 +23,21 @@ export const metadata = pageMetadata({
 const page = () => {
   return (
     <div>
+      <JsonLd
+        data={blogIndexJsonLd(
+          blogPosts.map((post) => ({
+            title: post.title,
+            description: post.description,
+            path: `/blog/${post.slug}`,
+          })),
+        )}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+        ])}
+      />
       <Header />
       <BlogPage />
       <Footer />

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none" role="img" aria-labelledby="title">
+  <title id="title">A large PDF reduced to a smaller file</title>
+  <rect width="800" height="450" fill="#FFF7ED"/>
+  <rect x="96" y="70" width="230" height="310" rx="18" fill="#FFFFFF" stroke="#FDBA74" stroke-width="3"/>
+  <rect x="124" y="104" width="120" height="12" rx="6" fill="#FDBA74"/>
+  <rect x="124" y="136" width="174" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="124" y="156" width="160" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="124" y="176" width="168" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="124" y="208" width="174" height="70" rx="10" fill="#FFEDD5"/>
+  <rect x="124" y="294" width="150" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="124" y="314" width="132" height="8" rx="4" fill="#E5E7EB"/>
+  <path d="M360 214h70" stroke="#F97316" stroke-width="6" stroke-linecap="round"/>
+  <path d="M414 196l22 18-22 18" stroke="#F97316" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="470" y="130" width="210" height="190" rx="18" fill="#FFFFFF" stroke="#F97316" stroke-width="4"/>
+  <rect x="496" y="158" width="100" height="12" rx="6" fill="#F97316"/>
+  <rect x="496" y="188" width="158" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="496" y="208" width="140" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="496" y="228" width="150" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="496" y="260" width="86" height="28" rx="14" fill="#FFEDD5"/>
+  <text x="539" y="279" text-anchor="middle" fill="#C2410C" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700">smaller</text>
+</svg>

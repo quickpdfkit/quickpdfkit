@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { allTools } from "@/config/toolsData";
 import { toolsMap } from "@/config/tools";
+import { blogPosts } from "@/config/blogPosts";
 import { SITE_URL } from "@/lib/seo";
 import { LOCALES } from "@/lib/i18n/locales";
 import { languageAlternates, localizedPath } from "@/lib/i18n/paths";
@@ -78,5 +79,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [english, ...localized];
   });
 
-  return [...staticEntries, ...toolEntries];
+  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: toAbsolute(`/blog/${post.slug}`),
+    lastModified: post.published,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...blogEntries, ...toolEntries];
 }
