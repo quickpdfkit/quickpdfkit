@@ -1,6 +1,5 @@
 "use client";
 import { useT } from "@/components/i18n/I18nProvider";
-import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument } from "pdf-lib-plus-encrypt";
@@ -151,7 +150,6 @@ export default function PdfProtector() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <Lock className="w-8 h-8 text-orange-500" />
           </div>
-          <ToolHeading toolId="protect-pdf" />
         </div>
 
         {/* Upload Area */}

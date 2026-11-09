@@ -1,6 +1,5 @@
 "use client";
 import { useT } from "@/components/i18n/I18nProvider";
-import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef, useEffect } from "react";
 import JSZip from "jszip";
@@ -257,7 +256,6 @@ export default function PdfToPng() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <ImageIcon className="w-8 h-8 text-orange-500" />
           </div>
-          <ToolHeading toolId="pdf-to-png" />
         </div>
 
         {/* Upload Area */}
