@@ -1,6 +1,5 @@
 "use client";
 import { useT } from "@/components/i18n/I18nProvider";
-import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef, useEffect } from "react";
 import { PDFDocument, rgb } from "pdf-lib";
@@ -579,9 +578,6 @@ export default function SignPdf() {
 
       <div className="w-full max-w-7xl relative z-10">
         {/* Header */}
-        <div className="text-center mb-8">
-          <ToolHeading toolId="sign-pdf" />
-        </div>
 
         {/* Upload Area */}
         {!pdfFile ? (

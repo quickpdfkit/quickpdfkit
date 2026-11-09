@@ -2,6 +2,8 @@ import { toolsMap } from "@/config/tools";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ToolPageWrapper from "@/components/layout/ToolPageWrapper";
+import ClientTool from "@/components/tools/ClientTool";
+import ToolPageHeading from "@/components/tools/ToolPageHeading";
 import JsonLd from "@/components/seo/JsonLd";
 import { howToJsonLd, pageMetadata, webApplicationJsonLd } from "@/lib/seo";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -59,7 +61,6 @@ export default async function LocalizedToolPage({ params }: LocalizedToolPagePro
 
   if (!toolData || !tool) notFound();
 
-  const ToolComponent = toolData.component;
   const path = `/${locale}/${toolId}`;
   const guide = dictionary.toolGuides[toolId as keyof typeof dictionary.toolGuides];
 
@@ -83,7 +84,8 @@ export default async function LocalizedToolPage({ params }: LocalizedToolPagePro
         />
       ) : null}
       <ToolPageWrapper>
-        <ToolComponent />
+        <ToolPageHeading toolId={toolId} />
+        <ClientTool id={toolId} />
       </ToolPageWrapper>
     </>
   );

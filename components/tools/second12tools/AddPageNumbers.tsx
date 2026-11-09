@@ -1,6 +1,5 @@
 "use client";
 import { useT } from "@/components/i18n/I18nProvider";
-import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef, useEffect } from "react";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
@@ -138,7 +137,6 @@ export default function AddPageNumbers() {
       <div className="w-full max-w-6xl relative z-10">
         {/* Header */}
         <div className="text-center mb-10">
-          <ToolHeading toolId="add-page-number-to-pdf" />
         </div>
 
         {/* Upload */}

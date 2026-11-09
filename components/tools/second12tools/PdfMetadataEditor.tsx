@@ -1,6 +1,5 @@
 "use client";
 import { useT } from "@/components/i18n/I18nProvider";
-import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import { PDFDocument } from "pdf-lib";
@@ -224,9 +223,6 @@ export default function PdfMetadataEditor() {
 
       <div className="w-full max-w-4xl relative z-10">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12">
-          <ToolHeading toolId="add-pdf-meta-data" />
-        </div>
 
         {/* Upload Area */}
         {!pdfFile ? (

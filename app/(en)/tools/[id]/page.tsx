@@ -3,6 +3,8 @@ import { toolHowToById } from "@/config/toolGuides";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ToolPageWrapper from "@/components/layout/ToolPageWrapper";
+import ClientTool from "@/components/tools/ClientTool";
+import ToolPageHeading from "@/components/tools/ToolPageHeading";
 import JsonLd from "@/components/seo/JsonLd";
 import { howToJsonLd, pageMetadata, webApplicationJsonLd } from "@/lib/seo";
 import { languageAlternates } from "@/lib/i18n/paths";
@@ -49,7 +51,6 @@ export default async function ToolPage({ params }: ToolPageProps) {
     return notFound();
   }
 
-  const ToolComponent = toolData.component;
   const path = `/tools/${id}`;
   const howTo = toolHowToById[id];
 
@@ -72,7 +73,8 @@ export default async function ToolPage({ params }: ToolPageProps) {
         />
       ) : null}
       <ToolPageWrapper>
-        <ToolComponent />
+        <ToolPageHeading toolId={id} />
+        <ClientTool id={id} />
       </ToolPageWrapper>
     </>
   );

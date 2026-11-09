@@ -1,6 +1,5 @@
 "use client";
 import { useT } from "@/components/i18n/I18nProvider";
-import ToolHeading from "@/components/i18n/ToolHeading";
 
 import { useState, useRef } from "react";
 import * as XLSX from "xlsx";
@@ -269,7 +268,6 @@ export default function PdfToExcel() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-4">
             <TableIcon className="w-8 h-8 text-orange-500" />
           </div>
-          <ToolHeading toolId="convert-pdf-to-excel" />
         </div>
 
         {/* Upload Area */}
