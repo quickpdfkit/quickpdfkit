@@ -116,6 +116,19 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    // www.quickpdfkit.com is attached to the Vercel project with no redirect
+    // target. This host rule sends it to the apex. The apex domain has no
+    // redirect back to www, so the rule cannot loop.
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.quickpdfkit.com" }],
+        destination: "https://quickpdfkit.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

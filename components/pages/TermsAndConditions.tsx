@@ -1,137 +1,73 @@
-"use client";
+import Link from "next/link";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
-import { motion } from "framer-motion";
+const updated = "November 25, 2026";
 
 export default function TermsAndConditions() {
   return (
     <section className="py-32 px-4 bg-gradient-to-br from-orange-50 via-white to-gray-50">
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
+      <div className="max-w-3xl mx-auto space-y-8">
+        <div>
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            Terms & <span className="text-orange-500">Conditions</span>
+            Terms and <span className="text-orange-500">conditions</span>
           </h1>
-          <p className="text-black text-base sm:text-lg">
-            Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using QuickPDFKit. By accessing or using our services, you agree to be bound by these Terms.
+          <p className="text-gray-700 text-base leading-7">
+            These terms cover use of quickpdfkit.com. They were last updated on {updated}. The site is a free collection of PDF tools that run in the browser. Using a page means you accept these terms.
           </p>
         </div>
 
-        {/* Acceptance of Terms */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Acceptance of Terms
-          </h2>
-          <p className="text-gray-700 text-sm sm:text-base">
-            By using QuickPDFKit, you agree to comply with and be bound by these Terms and all applicable laws and regulations. If you do not agree with any part of the Terms, you must not use our services.
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-3">
+          <h2 className="text-2xl font-semibold text-gray-900">The service</h2>
+          <p className="text-gray-700 text-base leading-7">
+            QuickPDFKit lets you process files on your own device. There is no account to create and no file stored for you on a server. You choose a file, the page works on it locally, and you download the result. Output quality depends on the file and on the tool. Read the guide on a tool page before you rely on the result. A signature placed on a page is a visual mark, not a certificate. A password is only as strong as the password you choose, and we cannot recover it.
           </p>
-        </motion.div>
+        </section>
 
-        {/* Use of Service */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.05 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Use of Service
-          </h2>
-          <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>Users must provide accurate information when using the service.</li>
-            <li>QuickPDFKit should not be used for illegal, harmful, or fraudulent purposes.</li>
-            <li>Users are responsible for maintaining the confidentiality of their account information, if any.</li>
-            <li>Excessive use or abuse of the service may result in temporary or permanent suspension.</li>
-          </ul>
-        </motion.div>
-
-        {/* Intellectual Property */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.1 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Intellectual Property
-          </h2>
-          <p className="text-gray-700 text-sm sm:text-base">
-            All content, features, and functionality of QuickPDFKit, including but not limited to text, graphics, logos, images, and software, are the property of QuickPDFKit or its licensors and are protected by copyright, trademark, and other intellectual property laws.
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-3">
+          <h2 className="text-2xl font-semibold text-gray-900">Your files and your conduct</h2>
+          <p className="text-gray-700 text-base leading-7">
+            You keep the rights in the files you open. You are responsible for having the right to use them and for what you do with the download. Do not use the site to break the law, to infringe someone else&apos;s copyright, or to hide information in a way the tool does not actually support. Cropping a page changes the visible area. It is not a promise that hidden content was destroyed.
           </p>
-        </motion.div>
-
-        {/* Limitation of Liability */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.15 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Limitation of Liability
-          </h2>
-          <p className="text-gray-700 text-sm sm:text-base">
-            QuickPDFKit is provided "as is" without warranties of any kind. To the fullest extent permitted by law, QuickPDFKit shall not be liable for any damages arising from the use or inability to use the service, including data loss, interrupted service, or errors in processing.
+          <p className="text-gray-700 text-base leading-7">
+            Do not attack the site, probe it for other people&apos;s data, or overload it. There is no customer file store to attack for documents, and trying to disrupt the site is not allowed.
           </p>
-        </motion.div>
+        </section>
 
-        {/* User Responsibilities */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.2 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            User Responsibilities
-          </h2>
-          <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>Keep all account credentials secure and confidential.</li>
-            <li>Ensure that uploaded files do not infringe on third-party rights.</li>
-            <li>Comply with all applicable laws while using the service.</li>
-          </ul>
-        </motion.div>
-
-        {/* Termination */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.25 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Termination
-          </h2>
-          <p className="text-gray-700 text-sm sm:text-base">
-            QuickPDFKit may suspend or terminate access to the service at any time, without prior notice, for any reason including violation of these Terms.
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-3">
+          <h2 className="text-2xl font-semibold text-gray-900">No warranty</h2>
+          <p className="text-gray-700 text-base leading-7">
+            The site is provided as is. Tools can fail on a damaged file, an encrypted file, a huge file, or a browser that runs out of memory. Conversions can drop layout, images, or text. Compression might not shrink a file. You should open the download and check it before you delete your original or send the new file to someone else. To the extent the law allows, QuickPDFKit is not liable for lost data, a missed deadline, or a file that did not convert the way you hoped.
           </p>
-        </motion.div>
+        </section>
 
-        {/* Changes to Terms */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.3 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Changes to Terms
-          </h2>
-          <p className="text-gray-700 text-sm sm:text-base">
-            We may update these Terms periodically. Users will be notified of any significant changes, and continued use of QuickPDFKit after changes indicates acceptance of the new Terms.
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-3">
+          <h2 className="text-2xl font-semibold text-gray-900">Ads and the website itself</h2>
+          <p className="text-gray-700 text-base leading-7">
+            Pages may show Google AdSense ads and load Google Analytics. Those services are described in the{" "}
+            <Link href="/privacy-policy" className="text-orange-600 underline underline-offset-2">
+              privacy policy
+            </Link>{" "}
+            and the{" "}
+            <Link href="/cookies" className="text-orange-600 underline underline-offset-2">
+              cookie policy
+            </Link>
+            . The text, layout, and code of the website belong to QuickPDFKit or to the people who license pieces of it. You may use the tools. You may not copy the site and present it as your own product.
           </p>
-        </motion.div>
+        </section>
+
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-3">
+          <h2 className="text-2xl font-semibold text-gray-900">Changes and contact</h2>
+          <p className="text-gray-700 text-base leading-7">
+            These terms can be updated by editing this page. The date at the top will change when that happens. Continued use of the site after an update means you accept the new terms. There is no separate notice by email, because there are no accounts to notify.
+          </p>
+          <p className="text-gray-700 text-base leading-7">
+            Questions:{" "}
+            <a className="text-orange-600 underline underline-offset-2" href={`mailto:${CONTACT_EMAIL}`}>
+              {CONTACT_EMAIL}
+            </a>
+            .
+          </p>
+        </section>
       </div>
     </section>
   );

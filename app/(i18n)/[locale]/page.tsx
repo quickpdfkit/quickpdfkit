@@ -8,13 +8,13 @@ import JsonLd from "@/components/seo/JsonLd";
 import { notFound } from "next/navigation";
 import { allTools } from "@/config/toolsData";
 import {
+  NOINDEX_FOLLOW,
   howToJsonLd,
   pageMetadata,
   softwareApplicationJsonLd,
 } from "@/lib/seo";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { isLocale, LOCALES } from "@/lib/i18n/locales";
-import { languageAlternates } from "@/lib/i18n/paths";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -37,7 +37,7 @@ export async function generateMetadata({
     path: `/${locale}`,
     keywords: dictionary.meta.homeKeywords,
     locale,
-    languages: languageAlternates("/"),
+    robots: NOINDEX_FOLLOW,
   });
 }
 

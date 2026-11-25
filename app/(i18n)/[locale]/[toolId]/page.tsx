@@ -5,10 +5,9 @@ import ToolPageWrapper from "@/components/layout/ToolPageWrapper";
 import ClientTool from "@/components/tools/ClientTool";
 import ToolPageHeading from "@/components/tools/ToolPageHeading";
 import JsonLd from "@/components/seo/JsonLd";
-import { howToJsonLd, pageMetadata, webApplicationJsonLd } from "@/lib/seo";
+import { NOINDEX_FOLLOW, howToJsonLd, pageMetadata, webApplicationJsonLd } from "@/lib/seo";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { isLocale, LOCALES } from "@/lib/i18n/locales";
-import { languageAlternates } from "@/lib/i18n/paths";
 
 interface LocalizedToolPageProps {
   params: Promise<{ locale: string; toolId: string }>;
@@ -48,7 +47,7 @@ export async function generateMetadata({
     path,
     keywords: tool.keywords,
     locale,
-    languages: languageAlternates(`/tools/${toolId}`),
+    robots: NOINDEX_FOLLOW,
   });
 }
 

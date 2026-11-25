@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none" role="img" aria-labelledby="title">
+  <title id="title">A PDF staying on a laptop</title>
+  <rect width="800" height="450" fill="#FFF7ED"/>
+  <rect x="250" y="78" width="300" height="200" rx="16" fill="#FFFFFF" stroke="#FDBA74" stroke-width="3"/>
+  <rect x="274" y="106" width="120" height="12" rx="6" fill="#F97316"/>
+  <rect x="274" y="136" width="210" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="274" y="156" width="180" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="274" y="176" width="196" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="274" y="210" width="70" height="28" rx="8" fill="#FFEDD5" stroke="#F97316" stroke-width="2"/>
+  <path d="M292 224h34" stroke="#F97316" stroke-width="3" stroke-linecap="round"/>
+  <rect x="210" y="278" width="380" height="18" rx="8" fill="#FDBA74"/>
+  <rect x="180" y="296" width="440" height="14" rx="7" fill="#FED7AA"/>
+</svg>

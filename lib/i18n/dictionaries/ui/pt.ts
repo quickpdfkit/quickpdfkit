@@ -94,19 +94,19 @@ export const ptUi: UiCopy = {
   features: {
     cards: [
       {
-        title: "Trabalhe offline no computador",
+        title: "Os arquivos ficam no seu dispositivo",
         description:
-          "Edite em lote e gerencie documentos no seu computador, sem internet e sem limites.",
+          "Cada ferramenta roda no navegador. Os PDFs são processados localmente e não são enviados ao QuickPDFKit.",
       },
       {
-        title: "Leve no celular",
+        title: "Grátis e sem conta",
         description:
-          "Suas ferramentas favoritas no bolso. Continue trabalhando a qualquer hora, em qualquer lugar.",
+          "Abra uma ferramenta, use e baixe o resultado. Não há cadastro nem plano pago.",
       },
       {
-        title: "Feito para empresas",
+        title: "As tarefas de PDF do dia a dia",
         description:
-          "Automatize fluxos, integre equipes com facilidade e cresça com planos flexíveis.",
+          "Juntar, dividir, comprimir, converter, anotar, assinar e proteger com senha, em um só site.",
       },
     ],
   },
@@ -118,23 +118,23 @@ export const ptUi: UiCopy = {
     steps: [
       {
         positionLabel: "01",
-        name: "Envie seu arquivo",
-        text: "Arraste o PDF ou clique para procurá-lo. Dá para enviar vários arquivos.",
+        name: "Escolha um arquivo",
+        text: "Selecione um PDF ou uma imagem no seu dispositivo. A ferramenta lê o arquivo nesta aba.",
       },
       {
         positionLabel: "02",
-        name: "Escolha as opções",
-        text: "Selecione a operação e ajuste as configurações do jeito que você precisa.",
+        name: "Ajuste as opções",
+        text: "Reordene páginas, escolha um tamanho ou digite uma senha, conforme a ferramenta.",
       },
       {
         positionLabel: "03",
         name: "Baixe o resultado",
-        text: "O arquivo é processado na hora. Baixe com um clique.",
+        text: "Salve o novo arquivo no seu dispositivo. Fechar a aba apaga a cópia que estava na memória.",
       },
     ],
-    trustedTitle: "A confiança de profissionais no mundo todo",
+    trustedTitle: "Privado por definição",
     trustedText:
-      "O QuickPDFKit é um app web confiável para editar PDFs com eficiência. Use todas as ferramentas de que precisa e mantenha seus dados protegidos.",
+      "O QuickPDFKit roda no navegador. Seus arquivos não são enviados para processamento e você não precisa de uma conta.",
   },
   toolsGrid: {
     titleLead: "Ferramentas de",
@@ -202,7 +202,15 @@ export const ptUi: UiCopy = {
     emailPlaceholder: "Seu e-mail",
     messagePlaceholder: "Sua mensagem",
     send: "Enviar mensagem",
-    mailtoNote: "Seu aplicativo de e-mail será aberto com esta mensagem pronta para enviar.",
+    mailtoNote: "Enviar abre seu e-mail com esta mensagem. O QuickPDFKit não a armazena.",
+    responseNote: "Uma pessoa lê hello@quickpdfkit.com e costuma responder em até dois dias úteis.",
+    includeHeading: "O que incluir",
+    includeItems: [
+      "A página em que você estava, por exemplo a ferramenta de juntar PDF.",
+      "Seu navegador e se o arquivo era um scan, um Word ou estava protegido por senha.",
+      "O que você esperava e o que aconteceu, inclusive qualquer mensagem na tela.",
+      "Não anexe um PDF privado. Descreva o problema. Documentos enviados por e-mail não são processados.",
+    ],
     subject: "Mensagem do QuickPDFKit de {name}",
     bodyName: "Nome",
     bodyEmail: "E-mail",

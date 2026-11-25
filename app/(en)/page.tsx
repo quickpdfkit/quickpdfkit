@@ -15,14 +15,11 @@ import {
   pageMetadata,
   softwareApplicationJsonLd,
 } from "@/lib/seo";
-import { languageAlternates } from "@/lib/i18n/paths";
-
 export const metadata = pageMetadata({
   title: HOME_TITLE,
   description: HOME_DESCRIPTION,
   path: "/",
   keywords: HOME_KEYWORDS,
-  languages: languageAlternates("/"),
 });
 
 export default function Home() {

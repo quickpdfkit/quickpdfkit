@@ -29,6 +29,9 @@ export function absoluteUrl(path: string): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+/** Visible pages that should not appear in Google's index. */
+export const NOINDEX_FOLLOW = "noindex,follow";
+
 export function pageMetadata({
   title,
   description,
@@ -37,6 +40,8 @@ export function pageMetadata({
   locale = "en",
   languages,
   noIndex = false,
+  canonicalPath,
+  robots,
 }: {
   title: string;
   description: string;
@@ -45,17 +50,21 @@ export function pageMetadata({
   locale?: AppLocale;
   languages?: Record<string, string>;
   noIndex?: boolean;
+  canonicalPath?: string;
+  robots?: NonNullable<Metadata["robots"]>;
 }): Metadata {
   const fullTitle = title.includes(SITE_NAME)
     ? title
     : `${title} | ${SITE_NAME}`;
+  const canonical = canonicalPath ?? path;
+  const robotsValue = robots ?? (noIndex ? { index: false, follow: false } : undefined);
 
   return {
     title: { absolute: fullTitle },
     description,
     keywords,
     alternates: {
-      canonical: path,
+      canonical,
       ...(languages ? { languages } : {}),
     },
     openGraph: {
@@ -68,7 +77,7 @@ export function pageMetadata({
               .map((code) => OG_LOCALE[code]),
           }
         : {}),
-      url: path,
+      url: canonical,
       siteName: SITE_NAME,
       title: fullTitle,
       description,
@@ -78,7 +87,7 @@ export function pageMetadata({
       title: fullTitle,
       description,
     },
-    ...(noIndex ? { robots: { index: false, follow: false } } : {}),
+    ...(robotsValue ? { robots: robotsValue } : {}),
   };
 }
 
