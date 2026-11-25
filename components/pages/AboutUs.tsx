@@ -1,186 +1,67 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { useI18n } from "@/components/i18n/I18nProvider";
 import { CONTACT_EMAIL } from "@/lib/contact";
 
 export default function AboutUs() {
-  const { dictionary } = useI18n();
-  const emailLead = dictionary.contactPage.emailLead;
-
   return (
     <section className="py-32 px-4 bg-gradient-to-br from-orange-50 via-white to-gray-50">
-      <div className="max-w-7xl mx-auto space-y-32">
-
-        {/* Hero Section */}
-        <div className="text-center space-y-6">
-          <h1 className="text-5xl sm:text-6xl font-bold text-gray-900">
-            About <span className="text-orange-500">Us</span>
+      <div className="max-w-3xl mx-auto space-y-10">
+        <div className="space-y-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900">
+            About <span className="text-orange-500">QuickPDFKit</span>
           </h1>
-          <p className="text-gray-700 text-lg sm:text-xl max-w-3xl mx-auto">
-            QuickPDFKit is committed to revolutionizing the way people manage
-            documents. From powerful batch processing to advanced team
-            features, we aim to save time, boost productivity, and simplify
-            workflows for millions of users worldwide.
+          <p className="text-gray-700 text-lg leading-8">
+            QuickPDFKit is a small independent website of free PDF tools. The tools run in your browser. You open a page, choose a file from your device, and download the result. There is no account, no desktop app, and no mobile app.
           </p>
-          <p className="text-gray-700 text-base sm:text-lg">
-            {emailLead}{" "}
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              dir="ltr"
-              className="font-semibold text-orange-500 hover:text-orange-600"
-            >
+          <p className="text-gray-700 text-base leading-7">
+            The project exists for ordinary jobs: combining a few PDFs, splitting out a chapter, turning photos into a PDF, placing a signature on a form, or adding a password before you email a file. It is not a company history, and it does not publish user counts or awards.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-4">
+          <h2 className="text-2xl font-semibold text-gray-900">What actually happens to a file</h2>
+          <p className="text-gray-700 text-base leading-7">
+            A tool reads the file you picked with code that ships in the page, including pdf-lib and PDF.js. The new file is created in that browser tab and saved to your device. QuickPDFKit does not receive the PDF, the images, or the password you type into a tool.
+          </p>
+          <p className="text-gray-700 text-base leading-7">
+            The site itself is a normal website. Loading a page can contact Google, because the site shows Google AdSense ads and measures visits with Google Analytics. Those services do not receive the contents of the files you process. The privacy policy and the cookie policy describe them.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-4">
+          <h2 className="text-2xl font-semibold text-gray-900">What this site is not</h2>
+          <ul className="list-disc pl-6 space-y-2 text-gray-700 text-base leading-7">
+            <li>There is no QuickPDFKit desktop application and no phone app to install.</li>
+            <li>There is no business plan, team workspace, or subscription.</li>
+            <li>A signature placed here is a mark drawn on the page, not a certificate.</li>
+            <li>Compressing a PDF rewrites its structure. It does not recompress the photos inside it.</li>
+            <li>Word and PDF conversions are practical and imperfect. Read the tool page before you rely on the layout.</li>
+          </ul>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-4">
+          <h2 className="text-2xl font-semibold text-gray-900">Contact</h2>
+          <p className="text-gray-700 text-base leading-7">
+            Write to{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="font-semibold text-orange-600 hover:text-orange-700">
               {CONTACT_EMAIL}
             </a>
+            . A person reads that mailbox and usually replies within two business days. Say which tool you used and what the page did. Do not attach a private document.
+          </p>
+          <p className="text-gray-700 text-base leading-7">
+            <Link href="/tools" className="font-medium text-orange-600 underline underline-offset-2">
+              Browse the tools
+            </Link>
+            , read the{" "}
+            <Link href="/faq" className="font-medium text-orange-600 underline underline-offset-2">
+              FAQ
+            </Link>
+            , or see the{" "}
+            <Link href="/privacy-policy" className="font-medium text-orange-600 underline underline-offset-2">
+              privacy policy
+            </Link>
+            .
           </p>
         </div>
-
-        {/* Our Story */}
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          <div className="md:w-1/2 space-y-4">
-            <h2 className="text-3xl font-semibold text-gray-900">Our Story</h2>
-            <p className="text-gray-700 text-base sm:text-lg">
-              QuickPDFKit began as a small startup with a big idea: make PDF and
-              document management effortless for everyone. What started in a
-              small office with a passionate team of developers has grown into
-              a comprehensive suite of document tools trusted worldwide.
-            </p>
-            <p className="text-gray-700 text-base sm:text-lg">
-              From the beginning, our mission has been simple: empower people
-              to save time, stay organized, and achieve more. Every tool we
-              create is designed to simplify tasks while ensuring security and
-              privacy.
-            </p>
-          </div>
-          <div className="md:w-1/2 relative w-full h-64 sm:h-80 md:h-96">
-            <Image
-              src="/img/not-given.jpg"
-              alt="Our Story"
-              fill
-              className="object-contain rounded-xl"
-            />
-          </div>
-        </div>
-
-        {/* History & Milestones */}
-        <div className="space-y-12 py-20">
-          <h2 className="text-3xl font-semibold text-gray-900 text-center mb-8">
-            History & <span className="text-orange-500">Milestones</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">2015</h3>
-              <p className="text-gray-700 text-sm sm:text-base">
-                QuickPDFKit was founded with the goal to streamline document
-                workflows for individuals and small businesses. Our first
-                PDF merge tool went live and received immediate positive feedback.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">2017</h3>
-              <p className="text-gray-700 text-sm sm:text-base">
-                Introduced batch processing and advanced editing features,
-                enabling users to handle multiple files at once with ease.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">2019</h3>
-              <p className="text-gray-700 text-sm sm:text-base">
-                Expanded to team collaboration features, allowing businesses to
-                share templates, watermarks, and default actions across teams.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">2022</h3>
-              <p className="text-gray-700 text-sm sm:text-base">
-                Launched mobile apps and desktop versions to provide seamless
-                access on every platform, further increasing productivity.
-              </p>
-            </div>
-          </div>
-        </div>
-
-       
-
-        {/* Core Values */}
-        <div className="py-20">
-          <h2 className="text-3xl font-semibold text-gray-900 text-center mb-8">
-            Core <span className="text-orange-500">Values</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8 text-center">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Innovation</h3>
-              <p className="text-gray-700 text-sm sm:text-base">
-                Constantly improving and creating new features to meet user
-                needs and stay ahead in technology.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8 text-center">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Integrity</h3>
-              <p className="text-gray-700 text-sm sm:text-base">
-                Operating with transparency, security, and privacy at the
-                forefront of every decision.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8 text-center">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Customer Focus</h3>
-              <p className="text-gray-700 text-sm sm:text-base">
-                Designing tools that save time, enhance productivity, and
-                provide real value to our users.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Awards & Media */}
-        <div className="py-20">
-          <h2 className="text-3xl font-semibold text-gray-900 text-center mb-8">
-            Awards & <span className="text-orange-500">Recognition</span>
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Best Productivity App 2021</h3>
-              <p className="text-gray-700 text-sm sm:text-base">Awarded by Tech Innovators for outstanding performance and usability.</p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Top SaaS Startup 2020</h3>
-              <p className="text-gray-700 text-sm sm:text-base">Recognized as one of the fastest growing SaaS platforms by Global Tech Awards.</p>
-            </div>
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Editor’s Choice</h3>
-              <p className="text-gray-700 text-sm sm:text-base">Featured in major tech blogs for innovation and user experience.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-12 text-center">
-          <h2 className="text-3xl font-semibold text-gray-900 mb-4">
-            Join Our Journey
-          </h2>
-          <p className="text-gray-700 text-base sm:text-lg mb-4">
-            Whether you want to collaborate, provide feedback, or join our team,
-            we’d love to hear from you. Let’s make document management effortless together!
-          </p>
-          <p className="text-gray-700 text-base sm:text-lg mb-6">
-            {emailLead}{" "}
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              dir="ltr"
-              className="font-semibold text-orange-500 hover:text-orange-600"
-            >
-              {CONTACT_EMAIL}
-            </a>
-          </p>
-          <Link
-            href="/contact"
-            className="px-8 py-4 bg-orange-500 text-white font-semibold rounded-xl hover:bg-orange-600 transition-all duration-300"
-          >
-            Contact Us
-          </Link>
-        </div>
-
       </div>
     </section>
   );

@@ -1,9 +1,8 @@
 import AllTools from "@/components/pages/AllTools";
 import { notFound } from "next/navigation";
-import { pageMetadata } from "@/lib/seo";
+import { NOINDEX_FOLLOW, pageMetadata } from "@/lib/seo";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { isLocale, LOCALES } from "@/lib/i18n/locales";
-import { languageAlternates } from "@/lib/i18n/paths";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -26,7 +25,7 @@ export async function generateMetadata({
     path: `/${locale}/tools`,
     keywords: dictionary.meta.toolsIndexKeywords,
     locale,
-    languages: languageAlternates("/tools"),
+    robots: NOINDEX_FOLLOW,
   });
 }
 

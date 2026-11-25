@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useI18n } from "@/components/i18n/I18nProvider";
 
-const cardImages = ["/img/desktop.webp", "/img/mobile.webp", "/img/business.webp"];
+const cardImages = ["/img/feature2.svg", "/img/pdf.svg", "/img/feature1.svg"];
 
 export default function InfoCards() {
   const { dictionary } = useI18n();
@@ -27,7 +27,7 @@ export default function InfoCards() {
             src={card.image}
             alt={card.title}
             fill
-            className="object-cover"
+            className="object-contain bg-orange-50 p-6"
           />
         </div>
 

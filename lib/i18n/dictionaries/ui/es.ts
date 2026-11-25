@@ -94,19 +94,19 @@ export const esUi: UiCopy = {
   features: {
     cards: [
       {
-        title: "Trabaja sin conexión en el escritorio",
+        title: "Los archivos se quedan en tu dispositivo",
         description:
-          "Edita por lotes y gestiona documentos en tu equipo, sin internet y sin límites.",
+          "Cada herramienta se ejecuta en el navegador. Los PDF se procesan en local y no se suben a QuickPDFKit.",
       },
       {
-        title: "Llévatelo en el móvil",
+        title: "Gratis y sin cuenta",
         description:
-          "Tus herramientas favoritas, en el bolsillo. Sigue trabajando cuando quieras y donde quieras.",
+          "Abre una herramienta, úsala y descarga el resultado. No hay registro ni planes de pago.",
       },
       {
-        title: "Hecho para empresas",
+        title: "Las tareas PDF de cada día",
         description:
-          "Automatiza flujos de trabajo, incorpora equipos con facilidad y crece con planes flexibles.",
+          "Unir, dividir, comprimir, convertir, anotar, firmar y proteger con contraseña, en un solo sitio.",
       },
     ],
   },
@@ -118,23 +118,23 @@ export const esUi: UiCopy = {
     steps: [
       {
         positionLabel: "01",
-        name: "Sube tu archivo",
-        text: "Arrastra el PDF o haz clic para buscarlo. Puedes subir varios archivos.",
+        name: "Elige un archivo",
+        text: "Selecciona un PDF o una imagen de tu dispositivo. La herramienta lo lee en esta pestaña.",
       },
       {
         positionLabel: "02",
-        name: "Elige las opciones",
-        text: "Selecciona la operación y ajusta los parámetros según lo que necesites.",
+        name: "Ajusta las opciones",
+        text: "Reordena páginas, elige un tamaño o escribe una contraseña, según la herramienta.",
       },
       {
         positionLabel: "03",
         name: "Descarga el resultado",
-        text: "El archivo se procesa al instante. Descárgalo con un solo clic.",
+        text: "Guarda el archivo nuevo en tu dispositivo. Al cerrar la pestaña se borra la copia que estaba en memoria.",
       },
     ],
-    trustedTitle: "La confianza de profesionales en todo el mundo",
+    trustedTitle: "Privado por diseño",
     trustedText:
-      "QuickPDFKit es una aplicación web fiable para editar PDF con eficacia. Tienes todas las herramientas que necesitas y tus datos siguen protegidos.",
+      "QuickPDFKit funciona en tu navegador. Tus archivos no se suben para procesarlos y no necesitas una cuenta.",
   },
   toolsGrid: {
     titleLead: "Potentes",
@@ -203,7 +203,15 @@ export const esUi: UiCopy = {
     emailPlaceholder: "Tu correo",
     messagePlaceholder: "Tu mensaje",
     send: "Enviar mensaje",
-    mailtoNote: "Se abrirá tu aplicación de correo con este mensaje listo para enviar.",
+    mailtoNote: "Enviar abre tu aplicación de correo con este mensaje. QuickPDFKit no lo guarda.",
+    responseNote: "Una persona lee hello@quickpdfkit.com y suele responder en dos días laborables.",
+    includeHeading: "Qué incluir",
+    includeItems: [
+      "La página en la que estabas, por ejemplo la herramienta de unir PDF.",
+      "Tu navegador y si el archivo era un escaneo, un Word o estaba protegido con contraseña.",
+      "Qué esperabas y qué ocurrió, incluido cualquier mensaje en pantalla.",
+      "No adjuntes un PDF privado. Describe el problema. No procesamos documentos enviados por correo.",
+    ],
     subject: "Mensaje de QuickPDFKit de {name}",
     bodyName: "Nombre",
     bodyEmail: "Correo",

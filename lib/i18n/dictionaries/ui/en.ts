@@ -94,19 +94,19 @@ export const enUi: UiCopy = {
   features: {
     cards: [
       {
-        title: "Work offline with Desktop",
+        title: "Files stay on your device",
         description:
-          "Batch edit and manage documents locally with no internet and no limits.",
+          "Every tool runs in the browser. PDFs are processed locally and are not uploaded to QuickPDFKit.",
       },
       {
-        title: "On-the-go with Mobile",
+        title: "Free, with no account",
         description:
-          "Your favorite tools, right in your pocket. Keep working anytime, anywhere.",
+          "Open a tool, use it, and download the result. There is no signup and no paid plan.",
       },
       {
-        title: "Built for business",
+        title: "The everyday PDF jobs",
         description:
-          "Automate workflows, onboard teams easily, and scale with flexible plans.",
+          "Merge, split, compress, convert, annotate, sign, and password-protect PDFs on one site.",
       },
     ],
   },
@@ -118,23 +118,23 @@ export const enUi: UiCopy = {
     steps: [
       {
         positionLabel: "01",
-        name: "Upload Your File",
-        text: "Drag and drop your PDF or click to browse. Multiple file support included.",
+        name: "Choose a file",
+        text: "Pick a PDF or image from your device. The tool reads it in this browser tab.",
       },
       {
         positionLabel: "02",
-        name: "Choose Your Options",
-        text: "Select the operation and customize settings according to your needs.",
+        name: "Set the options",
+        text: "Reorder pages, pick a page size, or type a password, depending on the tool.",
       },
       {
         positionLabel: "03",
-        name: "Download Result",
-        text: "Your file is processed instantly. Download it with a single click.",
+        name: "Download the result",
+        text: "Save the new file to your device. Closing the tab clears the copy held in memory.",
       },
     ],
-    trustedTitle: "Trusted by professionals worldwide",
+    trustedTitle: "Private by design",
     trustedText:
-      "QuickPDFKit is your reliable web app for editing PDFs efficiently. Enjoy all the tools you need while keeping your data secure.",
+      "QuickPDFKit runs in your browser. Your files are not uploaded for processing, and you do not need an account.",
   },
   toolsGrid: {
     titleLead: "Powerful",
@@ -175,7 +175,7 @@ export const enUi: UiCopy = {
     editPdf: "Edit PDF",
     mergePdf: "Merge PDF",
     splitPdf: "Split PDF",
-    imageToPdf: "Imgae to PDF",
+    imageToPdf: "Image to PDF",
     privacy: "Privacy policy",
     terms: "Terms & conditions",
     cookies: "Cookies",
@@ -198,13 +198,21 @@ export const enUi: UiCopy = {
     titleLead: "Contact",
     titleAccent: "Us",
     intro:
-      "Have questions, suggestions, or feedback? Fill out the form below and we'll get back to you shortly.",
-    emailLead: "Or email us directly at",
+      "Questions about a tool, a broken page, or this site go to one mailbox. There is no support portal and no account to look up.",
+    emailLead: "Email",
     namePlaceholder: "Your Name",
     emailPlaceholder: "Your Email",
     messagePlaceholder: "Your Message",
     send: "Send Message",
-    mailtoNote: "Your email app will open with this message ready to send.",
+    mailtoNote: "Send opens your email app with this message filled in. Nothing is stored on QuickPDFKit.",
+    responseNote: "A person reads hello@quickpdfkit.com and usually replies within two business days.",
+    includeHeading: "What to include",
+    includeItems: [
+      "The page you were on, such as the merge tool or the privacy policy.",
+      "Your browser, and whether the file was a scan, a Word file, or password-protected.",
+      "What you expected and what the page did instead, including any on-screen message.",
+      "Do not attach a private PDF. Describe the problem. Documents sent by email are not processed.",
+    ],
     subject: "QuickPDFKit message from {name}",
     bodyName: "Name",
     bodyEmail: "Email",

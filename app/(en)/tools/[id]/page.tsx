@@ -1,13 +1,14 @@
 import { toolsMap } from "@/config/tools";
 import { toolHowToById } from "@/config/toolGuides";
+import { duplicateToolCanonical, toolPages } from "@/config/toolPages";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ToolPageWrapper from "@/components/layout/ToolPageWrapper";
 import ClientTool from "@/components/tools/ClientTool";
 import ToolPageHeading from "@/components/tools/ToolPageHeading";
+import ToolArticle from "@/components/tools/ToolArticle";
 import JsonLd from "@/components/seo/JsonLd";
-import { howToJsonLd, pageMetadata, webApplicationJsonLd } from "@/lib/seo";
-import { languageAlternates } from "@/lib/i18n/paths";
+import { NOINDEX_FOLLOW, faqPageJsonLd, howToJsonLd, pageMetadata, webApplicationJsonLd } from "@/lib/seo";
 
 interface ToolPageProps {
   params: Promise<{ id: string }>;
@@ -34,12 +35,15 @@ export async function generateMetadata({
     };
   }
 
+  const indexable = Boolean(toolPages[id]);
+
   return pageMetadata({
     title: toolData.metadata.title,
     description: toolData.metadata.description,
     path: `/tools/${id}`,
+    canonicalPath: duplicateToolCanonical[id] ?? `/tools/${id}`,
     keywords: toolData.metadata.keywords,
-    languages: languageAlternates(`/tools/${id}`),
+    robots: indexable ? undefined : NOINDEX_FOLLOW,
   });
 }
 
@@ -53,6 +57,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
 
   const path = `/tools/${id}`;
   const howTo = toolHowToById[id];
+  const article = toolPages[id];
 
   return (
     <>
@@ -72,7 +77,8 @@ export default async function ToolPage({ params }: ToolPageProps) {
           })}
         />
       ) : null}
-      <ToolPageWrapper>
+      {article ? <JsonLd data={faqPageJsonLd(article.faqs)} /> : null}
+      <ToolPageWrapper supplementary={article ? <ToolArticle page={article} /> : null}>
         <ToolPageHeading toolId={id} />
         <ClientTool id={id} />
       </ToolPageWrapper>

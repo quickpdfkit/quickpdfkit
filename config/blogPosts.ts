@@ -654,4 +654,344 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "is-it-safe-to-use-online-pdf-tools",
+    title: "Is It Safe to Use Online PDF Tools?",
+    description:
+      "What happens to a file on an upload site versus a tool that runs in the browser, and what ads and analytics still see.",
+    published: "2026-11-18",
+    image: "/img/blog/safe-pdf-tools.svg",
+    imageAlt: "Illustration of a PDF staying on a laptop while a browser window is open",
+    keywords: [
+      "are online PDF tools safe",
+      "in-browser PDF processing",
+      "PDF tools without uploading",
+      "QuickPDFKit privacy",
+    ],
+    tools: [
+      {
+        href: "/tools/merge-pdf",
+        label: "Merge PDF",
+        description: "Combine PDFs in the browser. The files are read in the tab, not uploaded to QuickPDFKit.",
+      },
+      {
+        href: "/tools/protect-pdf",
+        label: "Protect PDF",
+        description: "Add a password locally. The password is not sent to QuickPDFKit and cannot be recovered here.",
+      },
+      {
+        href: "/privacy-policy",
+        label: "Privacy policy",
+        description: "How files, email, Google Analytics, and Google AdSense are handled on this site.",
+      },
+    ],
+    blocks: [
+      {
+        type: "p",
+        parts: [
+          "People ask whether an online PDF tool is safe because the honest answer depends on which computer does the work. A lot of sites take the file, process it on a server, and give you a download link. QuickPDFKit does the work in the browser tab. Those are different risks. This guide is about that difference, including the parts that still leave your device even when the PDF does not.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "What an upload site actually does",
+      },
+      {
+        type: "p",
+        parts: [
+          "On a typical upload converter you choose a file and the browser sends the bytes to someone else's machine. That machine merges, compresses, or converts, writes a result, and lets you fetch it. For a shopping list this is often fine. For a contract, a medical letter, a tax form, or a scan of an ID, you have just made a copy on a computer you do not control. You are trusting that operator's storage, their staff, their logs, their retention period, and every other company they use. A privacy policy that says files are deleted after two hours is a promise about their behavior. It is not a property of the file.",
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "You can sometimes see the difference without reading source code. If the page spends a long time on 'uploading' before any preview appears, the file is leaving. If the result comes back as a link on their domain rather than a normal browser download of a file your tab just built, the result lived on their server at least briefly. None of that makes the operator malicious. It does mean the document was not private to your machine.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "What in-browser processing means here",
+      },
+      {
+        type: "p",
+        parts: [
+          "A QuickPDFKit tool loads as a web page. When you pick a file, the browser reads it with the File API. The page then uses libraries that run in the tab, mainly pdf-lib and PDF.js, to copy pages, draw a preview, or write a new PDF. The download is produced by the tab and saved by your browser. The PDF is not posted to QuickPDFKit for processing. There is no account the file could be filed under, because there are no accounts.",
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "That is why a password you type into ",
+          { href: "/tools/protect-pdf", label: "Protect PDF" },
+          " cannot be reset from this site. The password is used in the tab to encrypt the download. We never receive it. It is also why closing the tab does not 'delete your upload.' There was no upload to delete. The file in your downloads folder is still there until you move or delete it, which matters on a shared computer.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "What still leaves the device",
+      },
+      {
+        type: "p",
+        parts: [
+          "Loading the website is ordinary web traffic. Your browser requests HTML, scripts, and images from the host that serves the site. That request does not include the PDF you have not picked yet, and picking a file does not add the PDF to those requests. Two other Google services do run on the pages, and they are not the same thing as file processing.",
+        ],
+      },
+      {
+        type: "ul",
+        items: [
+          [
+            "Google AdSense can set third-party cookies and show personalised ads based on visits to this site and other sites. You can turn personalised ads off at Google's ad settings. The cookie policy links there and to Google's advertising policy.",
+          ],
+          [
+            "Google Analytics measures page visits: which pages loaded, roughly what kind of browser, and approximate location from the IP address. It does not receive the contents of the PDF. You can block it in the browser or with Google's analytics opt-out add-on.",
+          ],
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "If you email hello@quickpdfkit.com, that message is email. Do not attach the private PDF. Describe the tool and what the page did. The contact form only opens your mail app. It does not store a copy on a form backend.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "What local processing does not protect you from",
+      },
+      {
+        type: "p",
+        parts: [
+          "The browser is only as private as the computer it runs on. Malware that can read your files can read the PDF before you open the tool and the download after. A person looking at your screen can read the preview. A browser extension with broad permissions can see page content. In-browser processing does not encrypt your disk, and it does not stop you from emailing the download to the wrong person.",
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "It also does not make a weak tool into a strong one. ",
+          { href: "/tools/sign-pdf", label: "Sign PDF" },
+          " places a drawn, typed, or image mark on the page. A reader will not show that as a verified certificate. ",
+          { href: "/tools/crop-pdf", label: "Crop PDF" },
+          " changes the visible crop box. It does not promise that the trimmed edge was shredded out of the file. ",
+          { href: "/tools/compress-pdf", label: "Compress PDF" },
+          " rewrites structure and does not recompress photographs, so a scan may not get smaller. Safety of the transport is a separate question from whether the output is what you meant.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "When a browser tool is the wrong place",
+      },
+      {
+        type: "p",
+        parts: [
+          "Use a desktop application you already trust, or the original program, when the job needs something these pages do not do. A certified digital signature, optical character recognition of a scan, a print-ready PDF with real text from Word, or a faithful rebuild of a designed brochure are those jobs. Word to PDF on this site is a snapshot of an HTML preview. PDF to Word extracts a text layer and drops layout. If the file is the record that has to stay signed, do not merge or split it and then treat the copy as the original.",
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "A browser tool is a good fit when you are on a machine you trust, the file is yours to change, and you can open the download before you send it. That is the ordinary case: a packet of invoices, a photo of a receipt, a sideways scan, a draft watermark. The ",
+          { href: "/blog/checklist-share-a-pdf-securely", label: "sharing checklist" },
+          " is the list to run after the file looks right and before it goes to someone else.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "A practical way to decide",
+      },
+      {
+        type: "ol",
+        items: [
+          [
+            "Read the tool page, not only the button. The guides under the main tools say what the code does, including the limits. A page that promises 'military-grade' handling of a file it never receives is advertising, not a description.",
+          ],
+          [
+            "Prefer a tool that never needs the file to leave, when the contents are sensitive and the job is one the browser can actually do.",
+          ],
+          [
+            "Keep the original until the download opens and the pages match what you wanted. Local processing can still produce a bad file.",
+          ],
+          [
+            "On a shared computer, move the download out of the shared downloads folder and close the tab.",
+          ],
+          [
+            "If you need a record of how this site treats ads and analytics, use the privacy policy rather than a slogan in a footer.",
+          ],
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "The useful test is simple. If the document would bother you sitting on a stranger's disk, do not upload it. If the job is a merge, a split, a rotation, a crop, or a password you can test yourself, do it in the browser and check the file that lands on your machine. That is the sense in which these tools are safe, and the sense in which they are not magic.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "clean-up-a-scanned-pdf",
+    title: "How to Clean Up a Scanned PDF Before You Send It",
+    description:
+      "Turn sideways scans upright, trim the dirty edge, drop blank pages, and add page numbers that match the file you will actually send.",
+    published: "2026-11-25",
+    image: "/img/blog/clean-scan.svg",
+    imageAlt: "Illustration of a tilted scan being straightened on a page",
+    keywords: [
+      "clean up a scanned PDF",
+      "rotate a scanned PDF",
+      "crop a scanned PDF",
+      "add page numbers to a scan",
+    ],
+    tools: [
+      {
+        href: "/tools/rotate-pdf",
+        label: "Rotate PDF",
+        description: "Turn pages 90 degrees at a time, one page or every page, and download a new PDF.",
+      },
+      {
+        href: "/tools/crop-pdf",
+        label: "Crop PDF",
+        description: "Set the visible crop box after the pages are upright. Cropping does not shred hidden content.",
+      },
+      {
+        href: "/tools/remove-pdf-pages",
+        label: "Remove PDF pages",
+        description: "Drop blank scanner pages and keep the rest as one PDF.",
+      },
+      {
+        href: "/tools/add-page-number-to-pdf",
+        label: "Add page numbers",
+        description: "Stamp n / total on every page after the file is in its final shape.",
+      },
+    ],
+    blocks: [
+      {
+        type: "p",
+        parts: [
+          "A phone scan often arrives as a PDF that is sideways, has a black strip down one edge, includes the table the paper was sitting on, and ends with a blank page. You can send it like that. Most of the time you should not. The cleanup is a short sequence, and the order matters, because each tool on QuickPDFKit writes a new file rather than editing the original in place. Do the steps in the order below and always feed the next tool the download you just checked.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Start from the scan, and keep it",
+      },
+      {
+        type: "p",
+        parts: [
+          "Copy the scan somewhere you can find it, with a name that says it is untouched. Something like 2026-11-lease-scan-original.pdf is enough. Every later file is a derivative. If a crop clips a signature or a rotation goes one click too far, you still have the scan. Do not 'save over' the original by downloading a new file with the same name into the same folder and agreeing when the browser asks to replace it.",
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "Open the original and note three things before you change anything. Which pages are sideways, and are they all sideways by the same amount? Is the dirty edge the same on every page, or only on the cover? Are there blank pages, duplicate covers, or a photo of the desk at the end? Write the page numbers down. A twelve-page scan that should be nine pages is easier to check if you knew that before you started clicking.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Rotate before you crop",
+      },
+      {
+        type: "p",
+        parts: [
+          "Open ",
+          { href: "/tools/rotate-pdf", label: "Rotate PDF" },
+          " and load the original. The buttons turn a page 90 degrees left or right. If every page is off by the same turn, switch on apply-to-all and click once. If only the appendix is landscape, leave apply-to-all off and turn that page alone. Each click adds another 90 degrees. Four clicks brings you back to the start. Reset is there when you overshoot.",
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "Download and open the rotated file in the viewer you will actually use to send it, not only in the preview. The angle written into the file is the one you set in that session. A scan that already carried a rotation flag can look fixed in one window and wrong in another. If it is wrong, go back to the original and try again. Do not rotate the rotated file a second time unless you mean to add another turn.",
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "Rotation does not make a photo of text into selectable text, and it cannot straighten a page that is two degrees off level. If the paper was photographed at a slant, fix that in the camera roll and make the PDF again, or accept the slant. There is no one-degree control on the rotate page.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Crop the edge you can see",
+      },
+      {
+        type: "p",
+        parts: [
+          "Open the rotated download in ",
+          { href: "/tools/crop-pdf", label: "Crop PDF" },
+          ". Draw the rectangle around the paper, not around a single paragraph. Leave a small margin so letters are not cut off. If every page has the same scanner border, apply that rectangle to all pages. If the cover was shot wider than the rest, crop the cover on its own and then the body.",
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "The tool sets the crop box, which is what viewers display. It does not reliably delete the pixels outside the rectangle. That is fine when you are trimming a black edge. It is not fine when you are trying to hide a sentence. Do not crop out an account number and then treat the file as redacted. If the hidden region must be gone, you need a process that renders a new image of only the visible page, and you still have to check it. For a normal scan cleanup, open the download and confirm the paper fills the page without clipping a signature.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Remove pages that are not part of the document",
+      },
+      {
+        type: "p",
+        parts: [
+          "Blank trailing pages and a second photo of the same sheet should go before you number anything. ",
+          { href: "/tools/remove-pdf-pages", label: "Remove PDF pages" },
+          " can drop the pages you select, or keep only the pages you select. Check which mode you are in. Selecting page 1 in the wrong mode either deletes the cover or deletes everything except the cover. The original scan is still in the folder you set aside. The download is a shorter copy.",
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "Count the pages in the download. If you started with 12 and removed 3, you want 9. Open the page before and after each gap so you did not drop the signature page that looked blank in a thumbnail. Thumbnails hide faint pencil and page numbers that were already printed on the paper.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Number the file you will send, not the file you started with",
+      },
+      {
+        type: "p",
+        parts: [
+          "Page numbers come last because the label includes the total. ",
+          { href: "/tools/add-page-number-to-pdf", label: "Add page numbers" },
+          " writes '3 / 9' in Helvetica at an edge you choose, on every page, starting at 1. It cannot skip a cover and it cannot start at a number you type. If the cover must stay clean, number the body only and accept that those numbers describe the body, or live with a number on the cover. Adding numbers before you delete a blank page leaves a wrong total and a gap.",
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "The number is drawn on top of the page. A busy footer will collide with a bottom-center label. Use the top edge, or crop a little more margin and number again from the unnumbered file. Do not run numbering twice on the same download or you will stack two labels. Also remember that a number printed on the paper itself, as part of the scan, does not update. The new label is an extra stamp.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Look at the file as a recipient",
+      },
+      {
+        type: "ol",
+        items: [
+          [
+            "Open the final download from the downloads folder, not from the tool preview. Check page 1, a middle page, and the last page.",
+          ],
+          [
+            "Confirm every page is upright, the text is not clipped, and the page count in the viewer matches the 'n / total' label.",
+          ],
+          [
+            "If you are sending a subset, extract those pages only after this cleanup, or do the cleanup on the subset. Do not make the recipient inherit your blank pages.",
+          ],
+          [
+            "If the scan is a stack of photographs and the PDF is enormous, know that compressing it here will probably not help much. The size is the pictures. Rescan smaller if the mailbox rejects it.",
+          ],
+          [
+            "Rename the final file so it does not say 'scan' or 'final-final'. Keep the original until the recipient confirms they can read it.",
+          ],
+        ],
+      },
+      {
+        type: "p",
+        parts: [
+          "That sequence is the whole job: keep the original, rotate, crop, remove the pages that are not the document, then number. Each step is a new file made in the browser. None of them needs the scan to be uploaded. The result is still a scan. It will not become a Word document with real paragraphs unless the PDF already has a text layer, which a photo of paper usually does not. For sending, a clean upright scan with an honest page count is enough.",
+        ],
+      },
+    ],
+  },
 ];

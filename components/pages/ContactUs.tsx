@@ -60,7 +60,7 @@ export default function ContactUs() {
         <p className="text-gray-700 text-center mb-4">
           {copy.intro}
         </p>
-        <p className="text-gray-700 text-center mb-8">
+        <p className="text-gray-700 text-center mb-4">
           {copy.emailLead}{" "}
           <a
             href={`mailto:${CONTACT_EMAIL}`}
@@ -70,6 +70,15 @@ export default function ContactUs() {
             {CONTACT_EMAIL}
           </a>
         </p>
+        <p className="text-gray-700 text-center mb-4">{copy.responseNote}</p>
+        <div className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-900 mb-2">{copy.includeHeading}</h2>
+          <ul className="list-disc pl-6 space-y-2 text-gray-700 text-base leading-7">
+            {copy.includeItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
 
         <form onSubmit={handleSubmit} aria-describedby="contact-mailto-note" className="space-y-4">
           <input

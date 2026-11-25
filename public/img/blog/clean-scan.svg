@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none" role="img" aria-labelledby="title">
+  <title id="title">A tilted scan straightened into an upright page</title>
+  <rect width="800" height="450" fill="#FFF7ED"/>
+  <g transform="rotate(-12 220 230)">
+    <rect x="120" y="110" width="180" height="240" rx="12" fill="#FFFFFF" stroke="#FDBA74" stroke-width="3"/>
+    <rect x="146" y="146" width="90" height="10" rx="5" fill="#FDBA74"/>
+    <rect x="146" y="172" width="128" height="8" rx="4" fill="#E5E7EB"/>
+    <rect x="146" y="192" width="110" height="8" rx="4" fill="#E5E7EB"/>
+  </g>
+  <path d="M360 220h70" stroke="#F97316" stroke-width="4" stroke-linecap="round"/>
+  <path d="M418 208l16 12-16 12" stroke="#F97316" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="470" y="80" width="200" height="270" rx="16" fill="#FFFFFF" stroke="#F97316" stroke-width="4"/>
+  <rect x="498" y="112" width="110" height="12" rx="6" fill="#F97316"/>
+  <rect x="498" y="144" width="146" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="498" y="164" width="132" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="498" y="184" width="140" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="498" y="300" width="48" height="18" rx="6" fill="#FFEDD5"/>
+</svg>

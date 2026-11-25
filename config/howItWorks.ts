@@ -1,17 +1,17 @@
 export const howItWorksSteps = [
   {
     positionLabel: "01",
-    name: "Upload Your File",
-    text: "Drag and drop your PDF or click to browse. Multiple file support included.",
+    name: "Choose a file",
+    text: "Pick a PDF or image from your device. The tool reads it in this browser tab.",
   },
   {
     positionLabel: "02",
-    name: "Choose Your Options",
-    text: "Select the operation and customize settings according to your needs.",
+    name: "Set the options",
+    text: "Reorder pages, pick a page size, or type a password, depending on the tool.",
   },
   {
     positionLabel: "03",
-    name: "Download Result",
-    text: "Your file is processed instantly. Download it with a single click.",
+    name: "Download the result",
+    text: "Save the new file to your device. Closing the tab clears the copy held in memory.",
   },
 ];

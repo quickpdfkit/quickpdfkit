@@ -1,115 +1,88 @@
-"use client";
+import Link from "next/link";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
-import { motion } from "framer-motion";
+const updated = "November 25, 2026";
 
 export default function CookiePolicy() {
   return (
     <section className="py-32 px-4 bg-gradient-to-br from-orange-50 via-white to-gray-50">
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
+      <div className="max-w-3xl mx-auto space-y-8">
+        <div>
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            Cookie <span className="text-orange-500">Policy</span>
+            Cookie <span className="text-orange-500">policy</span>
           </h1>
-          <p className="text-black text-base sm:text-lg">
-            This Cookie Policy explains how QuickPDFKit uses cookies and similar
-            technologies to enhance your experience while using our services.
+          <p className="text-gray-700 text-base leading-7">
+            This policy explains the cookies and similar storage used on quickpdfkit.com. It was last updated on {updated}. The PDF tools do not need a cookie to read your file. The cookies that do get set come from Google advertising and measurement.
           </p>
         </div>
 
-        {/* Introduction */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Introduction
-          </h2>
-          <p className="text-gray-700 text-sm sm:text-base">
-            QuickPDFKit uses cookies to personalize your experience, improve site functionality, and analyze performance. By continuing to use our services, you consent to the use of cookies in accordance with this policy.
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-3">
+          <h2 className="text-2xl font-semibold text-gray-900">Cookies the tools do not use</h2>
+          <p className="text-gray-700 text-base leading-7">
+            Choosing a PDF, merging it, or typing a password into a tool does not upload that file and does not require an account cookie. QuickPDFKit does not set a login cookie, because there is no login. The contact form does not set a cookie either. It opens your email program.
           </p>
-        </motion.div>
+        </section>
 
-        {/* What Are Cookies */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.05 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            What Are Cookies?
-          </h2>
-          <p className="text-gray-700 text-sm sm:text-base">
-            Cookies are small text files stored on your device that allow websites to remember your preferences, improve performance, and track usage. They help us provide a better and more personalized experience.
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-3">
+          <h2 className="text-2xl font-semibold text-gray-900">Google AdSense</h2>
+          <p className="text-gray-700 text-base leading-7">
+            Pages load Google AdSense. AdSense can store third-party cookies, and partners that deliver ads can store cookies too. Those cookies may remember that you visited this site, measure whether an ad was shown, and personalise later ads on this site and on other sites that use Google advertising. Personalised ads are ads selected using information about your activity, not ads that contain your PDF.
           </p>
-        </motion.div>
+          <p className="text-gray-700 text-base leading-7">
+            Control personalised ads at{" "}
+            <a className="text-orange-600 underline underline-offset-2" href="https://adssettings.google.com/">
+              adssettings.google.com
+            </a>
+            . Read how Google uses advertising cookies and data at{" "}
+            <a className="text-orange-600 underline underline-offset-2" href="https://policies.google.com/technologies/ads">
+              policies.google.com/technologies/ads
+            </a>{" "}
+            and in Google&apos;s privacy policy at{" "}
+            <a className="text-orange-600 underline underline-offset-2" href="https://policies.google.com/privacy">
+              policies.google.com/privacy
+            </a>
+            .
+          </p>
+        </section>
 
-        {/* Types of Cookies We Use */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.1 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Types of Cookies We Use
-          </h2>
-          <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>
-              <strong>Essential Cookies:</strong> Necessary for core functions such as file uploads, processing, and security.
-            </li>
-            <li>
-              <strong>Performance Cookies:</strong> Help us understand usage patterns and improve site speed and functionality.
-            </li>
-            <li>
-              <strong>Functional Cookies:</strong> Store user preferences, such as language or theme settings, to personalize your experience.
-            </li>
-            <li>
-              <strong>Analytics Cookies:</strong> Track visitor activity anonymously to measure and optimize website performance.
-            </li>
-          </ul>
-        </motion.div>
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-3">
+          <h2 className="text-2xl font-semibold text-gray-900">Google Analytics</h2>
+          <p className="text-gray-700 text-base leading-7">
+            Google Analytics sets its own cookies or uses similar storage to distinguish browsers and to remember how you moved through the site. We use the reports to see which tools are opened and to notice broken pages. Analytics cookies are not a copy of your document.
+          </p>
+          <p className="text-gray-700 text-base leading-7">
+            You can reject analytics cookies in the browser, use a blocker, or install Google&apos;s opt-out add-on from{" "}
+            <a className="text-orange-600 underline underline-offset-2" href="https://tools.google.com/dlpage/gaoptout">
+              tools.google.com/dlpage/gaoptout
+            </a>
+            .
+          </p>
+        </section>
 
-        {/* Managing Cookies */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.15 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Managing Cookies
-          </h2>
-          <p className="text-gray-700 text-sm sm:text-base mb-2">
-            You can manage cookies through your browser settings. Most browsers allow you to block, delete, or limit cookies. Disabling certain cookies may affect site functionality.
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-3">
+          <h2 className="text-2xl font-semibold text-gray-900">How to limit cookies</h2>
+          <p className="text-gray-700 text-base leading-7">
+            Browser settings can block third-party cookies, delete existing cookies, or prompt you before a cookie is stored. Blocking third-party cookies is the control that affects AdSense most directly. The PDF tools keep working. Ads may load differently or not load.
           </p>
-          <p className="text-gray-700 text-sm sm:text-base">
-            For more details on managing cookies in your browser, please refer to your browser’s help documentation.
+          <p className="text-gray-700 text-base leading-7">
+            The site does not show a separate consent banner today. If you do not want advertising or analytics cookies, set that preference in the browser or at the Google links above before you use the site, or use a browser profile that already blocks them.
           </p>
-        </motion.div>
+        </section>
 
-        {/* Consent */}
-        <motion.div
-          layout
-          className="bg-white rounded-xl shadow-md border border-gray-200 p-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.2 }}
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Your Consent
-          </h2>
-          <p className="text-gray-700 text-sm sm:text-base">
-            By using QuickPDFKit, you consent to our use of cookies as described in this Cookie Policy. You may withdraw your consent at any time by adjusting your browser settings.
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-3">
+          <h2 className="text-2xl font-semibold text-gray-900">Contact</h2>
+          <p className="text-gray-700 text-base leading-7">
+            Questions about this policy:{" "}
+            <a className="text-orange-600 underline underline-offset-2" href={`mailto:${CONTACT_EMAIL}`}>
+              {CONTACT_EMAIL}
+            </a>
+            . How the rest of the site handles data is in the{" "}
+            <Link href="/privacy-policy" className="text-orange-600 underline underline-offset-2">
+              privacy policy
+            </Link>
+            .
           </p>
-        </motion.div>
+        </section>
       </div>
     </section>
   );

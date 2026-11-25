@@ -146,6 +146,9 @@ export interface Dictionary {
     messagePlaceholder: string;
     send: string;
     mailtoNote: string;
+    responseNote: string;
+    includeHeading: string;
+    includeItems: string[];
     subject: string;
     bodyName: string;
     bodyEmail: string;

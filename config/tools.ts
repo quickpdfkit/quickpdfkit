@@ -50,7 +50,7 @@ export const toolsMap: Record<string, ToolConfig> = {
   "compress-pdf": {
     metadata: {
       title: "Compress PDF Online | Free PDF Compressor Tool",
-      description: "Reduce the file size of your PDF documents without losing quality. Free and fast online PDF compression.",
+      description: "Rebuild a PDF in your browser and compare the new size with the original. Structure can get tighter. Photos inside the file are not recompressed.",
     },
   },
   "edit-pdf": {
@@ -234,8 +234,8 @@ export const toolsMap: Record<string, ToolConfig> = {
   },
   "word-to-pdf": {
     metadata: {
-      title: "Word to PDF Converter | Convert DOC or DOCX to PDF Online",
-      description: "Convert your Word documents into professional, print-ready PDF files instantly online.",
+      title: "Word to PDF Converter | Convert DOCX to PDF Online",
+      description: "Turn a .docx file into a PDF snapshot in your browser. Read the preview first. The PDF is a picture of that preview, not a Word layout export.",
     },
   },
   "word-to-pdf-simple": {
@@ -248,8 +248,8 @@ export const toolsMap: Record<string, ToolConfig> = {
   // 4th 12 tools
   "convert-pdf-to-word": {
     metadata: {
-      title: "PDF to Word Converter | Convert PDF Files to DOCX Online",
-      description: "Easily convert PDF files into editable Word documents online for free.",
+      title: "PDF to Word Converter | Extract PDF Text to DOCX",
+      description: "Extract the text layer from a PDF into a Word file in your browser. Layout, columns, and images are not rebuilt. Scans without text stay empty.",
     },
   },
   "pdf-to-word-simple": {
@@ -302,8 +302,8 @@ export const toolsMap: Record<string, ToolConfig> = {
   },
   "sign-pdf": {
     metadata: {
-      title: "Sign PDF Online | Add Digital Signatures to PDF Files",
-      description: "Add your digital or electronic signature to PDF files securely and easily online.",
+      title: "Sign PDF Online | Draw, Type, or Place a Signature",
+      description: "Place a drawn, typed, or image signature on a PDF in your browser. This is a visual mark on the page, not a certificate-based digital signature.",
     },
   },
   "translate-pdf-text": {
